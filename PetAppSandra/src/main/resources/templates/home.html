@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home-PetCommunity</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light custom-nav">
+    <a class="navbar-brand" href="/">
+        <img src="/images/logo.png" alt="Pet Community Logo" class="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+            <li class="nav-item"><a class="nav-link" href="/aboutUs">ABOUT US</a></li>
+            <li class="nav-item"><a class="nav-link" href="/blog">BLOG</a></li>
+            <li class="nav-item"><a class="nav-link" href="/contact">CONTACT</a></li>
+            <li class="nav-item"><a class="nav-link" href="/login">LOG IN</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Petxie Title and Background Paws -->
+<div class="petxie-background">
+    <img src="/images/paw.png" alt="Paw Image" class="paw-left">
+    <div class="petxie-title">PETXIE</div>
+    <img src="/images/paw.png" alt="Paw Image" class="paw-right">
+</div>
+
+<!-- Centered Content -->
+<div class="home-container">
+    <div class="imageHome">
+        <img src="/images/imageHome.jpeg" alt="Community Image" class="welcome-image">
+    </div>
+    <div class="welcome-text">
+        <h2>Be part of this community, be part of this family, and join us today!</h2>
+        <a href="/login" class="btn custom-join-btn">JOIN US</a>
+    </div>
+</div>
+
+<div class="container carousel-container">
+    <div id="homeCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <!-- First Slide -->
+            <div class="carousel-item active">
+                <div class="row">
+                    <div class="col-md-4"><img src="/images/HomeCarrete1.jpeg" class="carousel-image"></div>
+                    <div class="col-md-4"><img src="/images/HomeCarrete2.jpeg" class="carousel-image"></div>
+                    <div class="col-md-4"><img src="/images/HomeCarrete3.jpeg" class="carousel-image"></div>
+                </div>
+            </div>
+            <!-- Second Slide -->
+            <div class="carousel-item">
+                <div class="row">
+                    <div class="col-md-4"><img src="/images/HomeCarrete4.jpeg" class="carousel-image"></div>
+                    <div class="col-md-4"><img src="/images/HomeCarrete5.jpeg" class="carousel-image"></div>
+                    <div class="col-md-4"><img src="/images/HomeCarrete6.jpeg" class="carousel-image"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Controls -->
+        <a class="carousel-control-prev" href="#homeCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#homeCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container text-center">
+        <p>Copyright © 2024 Petxie Inc. All Rights Reserved.</p>
+    </div>
+</footer>
+
+</html>

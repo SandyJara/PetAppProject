@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In - Petxie</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/login.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar">
+    <a class="navbar-brand" href="/">
+        <img src="/images/logo.png" alt="Petxie Logo">
+    </a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+        <li class="nav-item"><a class="nav-link" href="/aboutUs">ABOUT US</a></li>
+        <li class="nav-item"><a class="nav-link" href="/blog">BLOG</a></li>
+        <li class="nav-item"><a class="nav-link" href="/contact">CONTACT</a></li>
+        <li class="nav-item"><a class="nav-link" href="/login">LOG IN</a></li>
+    </ul>
+</nav>
+
+<div class="main-container">
+    <div class="login-box">
+        <h2>Log In</h2>
+        <div class="login-section">
+            <button class="login-btn">Owners</button>
+            <div class="image-box">
+                <img src="/images/logInOwner.jpeg" alt="Owners Image">
+            </div>
+            <button class="login-btn">Petsitters</button>
+            <div class="image-box">
+                <img src="/images/logInPetsitter.jpeg" alt="Petsitters Image">
+            </div>
+        </div>
+    </div>
+
+    <div class="register-box">
+        <h2>Join Us</h2>
+        <form action="/register" method="post">
+            <label for="account">Account:</label>
+            <select id="account" name="account">
+                <option value="owner">Owner</option>
+                <option value="petsitter">Petsitter</option>
+            </select>
+            <label for="fullname">Full Name:</label>
+            <input type="text" id="fullname" name="fullname" required>
+            <label for="birthdate">Day of Birth:</label>
+            <input type="date" id="birthdate" name="birthdate" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+            <label for="username">User Name:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+            <button type="submit" class="join-btn">Join</button>
+        </form>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>Copyright © 2024 Petxie Inc. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
