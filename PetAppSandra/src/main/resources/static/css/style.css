@@ -4,17 +4,24 @@ body {
     background-size: cover;
     font-family: 'Roboto', sans-serif;
     color: #333;
+    margin: 0;
+    padding: 0;
 }
 
 /* Navbar */
+.navbar,
 .custom-nav {
-    background-color: #d65eb8; /* Updated color */
+    background-color: #d65eb8;
     padding: 10px 20px;
+    color: white;
 }
 
-.nav-link {
-    color: white !important; /* Updated text color */
+.nav-link,
+.navbar a {
+    color: white !important;
     font-weight: 600;
+    text-decoration: none;
+    padding: 5px;
 }
 
 .navbar-brand {
@@ -25,6 +32,12 @@ body {
 .logo {
     max-width: 120px;
     max-height: 50px;
+}
+
+.navbar img {
+    max-width: 100px;
+    max-height: 30px;
+    object-fit: contain;
 }
 
 /* Title and Paws */
@@ -40,20 +53,19 @@ body {
     font-family: 'Playfair Display', serif;
     font-size: 2.5em;
     color: #be2b9a;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Adds shadow for contrast */
-    background-color: rgba(255, 255, 255, 0.7); /* Light background for visibility */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    background-color: rgba(255, 255, 255, 0.7);
     padding: 10px;
     border-radius: 10px;
     display: inline-block;
 }
 
-
-/* Paw Images (4x Size Increase) */
+/* Paw Images */
 .paw-left,
 .paw-right {
     position: absolute;
     top: 10px;
-    width: 200px; /* 4 times bigger (original was 50px) */
+    width: 200px;
 }
 
 .paw-left {
@@ -101,24 +113,96 @@ body {
 
 /* Carousel Images */
 .carousel-image {
-    width: 100%; /* Full width */
-    height: 200px; /* Consistent height */
-    object-fit: cover; /* Maintain aspect ratio and crop if needed */
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
     border-radius: 10px;
 }
 
-/* Responsive Adjustments */
-@media screen and (max-width: 768px) {
-    .carousel-image {
-        height: 150px; /* Smaller height for mobile */
-    }
+/* Log In Section */
+.main-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 20px;
 }
 
+.login-box {
+    width: 40%;
+    background-color: rgba(150, 75, 150, 0.85);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.image-box {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.image-box img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+.register-box {
+    width: 50%;
+    background-color: rgba(255, 239, 186, 0.85);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-size: 0.9em;
+    color: #333;
+}
+
+input,
+select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+input:focus {
+    outline: none;
+    border-color: #5a7d9a;
+}
+
+.join-btn {
+    background-color: #5a7d9a;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 /* Footer */
 .footer {
     background-color: #7b4a9e;
     color: white;
+    text-align: center;
     padding: 20px;
 }
 
@@ -126,7 +210,7 @@ body {
 @media screen and (max-width: 768px) {
     .paw-left,
     .paw-right {
-        width: 100px; /* Adjusted size for mobile */
+        width: 100px;
     }
 
     .logo {
@@ -146,7 +230,21 @@ body {
     }
 
     .carousel-container {
-        height: 50%; /* Further reduce height for mobile */
+        height: 50%;
+    }
+
+    .main-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .login-box,
+    .register-box {
+        width: 90%;
+    }
+
+    .image-box {
+        width: 120px;
+        height: 120px;
     }
 }
-

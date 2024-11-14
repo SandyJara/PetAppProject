@@ -1,0 +1,151 @@
+/* General Styles */
+body {
+    background: url('/images/background.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
+/* Navbar */
+.custom-nav {
+    background-color: #d65eb8; /* Updated color */
+    padding: 10px 20px;
+}
+
+.nav-link {
+    color: white !important; /* Updated text color */
+    font-weight: 600;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+/* Logo */
+.logo {
+    max-width: 120px;
+    max-height: 50px;
+}
+
+/* Title and Paws */
+.petxie-background {
+    text-align: center;
+    padding-top: 60px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* PETXIE Title */
+.petxie-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+    color: #be2b9a;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* Adds shadow for contrast */
+    background-color: rgba(255, 255, 255, 0.7); /* Light background for visibility */
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+
+/* Paw Images (4x Size Increase) */
+.paw-left,
+.paw-right {
+    position: absolute;
+    top: 10px;
+    width: 200px; /* 4 times bigger (original was 50px) */
+}
+
+.paw-left {
+    left: 10%;
+}
+
+.paw-right {
+    right: 10%;
+}
+
+/* Centered Content */
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.welcome-image {
+    width: 300px;
+    border-radius: 10px;
+}
+
+.welcome-text {
+    max-width: 400px;
+    text-align: center;
+    background-color: rgba(255, 239, 186, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.custom-join-btn {
+    background-color: #9a60b4;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Carousel Container */
+.carousel-container {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+/* Carousel Images */
+.carousel-image {
+    width: 100%; /* Full width */
+    height: 200px; /* Consistent height */
+    object-fit: cover; /* Maintain aspect ratio and crop if needed */
+    border-radius: 10px;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .carousel-image {
+        height: 150px; /* Smaller height for mobile */
+    }
+}
+
+
+/* Footer */
+.footer {
+    background-color: #7b4a9e;
+    color: white;
+    padding: 20px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .paw-left,
+    .paw-right {
+        width: 100px; /* Adjusted size for mobile */
+    }
+
+    .logo {
+        max-width: 100px;
+    }
+
+    .home-container {
+        flex-direction: column;
+    }
+
+    .welcome-image {
+        width: 90%;
+    }
+
+    .welcome-text {
+        max-width: 90%;
+    }
+
+    .carousel-container {
+        height: 50%; /* Further reduce height for mobile */
+    }
+}
