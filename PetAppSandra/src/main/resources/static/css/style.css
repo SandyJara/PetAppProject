@@ -206,8 +206,123 @@ input:focus {
     padding: 20px;
 }
 
+
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: url('/images/background.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+}
+
+/* Navbar */
+.custom-nav {
+    background-color: #d65eb8;
+    padding: 10px 20px;
+}
+
+.nav-link {
+    color: white !important;
+    font-weight: 600;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+.logo {
+    max-width: 120px;
+    max-height: 50px;
+}
+
+
+
+
+
+/* About Us Section */
+.about-section {
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.mission-card, .vision-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 35%;
+    margin: 20px;
+}
+
+.img-reduced {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin: 0 auto;
+}
+
+.mission-title, .vision-title {
+    font-size: 1.8em;
+    color: #4b2a68;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.text-custom {
+    font-size: 1em;
+    color: #666;
+}
+
+/* Why Us Section */
+.about-why {
+    background-color: rgba(255, 239, 186, 0.85);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 35%;
+    margin: 20px;
+}
+
+    
+    
+    
+    
+    
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
+
+---------------------
+	.about-section {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .about-section-title {
+        font-size: 1.5em;
+    }
+    
+    .img-reduced {
+        width: 80%;
+    }
+    
+    .mission-title, .vision-title {
+        font-size: 1.5em;
+    }
+
+    .mission-card, .vision-card, .about-why {
+        width: 90%;
+        margin: 10px auto;
+    }
+-------------------------
+
+
     .paw-left,
     .paw-right {
         width: 100px;
@@ -247,4 +362,6 @@ input:focus {
         width: 120px;
         height: 120px;
     }
+}
+    
 }
