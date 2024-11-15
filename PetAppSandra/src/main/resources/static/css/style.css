@@ -295,6 +295,246 @@ body {
     
     
     
+    
+ /* Contact Section Styles */
+.contact-section {
+    padding: 40px 0;
+    text-align: center;
+}
+
+.contact-title {
+    font-size: 2em;
+    color: #d65eb8;
+}
+
+.contact-subtitle {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.contact-form-box {
+    background-color: #f3c3df;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    flex: 1;
+}
+
+.contact-form {
+    text-align: left;
+}
+
+.contact-form .form-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.contact-form .form-control {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn-submit {
+    background-color: #ee4598;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #d64586;
+}
+
+/* Contact Info Box Styles */
+.contact-info-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    flex: 1;
+    margin-top: 20px;
+}
+
+.contact-image {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.contact-details {
+    font-size: 1.1em;
+    color: #333;
+    text-align: center;
+}
+
+.contact-details p {
+    margin: 5px 0;
+}
+
+.contact-icon {
+    margin-right: 10px;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+.footer-custom {
+    background-color: #7b4a9e;
+    color: white;
+}
+
+.social-icons .margin-small {
+    margin: 0 10px;
+    color: #fff !important;
+}
+    
+    
+    
+    
+    
+    
+/* Blog Page Styles */
+/* Blog Title Container */
+.blog-title-container {
+    background-color: #b5497d;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* Blog Title */
+.blog-title {
+    color: #ffffff;
+    margin: 0;
+}
+
+/* Articles Label */
+.articles-label {
+    font-size: 1.25em;
+}
+
+/* Blog Container */
+.blog-container {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Blog Search Bar */
+.blog-search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.blog-search-bar input[type="text"] {
+    padding: 10px;
+    border: 2px solid #d65eb8;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    width: 300px;
+}
+
+.blog-search-bar button {
+    padding: 10px 20px;
+    background-color: #d65eb8;
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0 5px 5px 0;
+}
+
+.blog-search-bar button:hover {
+    background-color: #b5497d;
+}
+
+/* Articles Dropdown */
+.articles-per-week {
+    margin: 20px;
+    display: inline-block;
+}
+
+.articles-per-week select {
+    padding: 10px;
+    border: 2px solid #d65eb8;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Blog Article Card */
+.blog-article-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.blog-article-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    text-align: left;
+}
+
+.blog-article-card h3 {
+    color: #d65eb8;
+    margin-bottom: 10px;
+}
+
+.blog-article-card p {
+    color: #555;
+    font-size: 1.1em;
+}
+
+/* Article Navigation Buttons */
+.article-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.article-navigation a {
+    padding: 10px;
+    background-color: #d65eb8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.article-navigation a:hover {
+    background-color: #b5497d;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
 
@@ -323,6 +563,36 @@ body {
 -------------------------
 
 
+.contact-form-box, .contact-info-box {
+        margin: 0 auto;
+        width: 90%;
+    }
+
+-------------------------
+
+
+.blog-container {
+        padding: 20px;
+    }
+    .blog-search-bar {
+        flex-direction: column;
+    }
+    .blog-search-bar input[type="text"] {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    .blog-article-container {
+        flex-direction: column;
+    }
+    .blog-article-card {
+        width: 100%;
+    }
+    .article-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+---------------------
     .paw-left,
     .paw-right {
         width: 100px;
