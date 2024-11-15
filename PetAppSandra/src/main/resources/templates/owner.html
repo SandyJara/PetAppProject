@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Owner-PetCommunity</title>
+    <title>Owner- Petxie</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -42,13 +42,16 @@
     </div>
 </nav>
 
+<button class="btn profile-btn-purple text-white logout-btn" style="position: relative; float: right; margin-right: 20px; margin-top: 20px;">LOG OUT</button> 
+
 <!-- PETXIE Title with Images behind Navbar -->
     <div class="petxie-background">
         <img src="/images/paw.png" alt="Paw Image" class="paw-left">
         <div class="petxie-title">PETXIE</div>
         <img src="/images/paw.png" alt="Paw Image" class="paw-right">
     </div>
-
+    
+    
     <!-- MY CODE -->
    
    
@@ -81,7 +84,15 @@
                     <select id="type" class="form-control profile-form-control">
                         <option value="walk">Walk</option>
                         <option value="visit">Visit</option>
-                        <option value="boarding">Boarding</option>
+                        <option value="boarding">House Sitting</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="type" class="profile-label">Pet:</label>
+                    <select id="type" class="form-control profile-form-control">
+                        <option value="Pet 1">Pet 1</option>
+                        <option value="Pet 2">Pet 2</option>
+                        <option value="Pet 3">Pet 3</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -146,19 +157,23 @@
     <div class="row justify-content-around mb-4">
         <!-- Pet Sitters Section -->
         <div class="col-lg-3 col-md-4 col-sm-12 profile-sitters-section mb-4 offset-lg-1">
-            <h3 class="profile-header">Pet Sitters</h3>
+            <h3 class="profile-header">SEARCH Pet Sitters</h3>
             <form>
                 <div class="form-group">
                     <label for="available-for" class="profile-label">Available for:</label>
                     <select id="available-for" class="form-control profile-form-control">
                         <option value="walk">Walk</option>
                         <option value="visit">Visit</option>
-                        <option value="boarding">Boarding</option>
+                        <option value="house sitting">Boarding</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="days-needed" class="profile-label">Days Needed:</label>
-                    <input type="date" id="days-needed" class="form-control profile-form-control">
+                    <label for="from" class="profile-label">From:</label>
+                    <input type="date" id="from" class="form-control profile-form-control">
+                </div>
+                <div class="form-group">
+                    <label for="to" class="profile-label">To:</label>
+                    <input type="date" id="to" class="form-control profile-form-control">
                 </div>
                 <button type="submit" class="btn profile-btn-purple text-white">Search</button>
             </form>
