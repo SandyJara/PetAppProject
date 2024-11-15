@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner-PetCommunity</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+   <!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light custom-nav">
+    <a class="navbar-brand" href="/">
+        <img src="/images/logo.png" alt="Pet Community Logo" class="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">HOME</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/aboutUs">ABOUT US</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/blog">BLOG</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">CONTACT</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">LOG IN</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- PETXIE Title with Images behind Navbar -->
+    <div class="petxie-background">
+        <img src="/images/paw.png" alt="Paw Image" class="paw-left">
+        <div class="petxie-title">PETXIE</div>
+        <img src="/images/paw.png" alt="Paw Image" class="paw-right">
+    </div>
+
+    <!-- MY CODE -->
+   
+   
+<header class="text-center">
+   <h1 class="profile-title text-shadow welcome-text-bg">WELCOME + Name of the person (OWNER)</h1>
+</header>
+
+<div class="container-fluid mt-4">
+    <div class="row justify-content-around">
+        <!-- Profile Section -->
+        <div class="col-lg-3 col-md-4 col-sm-12 profile-section mb-4">
+            <h3 class="profile-header">Profile</h3>
+            <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-image">
+            <p>FDGSDFG7</p>
+            <p>ADFAFDF</p>
+            <p>ADSGADSG ADGADSGADSG</p>
+            <button class="btn profile-btn-purple text-white">Update Information</button>
+        </div>
+
+        <!-- Services Section -->
+        <div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
+            <h3 class="profile-header">Services</h3>
+            <div class="existing-service">
+                <button class="btn profile-btn-purple text-white">Consult Existing Service</button>
+            </div>
+            <h5 class="profile-subheader">Create New Service</h5>
+            <form>
+                <div class="form-group">
+                    <label for="type" class="profile-label">Type:</label>
+                    <select id="type" class="form-control profile-form-control">
+                        <option value="walk">Walk</option>
+                        <option value="visit">Visit</option>
+                        <option value="boarding">Boarding</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="from" class="profile-label">From:</label>
+                    <input type="date" id="from" class="form-control profile-form-control">
+                </div>
+                <div class="form-group">
+                    <label for="to" class="profile-label">To:</label>
+                    <input type="date" id="to" class="form-control profile-form-control">
+                </div>
+                <div class="form-group">
+                    <label for="payment" class="profile-label">Payment (Euros):</label>
+                    <input type="number" id="payment" class="form-control profile-form-control">
+                </div>
+                <div class="form-group">
+                    <label for="comments" class="profile-label">Comments:</label>
+                    <textarea id="comments" class="form-control profile-form-control"></textarea>
+                </div>
+                <button type="submit" class="btn profile-btn-purple text-white">Create</button>
+            </form>
+        </div>
+
+        <!-- Rate a Pet Sitter Section -->
+        <div class="col-lg-3 col-md-4 col-sm-12 profile-rate-section mb-4">
+            <h3 class="profile-header">Rate a Pet Sitter</h3>
+            <form>
+                <div class="form-group">
+                    <label for="pet-sitter" class="profile-label">Pet Sitter:</label>
+                    <select id="pet-sitter" class="form-control profile-form-control">
+                        <option value="sitter1">Name Pet Sitter 1</option>
+                        <option value="sitter2">Name Pet Sitter 2</option>
+                    </select>
+                </div>
+                <div class="form-group profile-rating-stars">
+                    <label class="profile-label">Rate:</label><br>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                    <span class="star">&#9733;</span>
+                </div>
+                <div class="form-group">
+                    <label for="rate-comments" class="profile-label">Comments:</label>
+                    <textarea id="rate-comments" class="form-control profile-form-control"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="extra-compensation" class="profile-label">Extra Compensation:</label>
+                    <select id="extra-compensation" class="form-control profile-form-control">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amount" class="profile-label">Amount (Euros):</label>
+                    <input type="number" id="amount" class="form-control profile-form-control">
+                </div>
+                <button type="submit" class="btn profile-btn-purple text-white">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row justify-content-around mb-4">
+        <!-- Pet Sitters Section -->
+        <div class="col-lg-3 col-md-4 col-sm-12 profile-sitters-section mb-4 offset-lg-1">
+            <h3 class="profile-header">Pet Sitters</h3>
+            <form>
+                <div class="form-group">
+                    <label for="available-for" class="profile-label">Available for:</label>
+                    <select id="available-for" class="form-control profile-form-control">
+                        <option value="walk">Walk</option>
+                        <option value="visit">Visit</option>
+                        <option value="boarding">Boarding</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="days-needed" class="profile-label">Days Needed:</label>
+                    <input type="date" id="days-needed" class="form-control profile-form-control">
+                </div>
+                <button type="submit" class="btn profile-btn-purple text-white">Search</button>
+            </form>
+        </div>
+
+        <!-- Chats Section -->
+        <div class="col-lg-3 col-md-4 col-sm-12 profile-chats-section mb-4 offset-lg-1">
+            <h3 class="profile-header">Chats</h3>
+            <p>Chat feature coming soon...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Star Rating System
+    document.querySelectorAll('.profile-rating-stars .star').forEach((star, index) => {
+        star.addEventListener('click', () => {
+            document.querySelectorAll('.profile-rating-stars .star').forEach((s, i) => {
+                if (i <= index) {
+                    s.classList.add('checked');
+                } else {
+                    s.classList.remove('checked');
+                }
+            });
+        });
+    });
+</script>
+
+   
+   
+  <!-- MY CODE -->
+
+    
+    
+     <!-- Footer -->
+    <footer class="footer py-4 footer-custom">
+        <div class="container text-center">
+            <div class="social-icons mb-3">
+                <a href="#" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="mb-0">Copyright © 2024 Petxie Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

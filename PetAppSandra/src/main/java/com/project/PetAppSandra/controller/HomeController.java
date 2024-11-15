@@ -29,8 +29,7 @@ public class HomeController {
 	        
 	    @PostMapping("/register")
 	    public String register(String name, String email, String password) {
-	        // Handle registration logic (e.g., save to database)
-	        return "redirect:/";  // Redirects back to home page after registration
+	    	return "redirect:/";  // Redirects back to home page after registration
 	    }
 	    
 	    @GetMapping("/blog")
@@ -47,5 +46,12 @@ public class HomeController {
 	    public String showContactPage(Model model) {
 	        return "contact"; 
 	    }
+	    
+	    @GetMapping("/owner")
+	    public String showOwnerPage() {
+	        return "owner";  //
+	    }
+	    
+	    
 	}
 

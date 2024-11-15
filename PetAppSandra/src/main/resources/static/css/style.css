@@ -8,6 +8,12 @@ body {
     padding: 0;
 }
 
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #5a32a3; /* Cambia a un color púrpura oscuro */
+    font-weight: 700; /* Aumentar el grosor del texto */
+}
+
 /* Navbar */
 .navbar,
 .custom-nav {
@@ -529,6 +535,66 @@ body {
     
     
     
+
+
+
+
+/* PROFILE Page Styles */
+/* General Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+}
+
+.welcome-text-bg {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+    padding: 10px;
+    border-radius: 8px;
+    display: inline-block;
+}
+
+h1.profile-title, h3.profile-header, h5.profile-subheader {
+    color: #d63384; /* Use a shade of pink for headers */
+    font-family: 'Playfair Display', serif;
+}
+
+label.profile-label {
+    color: #d63384; /* Pink color for form labels */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+/* Button Styles */
+/* Button Styles */
+.profile-btn-purple {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+.profile-btn-purple.text-white {
+    color: #ffffff;
+}
+
+.profile-btn-purple:hover {
+    background-color: #5a32a3;
+    border-color: #5a32a3;
+}
+
+/* Card Style for Sections */
+.profile-section, .profile-services, .profile-rate-section, .profile-sitters-section, .profile-chats-section {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Input Styles */
+.profile-form-control {
+    border-radius: 5px;
+    border: 1px solid #d63384;
+}
+
+
     
     
     
@@ -590,6 +656,35 @@ body {
     .article-navigation {
         flex-direction: column;
         gap: 10px;
+    }
+
+---------------------
+
+ .profile-container {
+        grid-template-columns: 1fr;
+        grid-gap: 15px;
+        margin: 20px;
+    }
+
+    .profile-section, .services-section, .pet-sitters-section, .chats-section {
+        padding: 15px;
+    }
+
+    .services-section {
+        grid-column: span 1;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    .btn-primary {
+        font-size: 0.9em;
+        padding: 10px 15px;
+    }
+
+    .rating-stars span {
+        font-size: 16px;
     }
 
 ---------------------
