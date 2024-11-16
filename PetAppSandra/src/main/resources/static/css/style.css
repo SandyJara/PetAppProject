@@ -600,7 +600,12 @@ label.profile-label {
     border: 1px solid #d63384;
 }
 
-
+#complementary-info {
+    width: 70%; /* Adjust as per your preference */
+    height: 85px; /* Adjust to set the desired height */
+    max-width: 100%; /* Ensure it does not exceed the container width */
+    resize: both; /* Allow users to resize if needed */
+}
     
     
     
