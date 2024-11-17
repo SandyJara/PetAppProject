@@ -13,7 +13,7 @@
 
 <body>
 
-    <button class="btn profile-btn-purple text-white logout-btn" style="position: absolute; right: 20px; top: 20px;">LOG OUT</button>
+    <button id="logOutButton" class="btn profile-btn-purple text-white logout-btn" style="position: absolute; right: 20px; top: 20px;">LOG OUT</button>
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light custom-nav">
@@ -61,11 +61,14 @@
         <!-- Register Form -->
 		       <div class="register-box">
 		            <h2>Join Us</h2>
-		            <form action="/register" method="post">
+		         <!--   <form action="/register" method="post"> this was giving me problems to send-connect -->
+		            
+		            
+		            <form id="registerForm">
 		                <label for="account">Account:</label>
 		                <select id="account" name="account" class="form-control">
-		                    <option value="owner">Owner</option>
-		                    <option value="petsitter">Petsitter</option>
+		                    <option value="OWNER">Owner</option>
+		                    <option value="PETSITTER">Petsitter</option>
 		                </select>
 		                <label for="fullname">Full Name:</label>
 		                <input type="text" id="fullname" name="fullname" class="form-control" required>
@@ -79,11 +82,12 @@
 		                <input type="text" id="address" name="address" class="form-control" required>
 		                <label for="username">User Name:</label>
 		                <input type="text" id="username" name="username" class="form-control" required>
-		                <label for="password">Password:</label>
-		                <input type="password" id="password" name="password" class="form-control" required>
-		                <label for="confirm-password">Confirm Password:</label>
-		                <input type="password" id="confirm-password" name="confirm-password" class="form-control" required>
-		                <button type="submit" class="join-btn btn btn-success mt-3">Join</button>
+		                <label for="user-password">Password:</label>
+						<input type="password" id="user-password" name="user-password" class="form-control" required autocomplete="new-password">
+						<label for="confirm-password">Confirm Password:</label>
+						<input type="password" id="confirm-password" name="confirm-password" class="form-control" required autocomplete="new-password">
+		                
+		                <button id="joinButton"  type="submit" class="join-btn btn btn-success mt-3">Join</button>
 		            </form>
 		        </div>
 
@@ -110,5 +114,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+
+<script src="/js/login.js"></script>
 </body>
 </html>

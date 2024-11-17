@@ -3,6 +3,7 @@ package com.project.PetAppSandra.controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project.PetAppSandra.User;
 import com.project.PetAppSandra.repository.UserRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -25,6 +27,13 @@ public class LogInController {
         return "login"; 
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return ResponseEntity.ok("Logged out successfully");
+    }
+    
+    
     @PostMapping("/login")
     public String login(@RequestParam String identifier, @RequestParam String password, Model model, HttpSession session) {
         try {
@@ -60,7 +69,6 @@ public class LogInController {
                     model.addAttribute("error", "Invalid password");
                 }
             } else {
-                // Depuración: usuario no encontrado
                 System.out.println("User/Email not found");
                 model.addAttribute("error", "User/email not found");
             }

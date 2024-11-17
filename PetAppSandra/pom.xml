@@ -63,6 +63,11 @@
  		   <scope>runtime</scope>
 		</dependency>
 		
+		<!--new dependency to be able to storage new information from a new user and send it to my database in sql-->
+		<dependency>
+    	<groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
 		
 	</dependencies>
 	

@@ -10,6 +10,7 @@
     <link href="/css/style.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    
 </head>
 <body>
 
@@ -42,7 +43,10 @@
     </div>
 </nav>
 
-<button class="btn profile-btn-purple text-white logout-btn" style="position: relative; float: right; margin-right: 20px; margin-top: 20px;">LOG OUT</button> 
+<button id="logOutButton" class="btn profile-btn-purple text-white logout-btn" style="position: relative; float: right; margin-right: 20px; margin-top: 20px; z-index: 1000; pointer-events: auto;">
+    LOG OUT
+</button>
+ 
 
 <!-- PETXIE Title with Images behind Navbar -->
     <div class="petxie-background">
@@ -68,7 +72,8 @@
             <p>FDGSDFG7</p>
             <p>ADFAFDF</p>
             <p>ADSGADSG ADGADSGADSG</p>
-            <button class="btn profile-btn-purple text-white" onclick="window.location.href='/updateOwner'">Update Information</button>
+           <button id="updateInfo" class="btn profile-btn-purple text-white">Update Information
+</button>
         </div>
 
         <!-- Services Section -->
@@ -222,5 +227,8 @@
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/js/owner.js"></script>
 </body>
 </html>
