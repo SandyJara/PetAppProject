@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-//BUTTON FROM PAGE LOGIN.HTML to resiter a new user
+//BUTTON FROM PAGE LOGIN.HTML to resiter a new user, working
      const joinButton = document.getElementById('joinButton');
     const passwordInput = document.getElementById('user-password'); //i changes the ID because it was having like a duplication issue before this change
     const confirmPasswordInput = document.getElementById('confirm-password');
