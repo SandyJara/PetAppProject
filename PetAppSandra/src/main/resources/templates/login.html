@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,87 +8,107 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/style.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
 </head>
+
 <body>
 
-<button class="btn profile-btn-purple text-white logout-btn" style="position: absolute; right: 20px; top: 20px;">LOG OUT</button>
+    <button class="btn profile-btn-purple text-white logout-btn" style="position: absolute; right: 20px; top: 20px;">LOG OUT</button>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light custom-nav">
-    <a class="navbar-brand" href="/">
-        <img src="/images/logo.png" alt="Pet Community Logo" class="logo">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
-            <li class="nav-item"><a class="nav-link" href="/aboutUs">ABOUT US</a></li>
-            <li class="nav-item"><a class="nav-link" href="/blog">BLOG</a></li>
-            <li class="nav-item"><a class="nav-link" href="/contact">CONTACT</a></li>
-            <li class="nav-item"><a class="nav-link" href="/login">LOG IN</a></li>
-        </ul>
-    </div>
-</nav>
-
-<!-- Petxie Title and Background Paws -->
-<div class="petxie-background">
-    <img src="/images/paw.png" alt="Paw Image" class="paw-left">
-    <div class="petxie-title">PETXIE</div>
-    <img src="/images/paw.png" alt="Paw Image" class="paw-right">
-</div>
-
-<div class="main-container">
-    <div class="login-box">
-        <h2>Log In</h2>
-        <div class="login-section">
-        
-       <!-- temporal only to test the view of a profile page, I need to add the authentication -->
-            <button class="login-btn" onclick="window.location.href='/owner'">Owners</button>    
-            <div class="image-box">
-                <img src="/images/logInOwner.jpeg" alt="Owners Image">
-            </div>
-       <!-- temporal only to test the view of a profile page, I need to add the authentication -->
-            <button class="login-btn" onclick="window.location.href='/petSitter'">Petsitters</button>
-            <div class="image-box">
-                <img src="/images/logInPetsitter.jpeg" alt="Petsitters Image">
-            </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light custom-nav">
+        <a class="navbar-brand" href="/">
+            <img src="/images/logo.png" alt="Pet Community Logo" class="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="/aboutUs">ABOUT US</a></li>
+                <li class="nav-item"><a class="nav-link" href="/blog">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">CONTACT</a></li>
+                <li class="nav-item"><a class="nav-link" href="/login">LOG IN</a></li>
+            </ul>
         </div>
+    </nav>
+
+    
+    
+    <!-- Main Container -->
+	<div th:if="${error}" class="alert alert-danger" role="alert">
+    <span th:text="${error}"></span>
+	</div>  
+
+    <div class="about-section my-5"> <!--recycling this class from my other page -->
+        <!-- Login Form -->
+		        <div class="login-box">
+		            <h2>Log In</h2>
+		            <form action="/login" method="post">
+		                <div class="form-group">
+		                    <label for="identifier">Username or Email:</label>
+		                    <input type="text" id="identifier" name="identifier" class="form-control" required>
+		                </div>
+		                <div class="form-group">
+		                    <label for="password">Password:</label>
+		                    <input type="password" id="password" name="password" class="form-control" required>
+		                </div>
+		                <button type="submit" class="btn-submit">Sign in</button>
+		            </form>
+		        </div>
+
+        <!-- Register Form -->
+		       <div class="register-box">
+		            <h2>Join Us</h2>
+		            <form action="/register" method="post">
+		                <label for="account">Account:</label>
+		                <select id="account" name="account" class="form-control">
+		                    <option value="owner">Owner</option>
+		                    <option value="petsitter">Petsitter</option>
+		                </select>
+		                <label for="fullname">Full Name:</label>
+		                <input type="text" id="fullname" name="fullname" class="form-control" required>
+		                <label for="birthdate">Day of Birth:</label>
+		                <input type="date" id="birthdate" name="birthdate" class="form-control" required>
+		                <label for="email">Email:</label>
+		                <input type="email" id="email" name="email" class="form-control" required>
+		                <label for="phone">Phone Number:</label>
+		                <input type="tel" id="phone" name="phone" class="form-control" required>
+		                <label for="address">Address:</label>
+		                <input type="text" id="address" name="address" class="form-control" required>
+		                <label for="username">User Name:</label>
+		                <input type="text" id="username" name="username" class="form-control" required>
+		                <label for="password">Password:</label>
+		                <input type="password" id="password" name="password" class="form-control" required>
+		                <label for="confirm-password">Confirm Password:</label>
+		                <input type="password" id="confirm-password" name="confirm-password" class="form-control" required>
+		                <button type="submit" class="join-btn btn btn-success mt-3">Join</button>
+		            </form>
+		        </div>
+
+        <!-- Profile Section -->
+		         <div class="vision-card"><!--recycling this class from my other page, i wanted same design -->
+		            <h3>SEE PROFILE</h3>
+		            <button class="login-btn btn btn-info mt-4" onclick="setRedirectURL('owner')">Owners</button>    
+		            <div class="image-box">
+		                <img src="/images/logInOwner.jpeg" alt="Owners Image">
+		            </div>
+		            <button class="login-btn btn btn-info mt-4" onclick="setRedirectURL('petSitter')">Petsitters</button>
+		            <div class="image-box">
+		                <img src="/images/logInPetsitter.jpeg" alt="Petsitters Image">
+		            </div>
+		        </div>
     </div>
 
-    <div class="register-box">
-        <h2>Join Us</h2>
-        <form action="/register" method="post">
-            <label for="account">Account:</label>
-            <select id="account" name="account">
-                <option value="owner">Owner</option>
-                <option value="petsitter">Petsitter</option>
-            </select>
-            <label for="fullname">Full Name:</label>
-            <input type="text" id="fullname" name="fullname" required>
-            <label for="birthdate">Day of Birth:</label>
-            <input type="date" id="birthdate" name="birthdate" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="phone">Phone Number:</label>
-            <input type="tel" id="phone" name="phone" required>
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" required>
-            <label for="username">User Name:</label>
-            <input type="text" id="username" name="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <label for="confirm-password">Confirm Password:</label>
-            <input type="password" id="confirm-password" name="confirm-password" required>
-            <button type="submit" class="join-btn">Join</button>
-        </form>
-    </div>
-</div>
+    
 
-<footer class="footer">
+<footer class="footer mt-5">
     <p>Copyright © 2024 Petxie Inc. All Rights Reserved.</p>
 </footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 </html>

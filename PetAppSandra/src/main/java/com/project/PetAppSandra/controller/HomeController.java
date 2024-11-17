@@ -6,66 +6,55 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class HomeController {
-		 @GetMapping("/home")
-		    public String home() {
-		        return "home"; // This returns the home.html template
-		    }
-
-		 
-		 @GetMapping("/") // This maps the root URL to the same view as /home
-		    public String index() {
-		        return "home"; // Same view as the /home mapping
-		    }
-		 
-	    
-    
-	    @GetMapping("/login")
-	    public String login() {
-	        return "login";  // returns login.html
-	    }
 	
-	        
-	    @PostMapping("/register")
-	    public String register(String name, String email, String password) {
-	    	return "redirect:/";  // Redirects back to home page after registration
-	    }
-	    
-	    @GetMapping("/blog")
-	    public String showBlogPage(Model model) {
-	        return "blog"; 
-	    }
-	    
-	    @GetMapping("/aboutUs")
-	    public String showAboutPage(Model model) {
-	        return "aboutUs"; 
-	    }
-	    
-	    @GetMapping("/contact")
-	    public String showContactPage(Model model) {
-	        return "contact"; 
-	    }
-	    
-	    @GetMapping("/owner")
-	    public String showOwnerPage() {
-	        return "owner";  //
-	    }
-	    
-	    @GetMapping("/petSitter")
-	    public String showPetSitterPage() {
-	        return "petSitter";  //
-	    }
-	    
-	    @GetMapping("/updateOwner")
-	    public String showUpdateOwnerPage() {
-	        return "updateOwner";  //
-	    }
-	    
-	    @GetMapping("/updatePetSitter")
-	    public String showUpdatePetSitterPage() {
-	        return "updatePetSitter";  //
-	    }
-	    
+
+	@GetMapping("/home")
+	public String home() {
+	    return "home"; 
+	}
+
+	@GetMapping("/")
+	public String index() {
+	    return "home"; 
+	}
+
+	@GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // to close session --review because it has to work with a botton
+        return "redirect:/home"; // goes back to home
+    }
+	
+	
+	@GetMapping("/aboutUs")
+	public String aboutUs() {
+	    return "aboutUs";
+	}
+
+	@GetMapping("/blog")
+	public String blog() {
+	    return "blog"; 
+	}
+
+	@GetMapping("/contact")
+	public String contact() {
+	    return "contact"; 
+	}
+
+	@GetMapping("/owner")
+	public String ownerPage() {
+	    return "owner"; 
+	}
+
+	@GetMapping("/petSitter")
+	public String petSitterPage() {
+	    return "petSitter"; 
+	}
+
+	
+	
 	}
 
