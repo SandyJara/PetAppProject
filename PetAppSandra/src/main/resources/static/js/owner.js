@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		    });
 		    
     
-    //2.-to send to upload information
+    //2.-to send to upload information BUTTON FROM PAGE UPDATEOWNER.HTML
     const updateInfoButton = document.getElementById('updateInfo');
 
     updateInfoButton.addEventListener('click', () => {

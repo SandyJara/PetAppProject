@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.PetAppSandra.User;
@@ -122,7 +123,59 @@ public class LogInController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
+    
+       
+    
+/////////new for the updateOwner page
+    
+    @PostMapping("/updateOwner")
+    public ResponseEntity<String> updateOwnerProfile(@RequestBody Map<String, String> updateData, HttpSession session) {
+        User user = (User) session.getAttribute("user");
 
-   
+        if (user != null && "OWNER".equalsIgnoreCase(user.getAccount().name())) {
+            String phone = updateData.get("phone");
+            String address = updateData.get("address");
+            String newPassword = updateData.get("newPassword");
+
+            // Actualizar los campos del usuario
+            user.setPhone(phone);
+            user.setAddress(address);
+
+            if (newPassword != null && !newPassword.isEmpty()) {
+                user.setPassword(newPassword);
+            }
+
+            userRepository.save(user);
+            session.setAttribute("user", user);
+            return ResponseEntity.ok("Profile updated successfully");
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authorized");
+    }
+    
+    
+    @GetMapping("/updateOwner/data")
+    public ResponseEntity<Map<String, Object>> getOwnerProfileData(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+
+        // Verificar si hay usuario en sesión y es un Owner
+        if (user != null && "OWNER".equalsIgnoreCase(user.getAccount().name())) {
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("fullname", user.getFullname());
+            userData.put("phone", user.getPhone());
+            userData.put("address", user.getAddress());
+            userData.put("email", user.getEmail());
+            userData.put("birthdate", user.getBirthdate());
+            userData.put("username", user.getUsername());
+
+            return ResponseEntity.ok(userData);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+    }
+    
+    
+    
     
 }
+    
