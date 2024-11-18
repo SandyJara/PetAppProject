@@ -1,8 +1,11 @@
 package com.project.PetAppSandra.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +18,7 @@ import com.project.PetAppSandra.repository.UserRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class LogInController {
@@ -79,4 +83,46 @@ public class LogInController {
 
         return "login"; // If the logIn is not successful, Shows the log in page again 
     }
+    
+    @GetMapping("/owner/profile")
+    public String ownerProfile(Model model, HttpSession session) {
+        // get the user that is login
+        User user = (User) session.getAttribute("user");
+
+        // verify if there is login and if its an owner
+        if (user != null && "OWNER".equalsIgnoreCase(user.getAccount().toString())) {
+            model.addAttribute("user", user);
+            return "owner"; // send to owner.html with the information related
+        } else {
+            return "redirect:/login"; // if no go to login
+        }
+    }
+    
+    
+    
+    
+    
+    
+    @GetMapping("/owner/data")
+    public ResponseEntity<Map<String, Object>> getOwnerProfile(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+
+        // verify if there is login and if its an owner
+        if (user != null && "OWNER".equalsIgnoreCase(user.getAccount().name())) {
+            Map<String, Object> userData = new HashMap<>();
+            userData.put("fullname", user.getFullname());
+            userData.put("birthdate", user.getBirthdate());
+            userData.put("email", user.getEmail());
+            userData.put("phone", user.getPhone());
+            userData.put("address", user.getAddress());
+            userData.put("username", user.getUsername());
+
+            return ResponseEntity.ok(userData);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+    }
+
+   
+    
 }

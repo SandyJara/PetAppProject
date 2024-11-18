@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		    });
 		    
     
-    //1.-
+    //2.-to send to upload information
     const updateInfoButton = document.getElementById('updateInfo');
 
     updateInfoButton.addEventListener('click', () => {
@@ -43,6 +43,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     
+     // 3. Uplead information from Owner profile
     
+    const loadProfileData = async () => {
+    try {
+        // requesting backend for the data
+        const response = await fetch('/owner/data', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            const user = await response.json();
+
+            // filling the info
+          	  	document.querySelector('.profile-title').textContent = `WELCOME ${user.fullname}`;
+                document.getElementById('user-fullname').textContent = user.fullname || 'N/A';
+                document.getElementById('user-birthdate').textContent = user.birthdate || 'N/A';
+                document.getElementById('user-email').textContent = user.email || 'N/A';
+                document.getElementById('user-phone').textContent = user.phone || 'N/A';
+                document.getElementById('user-address').textContent = user.address || 'N/A';
+                document.getElementById('user-username').textContent = user.username || 'N/A';
+        } else {
+            alert('Failed to load user data. Please log in again.');
+            window.location.href = '/login';
+        }
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        alert('An error occurred while loading the user data.');
+    }
+  };
+    
+    // calling function to charge profile data
+   loadProfileData();;
     
 });
