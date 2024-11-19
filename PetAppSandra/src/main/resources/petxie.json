@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "gifted-veld-442223-t9",
+  "private_key_id": "1ed8a595f2ef2b7d9d5f7db25aabfd420924c2a0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC5DAJDBtK8659d\ncH/YIgj99dFnN19ig1dO7EMJZ54NGGdA0gsf0/JBbSP9v42gWUuJWw0Ulxgmxq1c\n74t4PkAXxARxmGD5auuf8NWFCJO+TiuvwKrHThCK71m572YDXtojVOj+UpcQaNLp\nN+JGzPdG9qtUK3pL5s6gM0+EQ95yrHCXd0fMxYPapU+CYBNU3IIR3oToD1HcBV8J\nJJZdIFNmCJ5mZEHK0V14J+Vk18rwceMiS6Fd77ZHIH260UyfySDHC7VctCREEjai\nS0GuTxxTuGp+rhnAuKdoLLWSEb5Uwai6C45CLOcO3nBhFDOFhVyt5LPVRoYY2KR/\nPVLS0wi5AgMBAAECggEAA2hF82OBBmMFTnRnmjx4M2rvFeo2WqtF9IlTq6zpg163\nagFkHIwrygofL0kza6gxRKB1U3N7yZz/bLZpeEeXKQjeNxRB9t3B5HJMEDTJ+adZ\nVRVkX6KfmdtR6ONQWtAIjr19w88UAoSXm51AkKKuC/O3UGeziwm/NMJ1HJ+eTTi5\nEF51g7YIV+GI6gm6Ityjh9RLJazmTRM5WAxJP7/C1Z2v5nk00N/saXcXMuzSCd9T\nuikk57ofQSKDvKgHM4etSfOHL8k96ku6OYzXklMIL1peQf/VOddMR0agrxsq2dL1\ns2HjfkzwycWRxGysoA2fdn0fcG6UdXJ1YSxwnoNYzQKBgQD1TYotIBI3yhkPC3gJ\nAlEfeWC1ILVp1qB3o8WZVuP9dCPL56DIFT132tpIOdw2NAv7u6yV8OmA3+8Mz3qg\nwOJ3fiPXKjfRKxS1xrgbCT7R2r3OLlLtxyDnhbOrjzdubsy+Jw92odlT0ivHEZwx\n8bybPIPVi/SdcuzXjQuQ0SptRQKBgQDBHcvSq4YL9rFQTna4eHWOukJPtKxGUpuZ\npFlbUCoS70phfxy5mWsa8DJEHmjJrU/EZn1M5f3HrBTh5o/tJPxxrUlsUULYUEaH\nN0+qIuTM22aQ/hRgEk1Q63SlTRSNvSjwOrcsUqTpeuKYw8l1F6EwKANG3B3nlOoW\nUYlc013C5QKBgDKSPMVW0kqsIIRogeOhlaXeeSB+UMg0Fjr0CX22WyRaeDLGWvBE\n6Lo35T50p0CJdFr+cvMqiokmIXtLnuVbPpUR7UOjkYRO1GMxR61TN5898Fl8VV5t\n6guxFbxttyjOMOmW1epILazJLHtK1x+4zYBXdnpk8xYupkM98b92T7/dAoGAN9qx\nV/ZKJ+2q7So0hjg48BYJFdqQtSoxXOe+/H0cHivdnINSQJAR/VGZiEAvWJ1q48gs\n12/xza2EwK2Z1SIMbaiMAush5USakYM65F+BQ4r1iFwkcoD4ob3oF+NKXZBnZcvl\nrMkeb3UeUsbV3qr98Nqxz+3cLF3Ssq/UheeQR80CgYBrMIRee+i4lkEeK0A3MvKg\nDdBbu4GcwBWvQs0+f/qRXwGqBoT6MfNV0CD63Q/B1jq5T7nrbXl3Qm0CrsVmcP4k\ngu58q3G1kNGWQjYGgP/e6mtwsiYcZiU7ie9Pt7d+P/jIqEB2mW31zgS62nu1fv5o\nuWhbF2DhMAfm1hYQXDDW2g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "petxie-storage-service@gifted-veld-442223-t9.iam.gserviceaccount.com",
+  "client_id": "110084894582237622729",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/petxie-storage-service%40gifted-veld-442223-t9.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
