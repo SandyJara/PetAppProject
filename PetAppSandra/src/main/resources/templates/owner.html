@@ -68,8 +68,12 @@
         <!-- Profile Section -->
         <div class="col-lg-3 col-md-4 col-sm-12 profile-section mb-4">
 		    <h3 class="profile-header">Profile</h3>
-		    <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-image">
-		    <p>Full Name: <span id="user-fullname"></span></p>
+		    
+		    
+		    <!-- next line updated to show the image loaded -->
+			<img id="profile-picture-preview" src="/images/default-image.png" alt="Profile Picture" style="width: 150px; height: 150px;">
+			
+			<p>Full Name: <span id="user-fullname"></span></p>
 		    <p>Email: <span id="user-email"></span></p>
 		    <p>Phone: <span id="user-phone"></span></p>
 		    <p>Birthdate: <span id="user-birthdate"></span></p>
@@ -230,7 +234,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
-    
-    <script src="/js/owner.js"></script>
+  
+		<script src="/js/updateOwner.js"></script>
+		<script src="/js/owner.js"></script>
 </body>
 </html>

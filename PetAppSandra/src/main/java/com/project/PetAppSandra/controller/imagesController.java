@@ -8,6 +8,8 @@ import com.google.cloud.storage.StorageOptions;
 import com.project.PetAppSandra.User;
 import com.project.PetAppSandra.repository.UserRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +20,17 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/images")
 public class imagesController {
 
     private Storage storage;
+    
+    @Autowired
+    private UserRepository userRepository; // to interact with the database
+    
 
     public imagesController() {
         try {
@@ -42,8 +49,9 @@ public class imagesController {
 
     @PostMapping("/upload/profile/{userId}")
     public ResponseEntity<?> uploadProfilePicture(
-            @PathVariable Long userId,
-            @RequestParam("file") MultipartFile file) {
+    		@PathVariable Long userId,
+            @RequestParam("file") MultipartFile file,
+            HttpSession session) { // add HttpSession as a parameter
         try {
             if (file.isEmpty()) {
                 return ResponseEntity.badRequest().body("the file is empty");
@@ -54,11 +62,30 @@ public class imagesController {
             storage.create(blobInfo, file.getBytes());
 
             String fileUrl = "https://storage.googleapis.com/petxie_project/" + fileName;
-            return ResponseEntity.ok(Map.of("message", "File uploaded succesfull", "url", fileUrl));
+            
+            
+            // New code to update the database with the URL
+            Optional<User> userOptional = userRepository.findById(userId);
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                user.setProfilePictureUrl(fileUrl); 
+                userRepository.save(user); 
+                
+             // update session with user 
+                session.setAttribute("user", user);
+                
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + userId);
+            }
+
+            // answer then it works
+            return ResponseEntity.ok(Map.of("message", "Photo uploaded successfully", "url", fileUrl));
         } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error to upload the file: " + e.getMessage());
+                    .body("Error uploading the file: " + e.getMessage());
         }
     }
 }
+    
+   

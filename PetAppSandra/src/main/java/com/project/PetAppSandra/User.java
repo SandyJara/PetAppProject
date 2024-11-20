@@ -34,6 +34,7 @@ public class User {
     private String phone;
     private String address;
 	
+    @Column(name = "profile_picture_url")
     private String profilePictureUrl;
     
     // Getters and setters

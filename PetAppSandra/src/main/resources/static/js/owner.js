@@ -57,6 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (response.ok) {
             const user = await response.json();
+            
+             //check the received data
+            console.log('User Data:', user);
 
             // filling the info
           	  	document.querySelector('.profile-title').textContent = `WELCOME ${user.fullname}`;
@@ -66,17 +69,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('user-phone').textContent = user.phone || 'N/A';
                 document.getElementById('user-address').textContent = user.address || 'N/A';
                 document.getElementById('user-username').textContent = user.username || 'N/A';
-        } else {
-            alert('Failed to load user data. Please log in again.');
-            window.location.href = '/login';
+      
+      
+	    		const imageElement = document.getElementById('profile-picture-preview');
+                imageElement.src = user.profilePictureUrl || 'https://via.placeholder.com/150';
+                imageElement.onload = () => console.log("Imagen cargada correctamente");
+                imageElement.onerror = () => console.error("Error al cargar la imagen", user.profilePictureUrl);
+
+            } else {
+                alert('Failed to load user data. Please log in again.');
+                window.location.href = '/login';
+            }
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+            alert('An error occurred while loading the user data.');
         }
-    } catch (error) {
-        console.error('Error fetching user data:', error);
-        alert('An error occurred while loading the user data.');
-    }
-  };
-    
-    // calling function to charge profile data
-   loadProfileData();;
-    
+    };
+
+    // Call function to load profile data
+    loadProfileData();
 });

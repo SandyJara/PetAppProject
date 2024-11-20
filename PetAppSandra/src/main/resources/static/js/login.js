@@ -65,4 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('An error occurred. Try again please.');
         }
     });
+    
+    //added when I added the profile pic, it wasnt connecting without this
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+        console.log(`User ID retrieved from localStorage: ${userId}`);
+    }
+    
 });

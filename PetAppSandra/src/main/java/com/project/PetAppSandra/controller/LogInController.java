@@ -48,11 +48,11 @@ public class LogInController {
                 User user = userOptional.get();
 
                 // some messages added to see if there is an issue for correct logIn
-                System.out.println("Usuario encontrado: " + user.getUsername());
+                System.out.println("User found: " + user.getUsername());
 
                 if (user.getPassword() != null && user.getPassword().equals(password)) {
                     // if the password is correct
-                    System.out.println("Contraseña correcta");
+                    System.out.println("valid password");
 
                     // Save the user in the sesion
                     session.setAttribute("user", user);
@@ -103,7 +103,7 @@ public class LogInController {
     
     
     
-    
+    //keep
     @GetMapping("/owner/data")
     public ResponseEntity<Map<String, Object>> getOwnerProfile(HttpSession session) {
         User user = (User) session.getAttribute("user");
@@ -117,6 +117,7 @@ public class LogInController {
             userData.put("phone", user.getPhone());
             userData.put("address", user.getAddress());
             userData.put("username", user.getUsername());
+            userData.put("profilePictureUrl", user.getProfilePictureUrl()); 
 
             return ResponseEntity.ok(userData);
         } else {
@@ -137,7 +138,7 @@ public class LogInController {
             String address = updateData.get("address");
             String newPassword = updateData.get("newPassword");
 
-            // Actualizar los campos del usuario
+            // update this information, not all registered from the begining can be changed
             user.setPhone(phone);
             user.setAddress(address);
 
@@ -154,26 +155,31 @@ public class LogInController {
     }
     
     
+
+    
+    
+    
     @GetMapping("/updateOwner/data")
     public ResponseEntity<Map<String, Object>> getOwnerProfileData(HttpSession session) {
         User user = (User) session.getAttribute("user");
 
-        // Verificar si hay usuario en sesión y es un Owner
         if (user != null && "OWNER".equalsIgnoreCase(user.getAccount().name())) {
             Map<String, Object> userData = new HashMap<>();
+            userData.put("id", user.getId());
             userData.put("fullname", user.getFullname());
             userData.put("phone", user.getPhone());
             userData.put("address", user.getAddress());
             userData.put("email", user.getEmail());
             userData.put("birthdate", user.getBirthdate());
             userData.put("username", user.getUsername());
+            userData.put("profilePictureUrl", user.getProfilePictureUrl());
 
             return ResponseEntity.ok(userData);
         } else {
+            
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
-    
     
     
     
