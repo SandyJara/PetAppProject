@@ -17,7 +17,7 @@ public class ContactMessage {
     private String message;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = true) // Relación con la tabla `users`
+    @JoinColumn(name = "user_id", nullable = true) // related with my table users in sql
     private User user;
     @Column(name = "submission_date", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP") // I was missing a part of this code and making imposible to update mi table
     private LocalDateTime submissionDate;

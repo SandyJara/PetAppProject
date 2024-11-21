@@ -24,7 +24,7 @@ public class HomeController {
 
 	@GetMapping("/logout")
     public String logout(HttpSession session) {
-        session.invalidate(); // to close session --review because it has to work with a botton
+        session.invalidate(); // to close session --review because it has to work with a button
         return "redirect:/home"; // goes back to home
     }
 	

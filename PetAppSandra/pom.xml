@@ -70,6 +70,12 @@
   		  <scope>provided</scope>
 			</dependency>
 
+		<!--new dependency for second database-->
+		<dependency>
+    	<groupId>org.springframework.boot</groupId>
+   		<artifactId>spring-boot-starter-data-mongodb</artifactId>
+		</dependency>
+		
 		<!--new dependency to use google cloud and be able to save the pictures-->
 	 	<dependency>
     	<groupId>com.google.cloud</groupId>
