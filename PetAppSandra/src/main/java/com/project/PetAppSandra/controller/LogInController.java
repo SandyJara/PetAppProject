@@ -120,10 +120,16 @@ public class LogInController {
             userData.put("profilePictureUrl", user.getProfilePictureUrl()); 
 
             return ResponseEntity.ok(userData);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-        }
+       } else if (user == null) {
+        // messaje to know the problem when i fails
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("error", "No user found in session. Please log in."));
+    } else {
+        // Manejo de error para cuentas no válidas
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .body(Map.of("error", "You are not authorized to view this data."));
     }
+}
     
        
     
@@ -174,14 +180,19 @@ public class LogInController {
             userData.put("username", user.getUsername());
             userData.put("profilePictureUrl", user.getProfilePictureUrl());
 
-            return ResponseEntity.ok(userData);
-        } else {
-            
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-        }
-    }
-    
-    
+		        return ResponseEntity.ok(userData);
+		    } else if (user == null) {
+		        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+		                .body(Map.of("error", "No user found in session. Please log in."));
+		    } else {
+		        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+		                .body(Map.of("error", "You are not authorized to view this page."));
+		    }
+		}
+		    
+		    
+	
+
     
 }
     

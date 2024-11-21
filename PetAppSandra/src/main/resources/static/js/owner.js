@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
       
 	    		const imageElement = document.getElementById('profile-picture-preview');
                 imageElement.src = user.profilePictureUrl || 'https://via.placeholder.com/150';
-                imageElement.onload = () => console.log("Imagen cargada correctamente");
-                imageElement.onerror = () => console.error("Error al cargar la imagen", user.profilePictureUrl);
+                imageElement.onload = () => console.log("image loaded correctly");
+                imageElement.onerror = () => console.error("Error while loading the image", user.profilePictureUrl);
 
             } else {
                 alert('Failed to load user data. Please log in again.');
