@@ -127,21 +127,20 @@
 		    <div class="form-box">
 		        <div class="form-group">
 		            <label for="pet-selection" class="profile-label">Information</label>
+		            <label for="pet-selection" class="profile-label">*This field must be introduced</label>
 		            <select id="pet-selection" class="form-control profile-form-control">
-		                <option value="new">NEW</option>
-		                <option value="pet1">Pet 1</option>
-		            </select>
+		                 <option value="new">NEW</option>
+		             </select>
 		            <button id="delete-pet" class="btn profile-btn-blue text-white mt-2" style="float: left; background-color: #c31067;">DELETE</button>
 		            <br><br>
 		        </div>
 		        <div class="form-group">
-		            <label for="pet-name" class="profile-label">Name</label>
+		            <label for="pet-name" class="profile-label">Name*</label>
 		            <input type="text" id="pet-name" class="form-control profile-form-control" placeholder="Enter pet's name">
 		        </div>
 		        <div class="form-group">
-		            <label for="pet-age" class="profile-label">Age</label>
+		            <label for="pet-age" class="profile-label">Age (years)*</label>
 		            <select id="pet-age" class="form-control profile-form-control mt-2">
-		                <option value="less 1">less than 1</option>
 		                <option value="1">1</option>
 		                <option value="2">2</option>
 		                <option value="3">3</option>
@@ -156,24 +155,67 @@
 		                <option value="12">12</option>
 		                <option value="13">13</option>
 		                <option value="14">14</option>
+		                <option value="15">15</option>
+		                <option value="16">16</option>
 		            </select>
 		        </div>
 		        <div class="form-group">
-		            <label for="pet-weight" class="profile-label">Weight (Kgs)</label>
-		            <input type="text" id="pet-weight" class="form-control profile-form-control" placeholder="Enter pet's weight in Kgs">
+		            <label for="pet-weight" class="profile-label">Weight (Kgs). Select the value closest to your pet's weight. *</label>
+		            <select id="pet-weight" class="form-control profile-form-control mt-2">
+		                <option value="1">1</option>
+		                <option value="2">2</option>
+		                <option value="3">3</option>
+		                <option value="4">4</option>
+		                <option value="5">5</option>
+		                <option value="6">6</option>
+		                <option value="7">7</option>
+		                <option value="8">8</option>
+		                <option value="9">9</option>
+		                <option value="10">10</option>
+		                <option value="11">11</option>
+		                <option value="12">12</option>
+		                <option value="13">13</option>
+		                <option value="14">14</option>
+		                <option value="15">15</option>
+		                <option value="16">16</option>
+		                <option value="17">17</option>
+		                <option value="18">18</option>
+		                <option value="19">19</option>
+		                <option value="20">20</option>
+		                <option value="21">21</option>
+		                <option value="22">22</option>
+		                <option value="23">20</option>
+		                <option value="24">21</option>
+		                <option value="25">22</option>
+		            </select>
 		        </div>
 		        <div class="form-group">
-		            <label for="pet-breed" class="profile-label">Breed</label>
+		            <label for="pet-breed" class="profile-label">Breed (or N/A)*</label>
 		            <input type="text" id="pet-breed" class="form-control profile-form-control" placeholder="Enter pet's breed">
 		        </div>
 		        <div class="form-group">
-		            <label for="pet-size" class="profile-label">Size</label>
+		            <label for="pet-size" class="profile-label">Size*</label>
 		            <select id="pet-size" class="form-control profile-form-control">
 		                <option value="small">small</option>
 		                <option value="medium">medium</option>
 		                <option value="big">big</option>
 		            </select>
 		        </div>
+		        
+		        
+		        <div class="form-group">
+		            <label for="pet-specie" class="profile-label">Specie*</label>
+		            <select id="pet-specie" class="form-control profile-form-control">
+		                <option value="dog">dog</option>
+		                <option value="cat">cat</option>
+		                <option value="bird">bird</option>
+		                <option value="bunny">bunny</option>
+		                <option value="other">other</option>
+		            </select>
+		        </div>
+		        
+		        
+		        
 		        <div class="form-group">
 		            <label for="complementary-info" class="profile-label">Complementary information</label>
 		            <textarea id="complementary-info" class="form-control profile-form-control" placeholder="Health conditions, allergies, behavior with other pets"></textarea>
@@ -183,7 +225,7 @@
 		            <button id="upload-photo" class="btn profile-btn-purple text-white">UPLOAD</button>
 		            <button id="view-gallery" class="btn profile-btn-purple text-white ml-2">VIEW GALLERY</button>
 		        </div>
-		        <button id="update-pet" class="btn profile-btn-blue text-white mt-2" style="float: left; background-color: #c31067;">UPDATE</button>
+		        <button id="save-pet" class="btn profile-btn-blue text-white mt-2" style="float: left; background-color: #c31067;">SAVE</button>
 		    </div>
 
             
