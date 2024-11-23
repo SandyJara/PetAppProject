@@ -21,12 +21,27 @@ public class BlogController {
     @GetMapping
     public String getBlogPage(@RequestParam(name = "week", required = false) Integer week, Model model) {
         List<BlogArticle> articles;
-        if (week != null) {
-            articles = blogArticleRepository.findByWeek(week); // to give the information according to the week
-        } else {
-            articles = blogArticleRepository.findAll(); // gets the articles
+
+        try {
+            if (week != null) {
+                // Allows to search articles by week selected
+                articles = blogArticleRepository.findByWeek(week);
+                if (articles.isEmpty()) {
+                    model.addAttribute("message", "No articles found for week " + week + ".");
+                }
+            } else {
+                articles = blogArticleRepository.findAll();
+                if (articles.isEmpty()) {
+                    model.addAttribute("message", "No articles available at the moment.");
+                }
+            }
+        } catch (Exception e) {
+            // catch errors
+            model.addAttribute("message", "An unexpected error occurred while retrieving articles.");
+            articles = List.of(); 
         }
-        model.addAttribute("articles", articles); // it adds the articles
-        return "blog"; // shows the information in the page blog.html
+
+        model.addAttribute("articles", articles); // this part adds the list emppty o with information 
+        return "blog"; // goes back to blog.html
     }
 }

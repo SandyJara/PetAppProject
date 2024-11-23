@@ -8,8 +8,10 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/modal.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  
     
 </head>
 <body>
@@ -86,33 +88,31 @@
         <div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
             <h3 class="profile-header">Services</h3>
             <div class="existing-service">
-                <button class="btn profile-btn-purple text-white">Consult Existing Service</button>
+                <button id="consult-services" class="btn profile-btn-purple text-white" data-toggle="modal" data-target="#servicesModal">Consult Existing Service</button>
             </div>
             <h5 class="profile-subheader">Create New Service</h5>
             <form>
                 <div class="form-group">
                     <label for="type" class="profile-label">Type:</label>
-                    <select id="type" class="form-control profile-form-control">
-                        <option value="walk">Walk</option>
-                        <option value="visit">Visit</option>
-                        <option value="boarding">House Sitting</option>
+                    <select id="service-type" class="form-control profile-form-control">
+                        <option value="WALK">Walk</option>
+                        <option value="VISIT">Visit</option>
+                        <option value="HOUSESITTING">House Sitting</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="type" class="profile-label">Pet:</label>
-                    <select id="type" class="form-control profile-form-control">
-                        <option value="Pet 1">Pet 1</option>
-                        <option value="Pet 2">Pet 2</option>
-                        <option value="Pet 3">Pet 3</option>
-                    </select>
-                </div>
+				    <label for="pet" class="profile-label">Pet:</label>
+				    <select id="pet-selection" class="form-control profile-form-control">
+				        <option value="">Select Pet</option>
+			   		 </select>
+				</div>
                 <div class="form-group">
                     <label for="from" class="profile-label">From:</label>
-                    <input type="date" id="from" class="form-control profile-form-control">
+                    <input type="date" id="start-date" class="form-control profile-form-control">
                 </div>
                 <div class="form-group">
                     <label for="to" class="profile-label">To:</label>
-                    <input type="date" id="to" class="form-control profile-form-control">
+                    <input type="date" id="end-date" class="form-control profile-form-control">
                 </div>
                 <div class="form-group">
                     <label for="payment" class="profile-label">Payment (Euros):</label>
@@ -122,7 +122,7 @@
                     <label for="comments" class="profile-label">Comments:</label>
                     <textarea id="comments" class="form-control profile-form-control"></textarea>
                 </div>
-                <button type="submit" class="btn profile-btn-purple text-white">Create</button>
+                <button id="create-service" class="btn profile-btn-purple text-white mt-2">Create</button>
             </form>
         </div>
 
@@ -214,7 +214,45 @@
 </script>
 
    
-   
+   <!-- Modal for Services -->
+<div class="modal fade custom-modal" id="servicesModal" tabindex="-1" role="dialog" aria-labelledby="servicesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="servicesModalLabel">Your Services</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Table to display services -->
+                <table class="table custom-table">
+                    <thead class="custom-table-header">
+                        <tr>
+                            <th>Service ID</th>
+                            <th>Type</th>
+                            <th>Pet Name</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Payment (€)</th>
+                            <th>Status</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="servicesTableBody">
+                        <!-- Rows will be dynamically populated here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn custom-close-btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
   <!-- MY CODE -->
 
     
@@ -236,5 +274,7 @@
     
   
 		 <script src="/js/ownerUnif.js"></script>
+		 <script src="/js/service.js"></script>
+		 
 </body>
 </html>

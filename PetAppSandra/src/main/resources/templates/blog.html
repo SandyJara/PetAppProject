@@ -67,8 +67,10 @@
             <option value="3">Week 3</option>
         </select>
     </div>
+   <!-- Message if it exists -->
+    <div class="alert alert-info" th:if="${message}" th:text="${message}"></div>
+
     <div class="blog-article-container">
-        <!-- Iterar sobre los artículos -->
         <div th:each="article : ${articles}" class="blog-article-card mb-4">
             <h3 class="subtitle" th:text="${article.title}">Subtitle Week</h3>
             <p th:text="${article.content}">Content goes here...</p>
