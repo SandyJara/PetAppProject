@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 <td>${service.id}</td>
                                 <td>${service.serviceType}</td>
                                 <td>${service.petName || 'N/A'}</td>
+                                <td>${service.sitterUsername || 'N/A'}</td> <!-- to show Pet Sitter -->
                                 <td>${formatDate(service.startDate)}</td> <!--formatDate to change without time -->
         					    <td>${formatDate(service.endDate)}</td> <!--formatDate to change without time -->
                                 <td>${service.payment} €</td>

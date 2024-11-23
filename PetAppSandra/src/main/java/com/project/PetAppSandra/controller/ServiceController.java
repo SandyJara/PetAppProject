@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,19 +108,36 @@ public class ServiceController {
         }
 
         // To get services with the pets name 
-        List<Object[]> results = serviceRepository.findServicesWithPetNameByOwnerId(user.getId());
-
+        //List<Object[]> results = serviceRepository.findServicesWithPetNameByOwnerId(user.getId());
+        // Obtener servicios con el nombre de la mascota y el username del Pet Sitter
+       // List<Object[]> results = serviceRepository.findServicesWithSitterUsernameByOwnerId(user.getId());
+        List<Object[]> results = serviceRepository.findServicesWithPetAndSitterUsernameByOwnerId(user.getId());
+        
+        for (Object[] result : results) {
+            for (Object obj : result) {
+                System.out.print(obj + " ");
+            }
+            System.out.println();
+        }
+        
+        for (Object[] result : results) {
+            System.out.print("sitterUsername: " + result[3]);
+            System.out.println(Arrays.toString(result));
+        }
+        //System.out.println(results);
+        
         // Map results to a format to present the information 
         List<Map<String, Object>> services = results.stream().map(result -> {
             Map<String, Object> map = new HashMap<>();
             map.put("id", result[0]); 
             map.put("serviceType", result[1]); 
             map.put("petName", result[2] != null ? result[2] : "N/A"); 
-            map.put("startDate", result[3]); 
-            map.put("endDate", result[4]); 
-            map.put("status", result[5]); 
-            map.put("description", result[6]); 
-            map.put("payment", result[7]); 
+            map.put("sitterUsername", (result[3] != null && !result[3].toString().isEmpty()) ? result[3].toString() : "Unassigned");
+            map.put("startDate", result[4]); 
+            map.put("endDate", result[5]); 
+            map.put("status", result[6]); 
+            map.put("description", result[7]); 
+            map.put("payment", result[8]); 
             return map;
         }).collect(Collectors.toList());
 

@@ -1,6 +1,7 @@
 package com.project.PetAppSandra.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.PetAppSandra.User;
 import com.project.PetAppSandra.repository.UserRepository;
+import com.project.PetAppSandra.repository.ServiceRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -26,6 +28,8 @@ public class LogInController {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ServiceRepository serviceRepository;
 
     @GetMapping("/login")
     public String loginPage() {
@@ -85,23 +89,35 @@ public class LogInController {
         return "login"; // If the logIn is not successful, Shows the log in page again 
     }
     
-    @GetMapping("/owner/profile")
+////I modified this to add the part of the rate to this controller, for the petsitter availables to rate!!!!!!1 ERA  @GetMapping("/owner/profile")
+    @GetMapping("/owner")
     public String ownerProfile(Model model, HttpSession session) {
-        // get the user that is login
+        // Get the logged-in user
         User user = (User) session.getAttribute("user");
 
-        // verify if there is login and if its an owner
+        // Verify if the user is logged in and if it's an owner
         if (user != null && "OWNER".equalsIgnoreCase(user.getAccount().toString())) {
             model.addAttribute("user", user);
-            return "owner"; // send to owner.html with the information related
+
+            // Get Pet Sitters related to the Owner
+            List<Object[]> sitters = serviceRepository.findSittersByOwnerId(user.getId());
+            if (sitters == null || sitters.isEmpty()) {
+                System.out.println("No Pet Sitters found for user ID: " + user.getId());
+                model.addAttribute("completedSitters", null); // No sitters
+            } else {
+                System.out.println("Pet Sitters found:");
+                for (Object[] sitter : sitters) {
+                    System.out.println("Sitter ID: " + sitter[0] + ", Username: " + sitter[1]);
+                }
+                model.addAttribute("completedSitters", sitters); // Pass sitters to the model
+            }
+
+            return "owner"; // Send to owner.html with the information related
         } else {
-            return "redirect:/login"; // if no go to login
+            return "redirect:/login"; // If not logged in, redirect to login
         }
     }
-    
-    
-    
-    
+   
     
     //keep
     @GetMapping("/owner/data")
@@ -129,8 +145,7 @@ public class LogInController {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(Map.of("error", "You are not authorized to view this data."));
     }
-}
-    
+} 
        
     
 /////////new for the updateOwner page
@@ -161,9 +176,6 @@ public class LogInController {
     }
     
     
-
-    
-    
     
     @GetMapping("/updateOwner/data")
     public ResponseEntity<Map<String, Object>> getOwnerProfileData(HttpSession session) {
@@ -190,9 +202,6 @@ public class LogInController {
 		    }
 		}
 		    
-		    
-	
-
-    
+	 
 }
     

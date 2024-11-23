@@ -44,11 +44,6 @@ public class HomeController {
 	    return "contact"; 
 	}
 
-	@GetMapping("/owner")
-	public String ownerPage() {
-	    return "owner"; 
-	}
-
 	@GetMapping("/petSitter")
 	public String petSitterPage() {
 	    return "petSitter"; 

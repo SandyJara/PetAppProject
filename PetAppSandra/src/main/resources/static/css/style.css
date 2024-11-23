@@ -1,3 +1,39 @@
+
+/* Stars style for rating in profile Owner page */
+/* Hide inputs */
+.profile-rating-stars input[type="radio"] {
+    display: none; /* hide de circles from the selection */
+}
+
+/* stars container */
+.profile-rating-stars {
+    display: flex;
+    flex-direction: row-reverse; /* to color the start in the properly direction */
+    gap: 5px; /* space betwwen stars */
+}
+
+/* Stars style */
+.profile-rating-stars .star {
+    font-size: 24px;
+    color: #ccc; /* grey as initial color */
+    cursor: pointer; 
+    transition: color 0.3s ease; 
+}
+
+/* Change stars color when selected */
+.profile-rating-stars input[type="radio"]:checked ~ label {
+    color: #f39c12; /* gold  */
+}
+
+/* Change their color when the mouse passes over them */
+.profile-rating-stars label:hover,
+.profile-rating-stars label:hover ~ label {
+    color: #f39c12; /* gold */
+}
+
+
+
+
 /* General Styles */
 body {
     background: url('/images/background.jpeg') no-repeat center center fixed;
@@ -614,8 +650,6 @@ label.profile-label {
     resize: both; /* Allow users to resize if needed */
 }
     
-
-
 
 
 

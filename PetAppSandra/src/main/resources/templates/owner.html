@@ -126,44 +126,49 @@
             </form>
         </div>
 
-        <!-- Rate a Pet Sitter Section -->
-        <div class="col-lg-3 col-md-4 col-sm-12 profile-rate-section mb-4">
-            <h3 class="profile-header">Rate a Pet Sitter</h3>
-            <form>
-                <div class="form-group">
-                    <label for="pet-sitter" class="profile-label">Pet Sitter:</label>
-                    <select id="pet-sitter" class="form-control profile-form-control">
-                        <option value="sitter1">Name Pet Sitter 1</option>
-                        <option value="sitter2">Name Pet Sitter 2</option>
-                    </select>
-                </div>
-                <div class="form-group profile-rating-stars">
-                    <label class="profile-label">Rate:</label><br>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                </div>
-                <div class="form-group">
-                    <label for="rate-comments" class="profile-label">Comments:</label>
-                    <textarea id="rate-comments" class="form-control profile-form-control"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="extra-compensation" class="profile-label">Extra Compensation:</label>
-                    <select id="extra-compensation" class="form-control profile-form-control">
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="amount" class="profile-label">Amount (Euros):</label>
-                    <input type="number" id="amount" class="form-control profile-form-control">
-                </div>
-                <button type="submit" class="btn profile-btn-purple text-white">Send</button>
-            </form>
-        </div>
+        
+        
+        <!-- Rate a Pet Sitter Section, makind the informatrion dynamic  -->
+	<div class="col-lg-3 col-md-4 col-sm-12 profile-rate-section mb-4">
+    <h3 class="profile-header">Rate a Pet Sitter</h3>
+    <form action="/owner/rate-sitter" method="POST">
+    <div class="form-group">
+    <label for="pet-sitter" class="profile-label">Pet Sitter:</label>
+    <select id="pet-sitter" name="reviewedId" class="form-control profile-form-control" required>
+        <option value="">Select Pet Sitter</option>
+        <th:block th:each="sitter : ${completedSitters}">
+            <option th:value="${sitter[0]}" th:text="${sitter[1]}"></option>
+        </th:block>
+    </select>
     </div>
+
+    <!-- For the stars -->
+        <div class="form-group profile-rating-stars">
+		    <label class="profile-label">Rate:</label><br>
+		    <input type="radio" id="star5" name="rating" value="5">
+		    <label for="star5" class="star">&#9733;</label>
+		    <input type="radio" id="star4" name="rating" value="4">
+		    <label for="star4" class="star">&#9733;</label>
+		    <input type="radio" id="star3" name="rating" value="3">
+		    <label for="star3" class="star">&#9733;</label>
+		    <input type="radio" id="star2" name="rating" value="2">
+		    <label for="star2" class="star">&#9733;</label>
+		    <input type="radio" id="star1" name="rating" value="1">
+		    <label for="star1" class="star">&#9733;</label>
+		</div>
+
+        <!-- for the comments -->
+        <div class="form-group">
+            <label for="comment" class="profile-label">Comments:</label>
+            <textarea id="comment" name="comment" class="form-control profile-form-control" required></textarea>
+        </div>
+
+        <!-- button -->
+         <button id="submit-rating" class="btn profile-btn-purple text-white mt-2">Submit</button>
+    </form>
+</div>
+        
+        
 
     <div class="row justify-content-around mb-4">
         <!-- Pet Sitters Section -->
@@ -214,7 +219,7 @@
 </script>
 
    
-   <!-- Modal for Services -->
+ <!-- Modal for Services -->
 <div class="modal fade custom-modal" id="servicesModal" tabindex="-1" role="dialog" aria-labelledby="servicesModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -232,6 +237,7 @@
                             <th>Service ID</th>
                             <th>Type</th>
                             <th>Pet Name</th>
+                            <th>Pet Sitter</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Payment (€)</th>
@@ -244,6 +250,17 @@
                     </tbody>
                 </table>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn custom-close-btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+            
+            
+            
+            
+            
             <div class="modal-footer">
                 <button type="button" class="btn custom-close-btn" data-dismiss="modal">Close</button>
             </div>
