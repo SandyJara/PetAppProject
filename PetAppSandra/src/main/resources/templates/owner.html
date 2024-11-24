@@ -134,7 +134,7 @@
     <form action="/owner/rate-sitter" method="POST">
     <div class="form-group">
     <label for="pet-sitter" class="profile-label">Pet Sitter:</label>
-    <select id="pet-sitter" name="reviewedId" class="form-control profile-form-control" required>
+    <select id="pet-sitter" name="sitterId" class="form-control profile-form-control" required>
         <option value="">Select Pet Sitter</option>
         <th:block th:each="sitter : ${completedSitters}">
             <option th:value="${sitter[0]}" th:text="${sitter[1]}"></option>
@@ -166,6 +166,11 @@
         <!-- button -->
          <button id="submit-rating" class="btn profile-btn-purple text-white mt-2">Submit</button>
     </form>
+    	<!-- Contenedor para mostrar el mensaje de éxito -->
+			<div id="success-message" class="alert alert-success mt-3" style="display: none;">
+			    Your review has been submitted successfully!
+			</div>
+    		
 </div>
         
         
@@ -202,21 +207,6 @@
         </div>
     </div>
 </div>
-
-<script>
-    // Star Rating System
-    document.querySelectorAll('.profile-rating-stars .star').forEach((star, index) => {
-        star.addEventListener('click', () => {
-            document.querySelectorAll('.profile-rating-stars .star').forEach((s, i) => {
-                if (i <= index) {
-                    s.classList.add('checked');
-                } else {
-                    s.classList.remove('checked');
-                }
-            });
-        });
-    });
-</script>
 
    
  <!-- Modal for Services -->
@@ -260,7 +250,6 @@
             
             
             
-            
             <div class="modal-footer">
                 <button type="button" class="btn custom-close-btn" data-dismiss="modal">Close</button>
             </div>
@@ -268,12 +257,9 @@
     </div>
 </div>
 
-
-
   <!-- MY CODE -->
 
-    
-    
+        
      <!-- Footer -->
     <footer class="footer py-4 footer-custom">
         <div class="container text-center">
@@ -292,6 +278,7 @@
   
 		 <script src="/js/ownerUnif.js"></script>
 		 <script src="/js/service.js"></script>
+		 <script src="/js/Review.js"></script>
 		 
 </body>
 </html>

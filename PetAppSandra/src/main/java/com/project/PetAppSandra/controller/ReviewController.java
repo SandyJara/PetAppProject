@@ -21,7 +21,7 @@ public class ReviewController {
 
     @PostMapping
     public String ratePetSitter(
-            @RequestParam Long reviewedId,
+            @RequestParam Long sitterId, 
             @RequestParam int rating,
             @RequestParam String comment,
             HttpSession session) {
@@ -30,18 +30,18 @@ public class ReviewController {
 
         // get the user that is logged
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            System.out.println("No user found in session. Redirecting to login.");
+        if (user == null || !"OWNER".equalsIgnoreCase(user.getAccount().toString())) {
+            System.out.println("No user found in session or not an owner. Redirecting to login.");
             return "redirect:/login";
         }
 
-        Long reviewerId = user.getId();
-        System.out.println("Reviewer ID: " + reviewerId);
+        Long ownerId = user.getId();
+        System.out.println("Owner ID: " + ownerId);
 
         // create and save review
         Review review = new Review();
-        review.setReviewerId(reviewerId);
-        review.setReviewedId(reviewedId);
+        review.setOwnerId(ownerId);
+        review.setSitterId(sitterId);
         review.setRating(rating);
         review.setComment(comment);
         review.setReviewDate(LocalDateTime.now());
@@ -49,6 +49,7 @@ public class ReviewController {
         reviewRepository.save(review);
         System.out.println("Review saved successfully.");
 
-        return "redirect:/owner?success=rating_submitted"; // go to Owner page updated with the successful message
+        //return "redirect:/owner?success=rating_submitted"; // go to Owner page updated with the successful message
+        return "redirect:/owner?success=true";
     }
 }

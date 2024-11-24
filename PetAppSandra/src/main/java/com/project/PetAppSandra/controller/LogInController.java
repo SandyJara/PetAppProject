@@ -112,6 +112,15 @@ public class LogInController {
                 model.addAttribute("completedSitters", sitters); // Pass sitters to the model
             }
 
+               
+         // Check for a success message and pass it to the model
+            String success = (String) session.getAttribute("successMessage");
+            if (success != null) {
+                model.addAttribute("successMessage", success);
+                session.removeAttribute("successMessage"); // Limpiar después de mostrar
+                System.out.println("Success message added to model and cleared from session");
+            }
+            
             return "owner"; // Send to owner.html with the information related
         } else {
             return "redirect:/login"; // If not logged in, redirect to login

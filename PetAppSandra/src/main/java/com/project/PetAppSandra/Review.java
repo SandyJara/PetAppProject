@@ -16,11 +16,11 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "reviewer_id")
-    private Long reviewerId;
+    @Column(name = "owner_id", nullable = false)
+    private Long ownerId; 
 
-    @Column(name = "reviewed_id")
-    private Long reviewedId;
+    @Column(name = "sitter_id", nullable = false)
+    private Long sitterId; 
 
     private int rating;
     private String comment;
@@ -37,23 +37,23 @@ public class Review {
         this.id = id;
     }
 
-    public Long getReviewerId() {
-        return reviewerId;
-    }
+    public Long getOwnerId() {
+		return ownerId;
+	}
 
-    public void setReviewerId(Long reviewerId) {
-        this.reviewerId = reviewerId;
-    }
+	public void setOwnerId(Long ownerId) {
+		this.ownerId = ownerId;
+	}
 
-    public Long getReviewedId() {
-        return reviewedId;
-    }
+	public Long getSitterId() {
+		return sitterId;
+	}
 
-    public void setReviewedId(Long reviewedId) {
-        this.reviewedId = reviewedId;
-    }
+	public void setSitterId(Long sitterId) {
+		this.sitterId = sitterId;
+	}
 
-    public int getRating() {
+	public int getRating() {
         return rating;
     }
 
