@@ -150,7 +150,7 @@ public class LogInController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(Map.of("error", "No user found in session. Please log in."));
     } else {
-        // Manejo de error para cuentas no válidas
+        // error for no valid accounts
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(Map.of("error", "You are not authorized to view this data."));
     }

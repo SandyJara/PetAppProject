@@ -28,7 +28,6 @@ public class HomeController {
         return "redirect:/home"; // goes back to home
     }
 	
-	
 	@GetMapping("/aboutUs")
 	public String aboutUs() {
 	    return "aboutUs";
@@ -44,10 +43,6 @@ public class HomeController {
 	    return "contact"; 
 	}
 
-	@GetMapping("/petSitter")
-	public String petSitterPage() {
-	    return "petSitter"; 
-	}
 
 	@GetMapping("/updateOwner")
 	public String updateOwnerPage() {
