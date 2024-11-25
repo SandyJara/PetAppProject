@@ -86,158 +86,153 @@
        
            
 
-        <!-- Availability Section -->
-        <div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
-            <h3 class="profile-header">Services</h3>
-            <div class="existing-service">
-                <button class="btn profile-btn-purple text-white">Consult Existing Service</button>
+         <!-- Services Section -->
+            <div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
+                <h3 class="profile-header">Services</h3>
+                <div class="existing-service">
+                    <button class="btn profile-btn-purple text-white">Consult Existing Service</button>
+                </div>
+                
+                <br>
+                <h5 class="profile-subheader">Set preferences</h5>
+                <form>
+                    <div class="form-group">
+                        <label for="type" class="profile-label">Type:</label>
+                        <div id="type-options" class="checkbox-group">
+                            <div><input type="checkbox" id="walk" value="WALK" name="type"><label for="walk">Walk</label></div>
+                            <div><input type="checkbox" id="visit" value="VISIT" name="type"><label for="visit">Visit</label></div>
+                            <div><input type="checkbox" id="housesitting" value="HOUSESITTING" name="type"><label for="housesitting">House Sitting</label></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-type" class="profile-label">Pet type:</label>
+                        <div id="pet-type-options">
+                            <div class="form-check"><input type="checkbox" id="dog" class="form-check-input" value="Dog"><label for="dog" class="form-check-label">Dog</label></div>
+                            <div class="form-check"><input type="checkbox" id="cat" class="form-check-input" value="Cat"><label for="cat" class="form-check-label">Cat</label></div>
+                            <div class="form-check"><input type="checkbox" id="rabbit" class="form-check-input" value="Rabbit"><label for="rabbit" class="form-check-label">Rabbit</label></div>
+                        	<div class="form-check"><input type="checkbox" id="bird" class="form-check-input" value="Bird"><label for="bird" class="form-check-label">Bird</label></div>
+                            <div class="form-check"><input type="checkbox" id="hamster" class="form-check-input" value="Hamster"><label for="hamster" class="form-check-label">Hamster</label></div>
+                            <div class="form-check"><input type="checkbox" id="other" class="form-check-input" value="Other"><label for="other" class="form-check-label">Other</label></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="type" class="profile-label">Estatus de perfil:</label>
+                        <select id="type" class="form-control profile-form-control">
+                            <option value="Activo">ACTIVO</option>
+                            <option value="Inactivo">INACTIVO</option>
+                        </select>
+                    </div>
+                    <button id="upload-buttonPreferences" type="button" class="btn profile-btn-purple text-white ml-2">Update</button>
+                </form>
             </div>
-            <h5 class="profile-subheader">Create New Service</h5>
-            <form>
-                <div class="form-group">
-                    <label for="type" class="profile-label">Type:</label>
-                    <select id="type" class="form-control profile-form-control">
-                        <option value="walk">Walk</option>
-                        <option value="visit">Visit</option>
-                        <option value="house sitting">House Sitting</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="type" class="profile-label">Pet type:</label>
-                    <select id="type" class="form-control profile-form-control">
-                        <option value="Dog">Dog</option>
-                        <option value="Cat 2">Cat</option>
-                        <option value="Rabbit">Rabbit</option>
-                        <option value="Bird">Bird</option>
-                        <option value="Hamster">Hamster</option>
-                        <option value="Other">Other</option>
-                    </select>
-   				 <input type="text" id="other-pet-type" class="form-control profile-form-control mt-2" placeholder="If other, specify" style="display: none;">
-				</div>
-				
-				 <div class="form-group">
-                    <label for="type" class="profile-label">Pet size:</label>
-                    <select id="type" class="form-control profile-form-control">
-                        <option value="Small">Small</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Big">Big</option>
-                       
-                    </select>
-   				
-				</div>
-				
-                <div class="form-group">
-                    <label for="from" class="profile-label">From:</label>
-                    <input type="date" id="from" class="form-control profile-form-control">
-                </div>
-                <div class="form-group">
-                    <label for="to" class="profile-label">To:</label>
-                    <input type="date" id="to" class="form-control profile-form-control">
-                </div>
-                
-                 <div class="form-group">
-                    <label for="area" class="profile-label">Area</label>
-                    <div id="map-placeholder" style="height: 150px; background-color: #e0e0e0; text-align: center; line-height: 150px; color: #777;">
-                        Google Maps
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="payment" class="profile-label">Payment (Euros):</label>
-                    <input type="number" id="payment" class="form-control profile-form-control">
-                </div>
-                <div class="form-group">
-                    <label for="comments" class="profile-label">Comments:</label>
-                    <textarea id="comments" class="form-control profile-form-control"></textarea>
-                </div>
-                <button type="submit" class="btn profile-btn-purple text-white">Create</button>
-            </form>
         </div>
 
-        <!-- Rate an Owner Section -->
-        <div class="col-lg-3 col-md-4 col-sm-12 profile-rate-section mb-4">
-            <h3 class="profile-header">Rate an Owner</h3>
-            <form>
-                <div class="form-group">
-                    <label for="pet-sitter" class="profile-label">Owner:</label>
-                    <select id="pet-sitter" class="form-control profile-form-control">
-                        <option value="sitter1">Name Owner 1</option>
-                        <option value="sitter2">Name Owner 2</option>
-                    </select>
-                </div>
-                <div class="form-group profile-rating-stars">
-                    <label class="profile-label">Rate:</label><br>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                </div>
-                <div class="form-group">
-                    <label for="rate-comments" class="profile-label">Comments:</label>
-                    <textarea id="rate-comments" class="form-control profile-form-control"></textarea>
-                </div>
-                
-                
-                <button type="submit" class="btn profile-btn-purple text-white">Send</button>
-            </form>
+       
+       
+		       <!-- Filter Section -->
+		<div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
+		<div class="form-group">
+		    <label for="service-type" class="profile-label">Filter by Service Type:</label>
+		    <select id="service-type" class="form-control profile-form-control">
+		        <option value="ALL">All</option>
+		        <option value="WALK">Walk</option>
+		        <option value="VISIT">Visit</option>
+		        <option value="HOUSESITTING">House Sitting</option>
+		    </select>
+		</div>
+		
+		<!-- Placeholder for Area (Map) -->
+		<div class="form-group">
+		    <label for="area" class="profile-label">Filter by Area:</label>
+		    <div id="map-placeholder" style="height: 150px; background-color: #e0e0e0; text-align: center; line-height: 150px; color: #777;">
+		        Google Maps Placeholder
+		    </div>
+		</div>
+		
+		<!-- Search Button -->
+		<div class="form-group">
+		    <button type="button" class="btn profile-btn-purple text-white" id="search-services-button">
+		        Search
+		    </button>
+		</div>
+		</div>
+       
+
+            <!-- Chats Section -->
+            <div class="col-lg-3 col-md-4 col-sm-12 profile-section mb-4">
+                <h3 class="profile-header">Chats</h3>
+                <p>Chat feature coming soon...</p>
+            </div>
         </div>
     </div>
 
-    <div class="row justify-content-around mb-4">
-        <!-- Open Services Section -->
-        <div class="col-lg-3 col-md-4 col-sm-12 profile-section mb-4 offset-lg-1">
-            <h3 class="profile-header">Open Services</h3>
-            <form>
-                <div class="form-group">
-                    <label for="area" class="profile-label">Area</label>
-                    <div id="map-placeholder" style="height: 150px; background-color: #e0e0e0; text-align: center; line-height: 150px; color: #777;">
-                        Google Maps
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="service-type" class="profile-label">Service Type:</label>
-                    <select id="service-type" class="form-control profile-form-control">
-                        <option value="walk">Walk</option>
-                        <option value="visit">Visit</option>
-                        <option value="boarding">House Sitting</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="from" class="profile-label">From:</label>
-                    <input type="date" id="from" class="form-control profile-form-control">
-                </div>
-                <div class="form-group">
-                    <label for="to" class="profile-label">To:</label>
-                    <input type="date" id="to" class="form-control profile-form-control">
-                </div>
-                <button type="submit" class="btn profile-btn-purple text-white">Search</button>
-            </form>
-        </div>
 
-        <!-- Chats Section -->
-        <div class="col-lg-3 col-md-4 col-sm-12 profile-chats-section mb-4 offset-lg-1">
-            <h3 class="profile-header">Chats</h3>
-            <p>Chat feature coming soon...</p>
+
+
+
+<!-- Modal for Services -->
+<div class="modal fade custom-modal" id="servicesModal" tabindex="-1" role="dialog" aria-labelledby="servicesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="servicesModalLabel">Available Services</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- all available services according to the filter-->
+                <table class="table custom-table">
+                    <thead class="custom-table-header">
+                        <tr>
+                            <th>Service ID</th>
+                            <th>Type</th>
+                            <th>Pet Name</th>
+                            <th>Owner</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Description</th>
+                            <th>Action</th> <!-- for Apply button -->
+                        </tr>
+                    </thead>
+                    <tbody id="servicesTableBody">
+                        <!-- Rows will be dynamically populated -->
+                        <!-- Example of Row -->
+                        <tr>
+                            <td>1</td>
+                            <td>WALK</td>
+                            <td>Max</td>
+                            <td>John Doe</td>
+                            <td>2024-01-01</td>
+                            <td>2024-01-02</td>
+                            <td>Walk Max for 1 hour</td>
+                            <td>
+                                <!-- Button for Apply -->
+                                <button id="apply-button-1" class="btn btn-success btn-apply-service" onclick="applyToService(1)">Apply for Service</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>VISIT</td>
+                            <td>Kitty</td>
+                            <td>Jane Doe</td>
+                            <td>2024-02-01</td>
+                            <td>2024-02-02</td>
+                            <td>Visit Kitty for feeding</td>
+                            <td>
+                                <!-- Button for Apply -->
+                                <button id="apply-button-2" class="btn btn-success btn-apply-service" onclick="applyToService(2)">Apply for Service</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn custom-close-btn" data-dismiss="modal">Close</button>
+            </div>
         </div>
     </div>
-</div>
-
-<script>
-    // Star Rating System
-    document.querySelectorAll('.profile-rating-stars .star').forEach((star, index) => {
-        star.addEventListener('click', () => {
-            document.querySelectorAll('.profile-rating-stars .star').forEach((s, i) => {
-                if (i <= index) {
-                    s.classList.add('checked');
-                } else {
-                    s.classList.remove('checked');
-                }
-            });
-        });
-    });
-</script>
-
+</div>   
    
    
   <!-- MY CODE -->
