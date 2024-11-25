@@ -51,37 +51,47 @@ const userIdField = document.getElementById('user-id');
     }
     
        
-    
-    // Fetch user data from the backend
-    fetch('/updatePetSitter/data')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to fetch user profile data. Status: ' + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('User ID:', data.id);
+     // Fetch user data from the backend
+fetch('/updatePetSitter/data')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to fetch user profile data. Status: ' + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('User ID:', data.id);
 
-            const phoneInput = document.getElementById('phone-number');
-            const addressInput = document.getElementById('address');
+        const phoneInput = document.getElementById('phone-number');
+        const addressInput = document.getElementById('address');
+        const profilePicturePreview = document.getElementById('profile-picture-preview'); //i forgot to add here that the photo should update too
+       
+        if (phoneInput) {
+            phoneInput.value = data.phone || '';
+        } else {
+            console.warn('Phone number input not found in the DOM.');
+        }
+        
+        if (addressInput) {
+            addressInput.value = data.address || '';
+        } else {
+            console.warn('Address input not found in the DOM.');
+        }
 
-            if (phoneInput) {
-                phoneInput.value = data.phone || '';
+        if (profilePicturePreview) {
+            if (data.profilePictureUrl) {
+                profilePicturePreview.src = data.profilePictureUrl;
             } else {
-                console.warn('Phone number input not found in the DOM.');
+                profilePicturePreview.src = 'https://via.placeholder.com/150';
             }
-
-            if (addressInput) {
-                addressInput.value = data.address || '';
-            } else {
-                console.warn('Address input not found in the DOM.');
-            }
-        })
-        .catch(error => {
-            console.error('Error fetching user data:', error);
-            alert('There was an error fetching your profile data. Please try again later.');
-        });
+        } else {
+            console.warn('Profile picture preview element not found in the DOM.');
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching user data:', error);
+        alert('There was an error fetching your profile data. Please try again later.');
+    });
     
     
 
@@ -163,6 +173,13 @@ if (uploadButton) {
             if (response.ok) {
                 const result = await response.json();
                 alert('Profile picture uploaded successfully.');
+                
+                // Update the profile pic in frontend
+                    const profilePicturePreview = document.getElementById('profile-picture-preview');
+                    profilePicturePreview.src = result.url;
+                
+                
+                
             } else {
                 const errorMessage = await response.text();
                 alert(`Image upload failed: ${errorMessage}`);

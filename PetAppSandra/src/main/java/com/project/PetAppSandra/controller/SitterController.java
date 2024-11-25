@@ -98,10 +98,6 @@ public ResponseEntity<String> updateOwnerProfile(@RequestBody Map<String, String
 
 
 
-
-
-
-
 @GetMapping("/updatePetSitter/data")
 public ResponseEntity<Map<String, Object>> getOwnerProfileData(HttpSession session) {
     User user = (User) session.getAttribute("user");
