@@ -50,11 +50,7 @@ const userIdField = document.getElementById('user-id');
         });
     }
     
-    
-    
-    
-    
-    
+       
     
     // Fetch user data from the backend
     fetch('/updatePetSitter/data')
@@ -138,54 +134,46 @@ const userIdField = document.getElementById('user-id');
 
     //fOR the button to upload the profile pic
     const uploadButton = document.getElementById('upload-buttonProfilePhoto');
-    if (uploadButton) {
-        uploadButton.addEventListener('click', async (event) => {
-            event.preventDefault();
+if (uploadButton) {
+    uploadButton.addEventListener('click', async (event) => {
+        event.preventDefault();
 
-            if (!userId) {
-                alert('User ID not found. Please refresh the page or log in again.');
-                return;
+        if (!userId) {
+            alert('User ID not found. Please refresh the page or log in again.');
+            return;
+        }
+
+        const fileInput = document.getElementById('profile-picture');
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert('Please select a file to upload.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await fetch(`/images/upload/profile/${userId}`, {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const result = await response.json();
+                alert('Profile picture uploaded successfully.');
+            } else {
+                const errorMessage = await response.text();
+                alert(`Image upload failed: ${errorMessage}`);
             }
-
-            const fileInput = document.getElementById('profile-picture');
-            const file = fileInput.files[0];
-
-            if (!file) {
-                alert('Please select a file to upload.');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('file', file);
-
-            try {
-                const response = await fetch(`/images/upload/profile/${userId}`, {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                if (response.ok) {
-                    const result = await response.json();
-                    alert('Profile picture uploaded successfully.');
-
-                    // Update the profile pic in frontend
-                    const profilePicturePreview = document.getElementById('profile-picture-preview');
-                    profilePicturePreview.src = result.url;
-                } else {
-                    const errorMessage = await response.text();
-                    alert(`Image upload failed: ${errorMessage}`);
-                }
-            } catch (error) {
-                console.error('Error uploading profile picture:', error);
-                alert('There was an issue, but the system is verifying it, Click UPDATE to proceed with your new information.');
-                // message updated for the original saying there was an error, but at the end the photo it's been uploading correctly
-            }
-        });
-    }
-
-
-
-
+        } catch (error) {
+            console.error('Error uploading profile picture:', error);
+        }
+    });
+}
     
+
+
     
 });
