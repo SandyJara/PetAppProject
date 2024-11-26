@@ -214,14 +214,18 @@ public class ServiceController {
 		        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized: Only Pet Sitters can apply to this.");
 		    }
 
-		    Service service = serviceRepository.findById(serviceId)
-		            .orElseThrow(() -> new RuntimeException("Service not found"));
+		    Optional<Service> optionalService = serviceRepository.findById(serviceId);
+		    if (optionalService.isEmpty()) {
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Service not found.");
+		    }
 
+		    Service service = optionalService.get();
 		    if (!"PENDING".equalsIgnoreCase(service.getStatus())) {
 		        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Service is not available.");
 		    }
 
 		    service.setSitterId(user.getId());
+		    service.setStatus("ACCEPTED");
 		    serviceRepository.save(service);
 
 		    return ResponseEntity.ok("You have successfully applied to the service.");

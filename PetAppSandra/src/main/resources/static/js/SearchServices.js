@@ -59,7 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
    				<td>${service.endDate.split('T')[0]}</td> <!-- dont show time -->
                 <td>${service.description}</td>
                 <td>
-       				 <button style="background-color: #d87db5; color: white; padding: 10px 15px; border: none; border-radius: 5px; transition: background-color 0.3s ease, transform 0.2s ease;" onclick="applyToService(${service.id})">Apply</button>
+       				 <button 
+	       				  id="apply-button-${service.id}" 
+	       				  style="background-color: #d87db5; color: white; padding: 10px 15px; border: none; border-radius: 5px; transition: background-color 0.3s ease, transform 0.2s ease;"
+	       				  onclick="applyToService(${service.id})">
+	       				  Apply
+       				  </button>
        				 
     			</td>
             `;
@@ -68,9 +73,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Function to handle the APPLY button click
-    async function applyToService(serviceId) {
+ 	window.applyToService = async function(serviceId) { //allows the function globally
         try {
-            const response = await fetch(`/api/services/${serviceId}/apply`, {
+            const response = await fetch(`/services/api/services/${serviceId}/apply`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -82,9 +87,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             alert('You have successfully applied to the service.');
-        } catch (error) {
-            console.error('Error applying to service:', error);
-            alert('There was an error applying to the service. Please try again later.');
+        
+          // If the user applied, unhabilitate it 
+        const button = document.getElementById(`apply-button-${serviceId}`);
+        if (button) {
+            button.disabled = true;
+            button.textContent = 'Applied'; 
+            button.style.backgroundColor = '#b76c9b'; 
         }
+
+    } catch (error) {
+        console.error('Error applying to service:', error);
+        alert('There was an error applying to the service. Please try again later.');
     }
+}
 });
