@@ -196,7 +196,8 @@ public class ServiceController {
 	            map.put("ownerName", service[3]);
 	            map.put("startDate", service[4]);
 	            map.put("endDate", service[5]);
-	            map.put("description", service[6]);
+	            map.put("payment", service[6]); 
+	            map.put("description", service[7]);
 	            return map;
 	        }).collect(Collectors.toList());
 

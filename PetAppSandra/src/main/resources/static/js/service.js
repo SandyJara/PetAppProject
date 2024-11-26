@@ -81,26 +81,68 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 <td>${service.status}</td>
                                 <td>${service.description}</td>                                
                                 <td>
-					               <button style="
-							            background-color: #58d68d; 
-							            color: white; 
-							            font-size: 12px; 
-							            padding: 5px 10px; 
-							            border: none; 
-							            border-radius: 5px; 
-							            cursor: pointer;
-							            transition: all 0.3s ease;" 
-							            onclick="handleAccept(${service.id})">Accept</button>
-							        <button style="
-							            background-color: #ec7063; 
-							            color: white; 
-							            font-size: 12px; 
-							            padding: 5px 10px; 
-							            border: none; 
-							            border-radius: 5px; 
-							            cursor: pointer;
-							            transition: all 0.3s ease;" 
-							            onclick="handleReject(${service.id})">Reject</button>
+							        ${
+							            service.status === 'APPLIED'
+							                ? `
+							                <button style="
+							                    background-color: #58d68d; 
+							                    color: white; 
+							                    font-size: 8px; 
+							                    padding: 5px 10px; 
+							                    border: none; 
+							                    border-radius: 5px; 
+							                    cursor: pointer;
+							                    transition: all 0.3s ease;" 
+							                    onclick="handleAccept(${service.id})">Accept</button>
+							                <button style="
+							                    background-color: #ec7063; 
+							                    color: white; 
+							                    font-size: 8px; 
+							                    padding: 5px 10px; 
+							                    border: none; 
+							                    border-radius: 5px; 
+							                    cursor: pointer;
+							                    transition: all 0.3s ease;" 
+							                    onclick="handleReject(${service.id})">Reject</button>
+							                `
+							                : service.status === 'ACCEPTED'
+							                ? `
+							                <button style="
+							                    background-color: #5dade2; 
+							                    color: white; 
+							                    font-size: 8px; 
+							                    padding: 5px 10px; 
+							                    border: none; 
+							                    border-radius: 5px; 
+							                    cursor: pointer;
+							                    transition: all 0.3s ease;" 
+							                    onclick="markCompleted(${service.id})">Complete</button>
+							                <button style="
+							                    background-color: #e67e22; 
+							                    color: white; 
+							                    font-size: 8px; 
+							                    padding: 5px 10px; 
+							                    border: none; 
+							                    border-radius: 5px; 
+							                    cursor: pointer;
+							                    transition: all 0.3s ease;" 
+							                    onclick="markCancelled(${service.id})">Cancel</button>
+							                `
+							                : service.status === 'PENDING'
+							                ? `
+							                <button style="
+							                    background-color: #e67e22; 
+							                    color: white; 
+							                    font-size: 8px; 
+							                    padding: 5px 10px; 
+							                    border: none; 
+							                    border-radius: 5px; 
+							                    cursor: pointer;
+							                    transition: all 0.3s ease;" 
+							                    onclick="markCancelled(${service.id})">Cancel</button>
+							                `
+										 : ''
+									}
 					            </td>
                                 <td>
                                     <button class="delete-service" data-id="${service.id}" title="Delete Service">

@@ -68,7 +68,7 @@
 </header>
 
 <div class="container-fluid mt-4">
-    <div class="row justify-content-around">
+    <div class="row justify-content-around mb-4">
        <!-- Profile Section -->
         <div class="col-lg-3 col-md-4 col-sm-12 profile-section mb-4">
 		    <h3 class="profile-header">Profile</h3>
@@ -131,7 +131,7 @@
         </div>
 
        
-       
+       <div class="row justify-content-around">
 		       <!-- Filter Section -->
 		<div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
 		<div class="form-group">
@@ -154,7 +154,27 @@
 		
 		<!-- Search Button -->
 		<div class="form-group">
-		    <button id="search-services" class="btn btn-primary">Search Services</button>
+		    <button id="search-services" class="btn profile-btn-purple text-white ml-2">Search Services</button>
+		    </button>
+		</div>
+		</div>
+		
+		
+		 <!-- My applications Section -->
+		<div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
+		<div class="form-group">
+		    <label for="service-type-filter" class="profile-label">My applications and Services</label>
+		    
+		</div>
+		
+		<!-- Placeholder for Area (Map) -->
+		<div class="form-group">
+		    
+		</div>
+		
+		<!-- Search Button -->
+		<div class="form-group">
+		    <button id="search-services" class="btn profile-btn-purple text-white ml-2">Search Services</button>
 		    </button>
 		</div>
 		</div>
@@ -193,6 +213,7 @@
                             <th>Owner</th>
                             <th>Start Date</th>
                             <th>End Date</th>
+                            <th>Payment (€)</th>
                             <th>Description</th>
                             <th>Action</th> <!-- Apply button -->
                         </tr>
@@ -208,6 +229,46 @@
         </div>
     </div>
 </div>
+  
+
+<!-- Modal for My Applications -->
+<div class="modal fade custom-modal" id="myApplicationsModal" tabindex="-1" role="dialog" aria-labelledby="myApplicationsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myApplicationsModalLabel">My Applications</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Table to display applied services -->
+                <table class="table custom-table">
+                    <thead class="custom-table-header">
+                        <tr>
+                            <th>Service ID</th>
+                            <th>Type</th>
+                            <th>Pet Name</th>
+                            <th>Owner</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Payment (€)</th>
+                            <th>Status</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myApplicationsTableBody">
+                        <!-- Rows will be dynamically populated here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn custom-close-btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
    
    
   <!-- MY CODE -->

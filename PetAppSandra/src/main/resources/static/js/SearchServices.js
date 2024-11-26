@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${service.ownerName}</td>
                <td>${service.startDate.split('T')[0]}</td> <!--dont show time -->
    				<td>${service.endDate.split('T')[0]}</td> <!-- dont show time -->
+                <td>${service.payment} €</td>
                 <td>${service.description}</td>
                 <td>
        				 <button 

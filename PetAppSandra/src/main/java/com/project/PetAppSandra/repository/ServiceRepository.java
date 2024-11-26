@@ -49,7 +49,7 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
     		
    /// still testing
     		@Query("SELECT s.id, s.serviceType, p.name AS petName, u.fullname AS ownerName, " +
-    			       "s.startDate, s.endDate, s.description " +
+    			       "s.startDate, s.endDate, s.payment, s.description " +
     			       "FROM Service s " +
     			       "LEFT JOIN User u ON s.ownerId = u.id " +
     			       "LEFT JOIN Pet p ON s.petId = p.id " +
@@ -57,11 +57,24 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
     			       "AND (:serviceType IS NULL OR s.serviceType = :serviceType)")
     			List<Object[]> findPendingServicesWithOwnerAndPet(@Param("serviceType") String serviceType);
 
-    		
+    		//Check if this is no needed
     			@Query("SELECT s.id, s.serviceType, s.status, u.username AS sitterUsername, s.description, s.startDate, s.endDate " +
     				       "FROM Service s " +
     				       "LEFT JOIN User u ON s.sitterId = u.id " +
     				       "WHERE s.id = :serviceId")
     				Optional<Object[]> findServiceWithSitterName(@Param("serviceId") Long serviceId);
+    				
+   //added to allow pet sitter to consult their services
+    				@Query("SELECT s.id AS serviceId, s.serviceType AS serviceType, " +
+    					       "p.name AS petName, u.fullname AS ownerName, " +
+    					       "s.startDate AS startDate, s.endDate AS endDate, " +
+    					       "s.payment AS payment, s.description AS description, " +
+    					       "s.status AS status " +
+    					       "FROM Service s " +
+    					       "LEFT JOIN User u ON s.ownerId = u.id " +
+    					       "LEFT JOIN Pet p ON s.petId = p.id " +
+    					       "WHERE s.sitterId = :sitterId " +
+    					       "AND s.status IN ('APPLIED', 'ACCEPTED', 'COMPLETED', 'CANCELLED')")
+    					List<Object[]> findDetailedServicesBySitterId(@Param("sitterId") Long sitterId);
  			
 }

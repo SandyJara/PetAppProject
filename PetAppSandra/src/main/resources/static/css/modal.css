@@ -1,4 +1,13 @@
 /* Custom Modal */
+
+.custom-modal {
+    font-size: 10px; /* Tamaño de fuente general para el modal */
+}
+
+.custom-table th, .custom-table td {
+    font-size: 10px; /* Tamaño de fuente específico para la tabla */
+}
+
 .custom-modal .modal-content {
     border-radius: 15px;
     border: none;
