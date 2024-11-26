@@ -107,3 +107,22 @@
     transform: scale(1.1); /* making it bigger */
     filter: brightness(1.2); /* making it brigther */
 }
+
+//button modal search services
+/* Custom Apply Button */
+
+.petxie-apply-btn {
+    background-color: #d87db5;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.petxie-apply-btn:hover {
+    background-color: #b76c9b;
+    transform: scale(1.05);
+    color: #fff;
+}

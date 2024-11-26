@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Placeholder for Google Maps integration for later
     console.log('Google Maps integration placeholder. To be implemented later.');
 
     // Get DOM elements
@@ -7,30 +6,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchServicesButton = document.getElementById('search-services');
     const servicesTableBody = document.getElementById('servicesTableBody');
 
-    // Check if the required DOM elements are present
-    if (!serviceTypeFilter) {
-        console.error("Service type filter not found in the DOM.");
-        return;
-    }
-
-    if (!searchServicesButton) {
-        console.error("Search services button not found in the DOM.");
-        return;
-    }
-
-    if (!servicesTableBody) {
-        console.error("Services table body not found in the DOM.");
+    // Check if required DOM elements exist
+    if (!serviceTypeFilter || !searchServicesButton || !servicesTableBody) {
+        console.error("Required DOM elements not found.");
         return;
     }
 
     // Filter Services by Type
-	 
-	searchServicesButton.addEventListener('click', async () => {
-        const selectedType = serviceTypeFilter.value; // Obtén el valor seleccionado
+    searchServicesButton.addEventListener('click', async () => {
+        const selectedType = serviceTypeFilter.value;
 
         try {
             const response = await fetch(`/services/pending?serviceType=${selectedType}`, {
-                method: 'GET', // Asegúrate de que sea GET
+                method: 'GET',
             });
 
             if (!response.ok) {
@@ -38,22 +26,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const services = await response.json();
-            console.log('Services received:', services); // Verifica los datos en la consola
+            console.log('Services received:', services);
+
+            // Populate the table and show modal
             populateServicesTable(services);
+            $('#servicesModal').modal('show'); // Open modal after populating
         } catch (error) {
             console.error('Error fetching services:', error);
             alert('There was an error fetching services. Please try again later.');
         }
     });
-		
-		 // Function to populate the services table with data
-   function populateServicesTable(services) {
-        const servicesTableBody = document.getElementById('servicesTableBody');
-        servicesTableBody.innerHTML = ''; // Limpia la tabla antes de llenarla
+
+    // Function to populate the services table with data
+    function populateServicesTable(services) {
+        servicesTableBody.innerHTML = ''; // Clear the table
 
         if (services.length === 0) {
             const row = document.createElement('tr');
-            row.innerHTML = `<td colspan="6">No services available.</td>`;
+            row.innerHTML = `<td colspan="8" class="text-center">No services available.</td>`;
             servicesTableBody.appendChild(row);
             return;
         }
@@ -65,16 +55,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${service.serviceType}</td>
                 <td>${service.petName}</td>
                 <td>${service.ownerName}</td>
-                <td>${service.startDate}</td>
-                <td>${service.endDate}</td>
+               <td>${service.startDate.split('T')[0]}</td> <!--dont show time -->
+   				<td>${service.endDate.split('T')[0]}</td> <!-- dont show time -->
                 <td>${service.description}</td>
+                <td>
+       				 <button style="background-color: #d87db5; color: white; padding: 10px 15px; border: none; border-radius: 5px; transition: background-color 0.3s ease, transform 0.2s ease;" onclick="applyToService(${service.id})">Apply</button>
+       				 
+    			</td>
             `;
             servicesTableBody.appendChild(row);
         });
     }
-    
-		
-		// Function to handle the APPLY button click
+
+    // Function to handle the APPLY button click
     async function applyToService(serviceId) {
         try {
             const response = await fetch(`/api/services/${serviceId}/apply`, {
@@ -95,4 +88,3 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
-		
