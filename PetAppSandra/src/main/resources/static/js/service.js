@@ -81,6 +81,28 @@ document.addEventListener('DOMContentLoaded', async () => {
                                 <td>${service.status}</td>
                                 <td>${service.description}</td>                                
                                 <td>
+					               <button style="
+							            background-color: #58d68d; 
+							            color: white; 
+							            font-size: 12px; 
+							            padding: 5px 10px; 
+							            border: none; 
+							            border-radius: 5px; 
+							            cursor: pointer;
+							            transition: all 0.3s ease;" 
+							            onclick="handleAccept(${service.id})">Accept</button>
+							        <button style="
+							            background-color: #ec7063; 
+							            color: white; 
+							            font-size: 12px; 
+							            padding: 5px 10px; 
+							            border: none; 
+							            border-radius: 5px; 
+							            cursor: pointer;
+							            transition: all 0.3s ease;" 
+							            onclick="handleReject(${service.id})">Reject</button>
+					            </td>
+                                <td>
                                     <button class="delete-service" data-id="${service.id}" title="Delete Service">
                					     <img src="/images/bin.png" alt="Delete" class="delete-icon">
              						 </button>
@@ -173,4 +195,54 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
     });
+    
+    
+    //BUTTONS TO ACCEPT OR REJECT A SERVICE-ACTION FROM THE OWNER
+    window.handleAccept = async function(serviceId) {
+    try {
+        const response = await fetch(`/services/${serviceId}/accept`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to accept service. Status: ${response.status}`);
+        }
+
+        alert('Service accepted successfully.');
+        location.reload(); 
+    } catch (error) {
+        console.error('Error accepting service:', error);
+        alert('There was an error accepting the service. Please try again later.');
+    }
+}
+
+window.handleReject = async function(serviceId) {
+    try {
+        const response = await fetch(`/services/${serviceId}/reject`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to reject service. Status: ${response.status}`);
+        }
+
+        alert('Service rejected successfully.');
+        location.reload(); 
+    } catch (error) {
+        console.error('Error rejecting service:', error);
+        alert('There was an error rejecting the service. Please try again later.');
+    }
+}
+    
+    
+    
+    
+    
+    
 });

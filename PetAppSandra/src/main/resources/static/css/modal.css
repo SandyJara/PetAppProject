@@ -126,3 +126,37 @@
     transform: scale(1.05);
     color: #fff;
 }
+
+
+//bUTTONS to accept or reject a service
+/* Custom Accept Button */
+.custom-accept-btn {
+    background-color: #58d68d !important;
+    color: #fff !important;
+    padding: 8px 15px !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+.custom-accept-btn:hover {
+    background-color: #45b975 !important; /* Verde más oscuro para hover */
+    transform: scale(1.05); /* Efecto de agrandamiento */
+}
+
+/*  Reject Button */
+.custom-reject-btn {
+    background-color: #ec7063 !important;
+    color: #fff !important;
+    padding: 8px 15px !important;
+    border: none !important;
+    border-radius: 5px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+
+.custom-reject-btn:hover {
+    background-color: #cb5b50 !important; /* Rojo más oscuro para hover */
+    transform: scale(1.05); /* Efecto de agrandamiento */
+}

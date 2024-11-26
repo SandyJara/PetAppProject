@@ -225,11 +225,43 @@ public class ServiceController {
 		    }
 
 		    service.setSitterId(user.getId());
-		    service.setStatus("ACCEPTED");
+		    service.setStatus("APPLIED");
 		    serviceRepository.save(service);
 
 		    return ResponseEntity.ok("You have successfully applied to the service.");
 		}
+		
+		
+		@PostMapping("/api/services/{serviceId}/accept")
+		public ResponseEntity<?> acceptSitter(@PathVariable Long serviceId, HttpSession session) {
+		    User owner = (User) session.getAttribute("user");
+
+		    if (owner == null || !"OWNER".equalsIgnoreCase(owner.getAccount().name())) {
+		        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized: Only Owners can accept applications.");
+		    }
+
+		    Optional<Service> serviceOpt = serviceRepository.findById(serviceId);
+		    if (serviceOpt.isEmpty()) {
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Service not found.");
+		    }
+
+		    Service service = serviceOpt.get();
+
+		    // Verificar que el servicio esté en estado APPLIED y que pertenezca al Owner
+		    if (!"APPLIED".equalsIgnoreCase(service.getStatus()) || !service.getOwnerId().equals(owner.getId())) {
+		        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("You cannot accept this service.");
+		    }
+
+		    // Cambiar el estado a ACCEPTED
+		    service.setStatus("ACCEPTED");
+		    serviceRepository.save(service);
+
+		    return ResponseEntity.ok("You have successfully accepted the Pet Sitter.");
+		}
+		
+		
+		
+		
 		
 		
 //to obtain detail of the service from an owner and join it with the pet sitter
@@ -244,6 +276,43 @@ public class ServiceController {
 		    }
 		}
 		
+//to change status when a owner ACCEPTS A petsitter
+		@PostMapping("/{id}/accept")
+	    public ResponseEntity<?> acceptService(@PathVariable Long id) {
+	        Optional<Service> serviceOpt = serviceRepository.findById(id);
+	        if (serviceOpt.isPresent()) {
+	            Service service = serviceOpt.get();
+	            if (service.getStatus().equals("APPLIED")) { // Ensure only 'APPLIED' can be accepted
+	                service.setStatus("ACCEPTED");
+	                serviceRepository.save(service);
+	                return ResponseEntity.ok("Service accepted successfully.");
+	            } else {
+	                return ResponseEntity.badRequest().body("Service is not in APPLIED status.");
+	            }
+	        }
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Service not found.");
+	    }
+
+		
+//to change status when a owner REJECTS A petsitter		
+		@PostMapping("/{id}/reject")
+	    public ResponseEntity<?> rejectService(@PathVariable Long id) {
+	        Optional<Service> serviceOpt = serviceRepository.findById(id);
+	        if (serviceOpt.isPresent()) {
+	            Service service = serviceOpt.get();
+	            if (service.getStatus().equals("APPLIED")) { // Ensure only 'APPLIED' can be rejected
+	                service.setStatus("PENDING"); // Revert to 'PENDING' when rejected
+	                service.setSitterId(null); // Remove the assigned pet sitter
+	                serviceRepository.save(service); // Save changes to the database
+	                serviceRepository.save(service);
+	                return ResponseEntity.ok("Service rejected successfully.");
+	            } else {
+	                return ResponseEntity.badRequest().body("Service is not in APPLIED status.");
+	            }
+	        }
+	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Service not found.");
+	    }
+
 		
 		
 }
