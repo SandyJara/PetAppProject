@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -173,6 +175,71 @@ public class ServiceController {
 		    }
 		}
 
+
+		
+		
+///////////////////////AREA FOR THE SEARCH OF SERVICES TO APPLY
+
+//endpoint for the services
+		@GetMapping("/pending")
+	    public ResponseEntity<?> getPendingServices(
+	        @RequestParam(required = false) String serviceType) {
+	        
+	        // Available services
+	        List<Object[]> services = serviceRepository.findPendingServicesWithOwnerAndPet(serviceType);
+
+	        List<Map<String, Object>> response = services.stream().map(service -> {
+	            Map<String, Object> map = new HashMap<>();
+	            map.put("id", service[0]);
+	            map.put("serviceType", service[1]);
+	            map.put("petName", service[2]);
+	            map.put("ownerName", service[3]);
+	            map.put("startDate", service[4]);
+	            map.put("endDate", service[5]);
+	            map.put("description", service[6]);
+	            return map;
+	        }).collect(Collectors.toList());
+
+	        return ResponseEntity.ok(response);
+	    }
+	
+		
+		
+//endpoint to apply for a service
+		@PostMapping("/api/services/{serviceId}/apply")
+		public ResponseEntity<?> applyToService(@PathVariable Long serviceId, HttpSession session) {
+		    User user = (User) session.getAttribute("user");
+
+		    if (user == null || !"PETSITTER".equalsIgnoreCase(user.getAccount().name())) {
+		        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized: Only Pet Sitters can apply to this.");
+		    }
+
+		    Service service = serviceRepository.findById(serviceId)
+		            .orElseThrow(() -> new RuntimeException("Service not found"));
+
+		    if (!"PENDING".equalsIgnoreCase(service.getStatus())) {
+		        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Service is not available.");
+		    }
+
+		    service.setSitterId(user.getId());
+		    serviceRepository.save(service);
+
+		    return ResponseEntity.ok("You have successfully applied to the service.");
+		}
+		
+		
+//to obtain detail of the service from an owner and join it with the pet sitter
+		@GetMapping("/api/services/{serviceId}/details")
+		public ResponseEntity<?> getServiceDetails(@PathVariable Long serviceId) {
+		    Optional<Object[]> result = serviceRepository.findServiceWithSitterName(serviceId);
+
+		    if (result.isPresent()) {
+		        return ResponseEntity.ok(result.get());
+		    } else {
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Service not found.");
+		    }
+		}
+		
 		
 		
 }

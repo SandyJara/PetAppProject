@@ -1,70 +1,98 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Placeholder for Google Maps integration
-    console.log('TODO: Implement Google Maps functionality here for area filter.');
+    // Placeholder for Google Maps integration for later
+    console.log('Google Maps integration placeholder. To be implemented later.');
 
-    // Filter Services by Type
+    // Get DOM elements
     const serviceTypeFilter = document.getElementById('service-type-filter');
     const searchServicesButton = document.getElementById('search-services');
+    const servicesTableBody = document.getElementById('servicesTableBody');
 
-    searchServicesButton.addEventListener('click', async () => {
-        const selectedType = serviceTypeFilter.value;
+    // Check if the required DOM elements are present
+    if (!serviceTypeFilter) {
+        console.error("Service type filter not found in the DOM.");
+        return;
+    }
+
+    if (!searchServicesButton) {
+        console.error("Search services button not found in the DOM.");
+        return;
+    }
+
+    if (!servicesTableBody) {
+        console.error("Services table body not found in the DOM.");
+        return;
+    }
+
+    // Filter Services by Type
+	 
+	searchServicesButton.addEventListener('click', async () => {
+        const selectedType = serviceTypeFilter.value; // Obtén el valor seleccionado
 
         try {
-            const response = await fetch(`/api/services?type=${selectedType}&status=PENDING`); // Fetch services based on filter
+            const response = await fetch(`/services/pending?serviceType=${selectedType}`, {
+                method: 'GET', // Asegúrate de que sea GET
+            });
+
             if (!response.ok) {
                 throw new Error(`Failed to fetch services. Status: ${response.status}`);
             }
 
             const services = await response.json();
+            console.log('Services received:', services); // Verifica los datos en la consola
             populateServicesTable(services);
         } catch (error) {
             console.error('Error fetching services:', error);
             alert('There was an error fetching services. Please try again later.');
         }
     });
-
-    // Populate the Modal Table with Services
-    function populateServicesTable(services) {
+		
+		 // Function to populate the services table with data
+   function populateServicesTable(services) {
         const servicesTableBody = document.getElementById('servicesTableBody');
-        servicesTableBody.innerHTML = ''; // Clear previous info
-        
+        servicesTableBody.innerHTML = ''; // Limpia la tabla antes de llenarla
+
         if (services.length === 0) {
-            const noDataRow = document.createElement('tr');
-            noDataRow.innerHTML = `
-                <td colspan="8" class="text-center">No services available for the selected criteria.</td>
-            `;
-            servicesTableBody.appendChild(noDataRow);
+            const row = document.createElement('tr');
+            row.innerHTML = `<td colspan="6">No services available.</td>`;
+            servicesTableBody.appendChild(row);
             return;
         }
 
-        services.forEach((service) => {
+        services.forEach(service => {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${service.id}</td>
-                <td>${service.type}</td>
+                <td>${service.serviceType}</td>
                 <td>${service.petName}</td>
                 <td>${service.ownerName}</td>
                 <td>${service.startDate}</td>
                 <td>${service.endDate}</td>
                 <td>${service.description}</td>
-                <td>
-                    <button id="apply-btn-${service.id}" class="btn btn-success btn-apply-service">APPLY</button>
-                </td>
             `;
             servicesTableBody.appendChild(row);
-
-            // Add event listener for the APPLY button
-            const applyButton = document.getElementById(`apply-btn-${service.id}`);
-            applyButton.addEventListener('click', () => {
-                applyToService(service.id);
-            });
         });
     }
+    
+		
+		// Function to handle the APPLY button click
+    async function applyToService(serviceId) {
+        try {
+            const response = await fetch(`/api/services/${serviceId}/apply`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
-    // Apply to a Service
-    function applyToService(serviceId) {
-        // Placeholder for actual application logic
-        console.log(`Applying to service with ID: ${serviceId}`);
-        alert(`Application for service ID: ${serviceId} submitted successfully!`);
+            if (!response.ok) {
+                throw new Error(`Failed to apply for service. Status: ${response.status}`);
+            }
+
+            alert('You have successfully applied to the service.');
+        } catch (error) {
+            console.error('Error applying to service:', error);
+            alert('There was an error applying to the service. Please try again later.');
+        }
     }
 });
+		

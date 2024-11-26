@@ -190,7 +190,5 @@ if (uploadButton) {
     });
 }
     
-
-
     
 });

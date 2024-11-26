@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ServiceRepository extends JpaRepository<Service, Long> {
@@ -42,5 +43,25 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
     		       "JOIN User u ON s.sitterId = u.id " +
     		       "WHERE s.ownerId = :ownerId AND s.status = 'COMPLETED'")
     		List<Object[]> findSittersByOwnerId(@Param("ownerId") Long ownerId);
-    
+    		
+    		
+    		
+    		
+   /// still testing
+    		@Query("SELECT s.id, s.serviceType, p.name AS petName, u.fullname AS ownerName, " +
+    			       "s.startDate, s.endDate, s.description " +
+    			       "FROM Service s " +
+    			       "LEFT JOIN User u ON s.ownerId = u.id " +
+    			       "LEFT JOIN Pet p ON s.petId = p.id " +
+    			       "WHERE s.status = 'PENDING' " +
+    			       "AND (:serviceType IS NULL OR s.serviceType = :serviceType)")
+    			List<Object[]> findPendingServicesWithOwnerAndPet(@Param("serviceType") String serviceType);
+
+    		
+    			@Query("SELECT s.id, s.serviceType, s.status, u.username AS sitterUsername, s.description, s.startDate, s.endDate " +
+    				       "FROM Service s " +
+    				       "LEFT JOIN User u ON s.sitterId = u.id " +
+    				       "WHERE s.id = :serviceId")
+    				Optional<Object[]> findServiceWithSitterName(@Param("serviceId") Long serviceId);
+ 			
 }
