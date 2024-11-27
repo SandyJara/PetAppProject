@@ -313,7 +313,32 @@ public class ServiceController {
 	        }
 	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Service not found.");
 	    }
+		
+	/////Pet sitter consults her/his services
+			@GetMapping("/services/petsitter/{sitterId}")
+			public ResponseEntity<List<Map<String, Object>>> getDetailedServicesForPetSitter(@PathVariable Long sitterId) {
+			    List<Object[]> services = serviceRepository.findDetailedServicesBySitterId(sitterId);
+			    
+			    // Map the data 
+			    List<Map<String, Object>> formattedServices = services.stream().map(service -> {
+			        Map<String, Object> serviceMap = new HashMap<>();
+			        serviceMap.put("id", service[0]);
+			        serviceMap.put("serviceType", service[1]);
+			        serviceMap.put("petName", service[2]);
+			        serviceMap.put("ownerName", service[3]);
+			        serviceMap.put("startDate", service[4]);
+			        serviceMap.put("endDate", service[5]);
+			        serviceMap.put("payment", service[6]);
+			        serviceMap.put("description", service[7]);
+			        serviceMap.put("status", service[8]);
+			        return serviceMap;
+			    }).collect(Collectors.toList());
+			    
+			    return ResponseEntity.ok(formattedServices);
+			}
+			
 
+			
 		
 		
 }

@@ -72,8 +72,8 @@
        <!-- Profile Section -->
         <div class="col-lg-3 col-md-4 col-sm-12 profile-section mb-4">
 		    <h3 class="profile-header">Profile</h3>
-		    
-		    <input type="hidden" id="user-id" name="userId">
+		 <!-- hidden ID -->   
+		  <input type="hidden" id="user-id" name="userId" th:value="${user.id}">
 		    
 		    <!-- next line updated to show the image loaded -->
 			<img id="profile-picture-preview" src="https://via.placeholder.com/150" alt="Profile Picture" style="width: 150px; height: 150px;">
@@ -83,6 +83,8 @@
                 <p>Birthdate: <span th:text="${user.birthdate}"></span></p>
                 <p>Address: <span th:text="${user.address}"></span></p>
                 <p>Username: <span th:text="${user.username}"></span></p>
+                
+                
 		    <button id="updateInfo" class="btn profile-btn-purple text-white">Update Information</button>
 		</div>
        
@@ -135,6 +137,7 @@
 		       <!-- Filter Section -->
 		<div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
 		<div class="form-group">
+			 <h3 class="profile-header">Consult Open Services</h3>
 		    <label for="service-type-filter" class="profile-label">Filter by Service Type:</label>
 		    <select id="service-type-filter" class="form-control profile-form-control">
 		        
@@ -163,7 +166,7 @@
 		 <!-- My applications Section -->
 		<div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
 		<div class="form-group">
-		    <label for="service-type-filter" class="profile-label">My applications and Services</label>
+		    <h3 class="profile-header">My applications and Services</h3>
 		    
 		</div>
 		
@@ -174,7 +177,7 @@
 		
 		<!-- Search Button -->
 		<div class="form-group">
-		    <button id="search-services" class="btn profile-btn-purple text-white ml-2">Search Services</button>
+		    <button id="consultApplications" class="btn profile-btn-purple text-white ml-2">Consult</button>
 		    </button>
 		</div>
 		</div>

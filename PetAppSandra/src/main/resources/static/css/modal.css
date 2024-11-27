@@ -1,11 +1,11 @@
 /* Custom Modal */
 
 .custom-modal {
-    font-size: 10px; /* Tamaño de fuente general para el modal */
+    font-size: 10px; 
 }
 
 .custom-table th, .custom-table td {
-    font-size: 10px; /* Tamaño de fuente específico para la tabla */
+    font-size: 10px; 
 }
 
 .custom-modal .modal-content {
