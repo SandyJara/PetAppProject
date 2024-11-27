@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Sitter- Petxie</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+	
+
+</head>
+<body>
+
+   <!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light custom-nav">
+    <a class="navbar-brand" href="/">
+        <img src="/images/logo.png" alt="Pet Community Logo" class="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">HOME</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/aboutUs">ABOUT US</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/blog">BLOG</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">CONTACT</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">LOG IN</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<button id="logOutButton" class="btn profile-btn-purple text-white logout-btn" style="position: relative; float: right; margin-right: 20px; margin-top: 20px; z-index: 1000; pointer-events: auto;">
+    LOG OUT
+</button>
+
+<!-- PETXIE Title with Images behind Navbar -->
+    <div class="petxie-background">
+        <img src="/images/paw.png" alt="Paw Image" class="paw-left">
+        <div class="petxie-title">PETXIE</div>
+        <img src="/images/paw.png" alt="Paw Image" class="paw-right">
+    </div>
+    
+    
+    <!-- MY CODE -->
+   
+   
+<header class="text-center">
+   <h1 class="profile-title text-shadow welcome-text-bg">WELCOME <span th:text="${user.fullname}"></span>
+</h1>
+   
+</header>
+
+<div class="container-fluid mt-4">
+    <div class="row justify-content-around mb-4">
+       <!-- Profile Section -->
+        <div class="col-lg-3 col-md-4 col-sm-12 profile-section mb-4">
+		    <h3 class="profile-header">Profile</h3>
+		 <!-- hidden ID -->   
+		  <input type="hidden" id="user-id" name="userId" th:value="${user.id}">
+		    
+		    <!-- next line updated to show the image loaded -->
+			<img id="profile-picture-preview" src="https://via.placeholder.com/150" alt="Profile Picture" style="width: 150px; height: 150px;">
+				<p>Full Name: <span th:text="${user.fullname}"></span></p>
+                <p>Email: <span th:text="${user.email}"></span></p>
+                <p>Phone: <span th:text="${user.phone}"></span></p>
+                <p>Birthdate: <span th:text="${user.birthdate}"></span></p>
+                <p>Address: <span th:text="${user.address}"></span></p>
+                <p>Username: <span th:text="${user.username}"></span></p>
+                
+                
+		    <button id="updateInfo" class="btn profile-btn-purple text-white">Update Information</button>
+		</div>
+       
+       
+           
+
+         <!-- Services Section -->
+            <div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
+                <h3 class="profile-header">Services</h3>
+                <div class="existing-service">
+                    <button class="btn profile-btn-purple text-white">Consult Existing Service</button>
+                </div>
+                
+                <br>
+                <h5 class="profile-subheader">Set preferences</h5>
+                <form>
+                    <div class="form-group">
+                        <label for="type" class="profile-label">Type:</label>
+                        <div id="type-options" class="checkbox-group">
+                            <div><input type="checkbox" id="walk" value="WALK" name="type"><label for="walk">Walk</label></div>
+                            <div><input type="checkbox" id="visit" value="VISIT" name="type"><label for="visit">Visit</label></div>
+                            <div><input type="checkbox" id="housesitting" value="HOUSESITTING" name="type"><label for="housesitting">House Sitting</label></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pet-type" class="profile-label">Pet type:</label>
+                        <div id="pet-type-options">
+                            <div class="form-check"><input type="checkbox" id="dog" class="form-check-input" value="Dog"><label for="dog" class="form-check-label">Dog</label></div>
+                            <div class="form-check"><input type="checkbox" id="cat" class="form-check-input" value="Cat"><label for="cat" class="form-check-label">Cat</label></div>
+                            <div class="form-check"><input type="checkbox" id="rabbit" class="form-check-input" value="Rabbit"><label for="rabbit" class="form-check-label">Rabbit</label></div>
+                        	<div class="form-check"><input type="checkbox" id="bird" class="form-check-input" value="Bird"><label for="bird" class="form-check-label">Bird</label></div>
+                            <div class="form-check"><input type="checkbox" id="hamster" class="form-check-input" value="Hamster"><label for="hamster" class="form-check-label">Hamster</label></div>
+                            <div class="form-check"><input type="checkbox" id="other" class="form-check-input" value="Other"><label for="other" class="form-check-label">Other</label></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="type" class="profile-label">Estatus de perfil:</label>
+                        <select id="type" class="form-control profile-form-control">
+                            <option value="Activo">ACTIVO</option>
+                            <option value="Inactivo">INACTIVO</option>
+                        </select>
+                    </div>
+                    <button id="upload-buttonPreferences" type="button" class="btn profile-btn-purple text-white ml-2">Update</button>
+                </form>
+            </div>
+        </div>
+
+       
+       <div class="row justify-content-around">
+		       <!-- Filter Section -->
+		<div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
+		<div class="form-group">
+			 <h3 class="profile-header">Consult Open Services</h3>
+		    <label for="service-type-filter" class="profile-label">Filter by Service Type:</label>
+		    <select id="service-type-filter" class="form-control profile-form-control">
+		        
+		        <option value="WALK">Walk</option>
+		        <option value="VISIT">Visit</option>
+		        <option value="HOUSESITTING">House Sitting</option>
+		    </select>
+		</div>
+		
+		<!-- Placeholder for Area (Map) -->
+		<div class="form-group">
+		    <label for="area" class="profile-label">Filter by Area:</label>
+		    <div id="map-placeholder" style="height: 150px; background-color: #e0e0e0; text-align: center; line-height: 150px; color: #777;">
+		        Google Maps Placeholder
+		    </div>
+		</div>
+		
+		<!-- Search Button -->
+		<div class="form-group">
+		    <button id="search-services" class="btn profile-btn-purple text-white ml-2">Search Services</button>
+		    </button>
+		</div>
+		</div>
+		
+		
+		 <!-- My applications Section -->
+		<div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
+		<div class="form-group">
+		    <h3 class="profile-header">My applications and Services</h3>
+		    
+		</div>
+		
+		<!-- Placeholder for Area (Map) -->
+		<div class="form-group">
+		    
+		</div>
+		
+		<!-- Search Button -->
+		<div class="form-group">
+		    <button id="consultApplications" class="btn profile-btn-purple text-white ml-2">Consult</button>
+		    </button>
+		</div>
+		</div>
+       
+
+            <!-- Chats Section -->
+            <div class="col-lg-3 col-md-4 col-sm-12 profile-section mb-4">
+                <h3 class="profile-header">Chats</h3>
+                <p>Chat feature coming soon...</p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<!-- Modal for Available Services -->
+<div class="modal fade custom-modal" id="servicesModal" tabindex="-1" role="dialog" aria-labelledby="servicesModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="servicesModalLabel">Available Services</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Table for displaying services -->
+                <table class="table custom-table">
+                    <thead class="custom-table-header">
+                        <tr>
+                            <th>Service ID</th>
+                            <th>Type</th>
+                            <th>Pet Name</th>
+                            <th>Owner</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Payment (€)</th>
+                            <th>Description</th>
+                            <th>Action</th> <!-- Apply button -->
+                        </tr>
+                    </thead>
+                    <tbody id="servicesTableBody">
+                        <!-- Rows will be dynamically populated -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn custom-close-btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
+
+<!-- Modal for My Applications -->
+<div class="modal fade custom-modal" id="myApplicationsModal" tabindex="-1" role="dialog" aria-labelledby="myApplicationsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myApplicationsModalLabel">My Applications</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Table to display applied services -->
+                <table class="table custom-table">
+                    <thead class="custom-table-header">
+                        <tr>
+                            <th>Service ID</th>
+                            <th>Type</th>
+                            <th>Pet Name</th>
+                            <th>Owner</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Payment (€)</th>
+                            <th>Status</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myApplicationsTableBody">
+                        <!-- Rows will be dynamically populated here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn custom-close-btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
+   
+   
+  <!-- MY CODE -->
+
+    
+    
+     <!-- Footer -->
+    <footer class="footer py-4 footer-custom">
+        <div class="container text-center">
+            <div class="social-icons mb-3">
+                <a href="#" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="mb-0">Copyright © 2024 Petxie Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="/css/modal.css" rel="stylesheet">
+    
+    <script src="/js/petSitter.js"></script>
+    <script src="/js/SearchServices.js"></script>
+   
+    
+</body>
+</html>

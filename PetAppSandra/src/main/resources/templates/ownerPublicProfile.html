@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OwnerPublicProfile- Petxie</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/modal.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  
+    
+</head>
+<body>
+
+   <!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light custom-nav">
+    <a class="navbar-brand" href="/">
+        <img src="/images/logo.png" alt="Pet Community Logo" class="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">HOME</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/aboutUs">ABOUT US</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/blog">BLOG</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/contact">CONTACT</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">LOG IN</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<button id="logOutButton" class="btn profile-btn-purple text-white logout-btn" style="position: relative; float: right; margin-right: 20px; margin-top: 20px; z-index: 1000; pointer-events: auto;">
+    LOG OUT
+</button>
+ 
+
+<!-- PETXIE Title with Images behind Navbar -->
+    <div class="petxie-background">
+        <img src="/images/paw.png" alt="Paw Image" class="paw-left">
+        <div class="petxie-title">PETXIE</div>
+        <img src="/images/paw.png" alt="Paw Image" class="paw-right">
+    </div>
+    
+    
+    <!-- MY CODE -->
+   
+   
+<header class="text-center">
+   <h1 class="profile-title text-shadow welcome-text-bg">OWNER</h1>
+</header>
+
+<div class="container-fluid mt-4">
+    <div class="row justify-content-around">
+        <!-- Profile Section -->
+        <div class="col-lg-5 col-md-6 col-sm-12 profile-section mb-4">
+            <div class="card shadow-sm p-3">
+                <h3 class="profile-header text-center">Profile</h3>
+                <div class="text-center">
+                    <img id="profile-picture-preview" src="/images/default-image.png" alt="Profile Picture" class="rounded-circle mb-3" style="width: 120px; height: 120px;">
+                </div>
+                <p><strong>Full Name:</strong> <span id="user-fullname"></span></p>
+                <p><strong>Email:</strong> <span id="user-email"></span></p>
+                <p><strong>Username:</strong> <span id="user-username"></span></p>
+                <br>
+                <p><strong>Preferred type of service:</strong> <span id="preferred_type_service"></span></p>
+                <p><strong>Preferred species:</strong> <span id="preferred_species"></span></p>
+                <p><strong>Preferred size:</strong> <span id="preferred_size"></span></p>
+                <br>
+                <p><strong>Brief Description / Experience:</strong> <span id="experience_text"></span></p>
+                <div class="text-center">
+                    <button id="contactOwner" class="btn profile-btn-purple text-white">Send Message</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pet Section -->
+        <div class="col-lg-5 col-md-6 col-sm-12 profile-section mb-4">
+            <div class="card shadow-sm p-3">
+                <h3 class="profile-header text-center">Pet</h3>
+                <div class="form-box">
+                    <div class="form-group">
+                        <label for="pet" class="profile-label">Select Pet:</label>
+                        <select id="pet-selection" class="form-control profile-form-control">
+                            <option value="">Select Pet</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <p><strong>Name:</strong> <span id="pet-name"></span></p>
+                        <p><strong>Age:</strong> <span id="pet-age"></span></p>
+                        <p><strong>Breed:</strong> <span id="pet-breed"></span></p>
+                        <p><strong>Species:</strong> <span id="pet-specie"></span></p>
+                        <p><strong>Size:</strong> <span id="pet-size"></span></p>
+                        <p><strong>Complementary Information:</strong> <span id="complementary-info"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  
+
+   
+
+  <!-- MY CODE -->
+
+        
+     <!-- Footer -->
+    <footer class="footer py-4 footer-custom">
+        <div class="container text-center">
+            <div class="social-icons mb-3">
+                <a href="#" class="text-white mx-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white mx-2"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="mb-0">Copyright © 2024 Petxie Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+  
+		 <script src="/js/ownerUnif.js"></script>
+		 <script src="/js/service.js"></script>
+		 <script src="/js/Review.js"></script>
+		 
+</body>
+</html>

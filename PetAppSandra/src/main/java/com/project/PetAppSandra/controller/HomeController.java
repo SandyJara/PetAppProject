@@ -54,5 +54,13 @@ public class HomeController {
 	    return "updatePetSitter"; 
 	}
 	
+	
+	
+	@GetMapping("/ownerPublicProfile")
+	public String ownerPublicProfilePage() {
+	    return "ownerPublicProfile"; 
+	}
+	
+	
 	}
 

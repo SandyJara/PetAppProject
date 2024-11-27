@@ -264,7 +264,6 @@ public class ServiceController {
 		
 		
 		
-		
 //to obtain detail of the service from an owner and join it with the pet sitter
 		@GetMapping("/api/services/{serviceId}/details")
 		public ResponseEntity<?> getServiceDetails(@PathVariable Long serviceId) {
@@ -337,7 +336,38 @@ public class ServiceController {
 			    return ResponseEntity.ok(formattedServices);
 			}
 			
+			//to change status when a owner changes status to COMPLETE 
+			@PostMapping("/{id}/complete")
+		    public ResponseEntity<?> completeService(@PathVariable Long id) {
+		        Optional<Service> serviceOpt = serviceRepository.findById(id);
+		        if (serviceOpt.isPresent()) {
+		            Service service = serviceOpt.get();
+		            if (service.getStatus().equals("ACCEPTED")) { // Ensure only 'ACCEPTED' can be accepted
+		                service.setStatus("COMPLETED");
+		                serviceRepository.save(service);
+		                return ResponseEntity.ok("Service COMPLETED successfully.");
+		            } else {
+		                return ResponseEntity.badRequest().body("Service is not posible to change to estatus complete.");
+		            }
+		        }
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Service not found.");
+		    }
 
+			
+	//to change status when a owner changes status to cancelled		
+			@PostMapping("/{id}/cancel")
+		    public ResponseEntity<?> cancelService(@PathVariable Long id) {
+		        Optional<Service> serviceOpt = serviceRepository.findById(id);
+		        if (serviceOpt.isPresent()) {
+		            Service service = serviceOpt.get();
+		           // ALL can be changed to cancelled
+		                service.setStatus("CANCELLED"); 
+		                serviceRepository.save(service); // Save changes to the database
+		                return ResponseEntity.ok("Service rejected successfully.");
+		            } else {
+		        }
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Service not found.");
+		    }
 			
 		
 		

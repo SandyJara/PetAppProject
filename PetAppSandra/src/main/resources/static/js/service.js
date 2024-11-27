@@ -130,6 +130,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 							                `
 							                : service.status === 'PENDING'
 							                ? `
+							               	<button style="
+							                    background-color: #5dade2; 
+							                    color: white; 
+							                    font-size: 8px; 
+							                    padding: 5px 10px; 
+							                    border: none; 
+							                    border-radius: 5px; 
+							                    cursor: pointer;
+							                    transition: all 0.3s ease;" 
+							                    onclick="markCompleted(${service.id})">Complete</button>
 							                <button style="
 							                    background-color: #e67e22; 
 							                    color: white; 
@@ -281,8 +291,50 @@ window.handleReject = async function(serviceId) {
         alert('There was an error rejecting the service. Please try again later.');
     }
 }
-    
-    
+
+ //BUTTONS TO MARK AS A COMPLETED SERVICE-ACTION FROM THE OWNER
+    window.markCompleted = async function(serviceId) {
+    try {
+        const response = await fetch(`/services/${serviceId}/complete`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to change status as a Completed. Status: ${response.status}`);
+        }
+
+        alert('Service completed successfully.');
+        location.reload(); 
+    } catch (error) {
+        console.error('Error to change status of service as completed:', error);
+        alert('There was an error updating as a completed service. Please try again later.');
+    }
+}
+
+//BUTTONS TO MARK AS A CANCELLED SERVICE-ACTION FROM THE OWNER
+    window.markCancelled = async function(serviceId) {
+    try {
+        const response = await fetch(`/services/${serviceId}/cancel`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Failed to change status to Cancelled. Status: ${response.status}`);
+        }
+
+        alert('Service cancelled successfully.');
+        location.reload(); 
+    } catch (error) {
+        console.error('Error to change status of service as cancelled:', error);
+        alert('There was an error updating as a cancelled service. Please try again later.');
+    }
+}
     
     
     
