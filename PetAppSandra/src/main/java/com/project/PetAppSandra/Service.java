@@ -46,7 +46,13 @@ public class Service {
     
     @Column(name = "payment")
     private Integer payment;
-
+    
+    @Column(name = "hiddenForSitter")
+    private boolean hiddenForSitter = false;
+    
+    @Column(name = "hiddenForOwner")
+    private boolean hiddenForOwner = false;
+    
     // Getters y Setters
     public Long getId() {
         return id;
@@ -151,6 +157,23 @@ public class Service {
 	public void setPayment(Integer payment) {
 		this.payment = payment;
 	}
+
+	public boolean isHiddenForSitter() {
+		return hiddenForSitter;
+	}
+
+	public void setHiddenForSitter(boolean hiddenForSitter) {
+		this.hiddenForSitter = hiddenForSitter;
+	}
+
+	public boolean isHiddenForOwner() {
+		return hiddenForOwner;
+	}
+
+	public void setHiddenForOwner(boolean hiddenForOwner) {
+		this.hiddenForOwner = hiddenForOwner;
+	}
     
+	
     
 }

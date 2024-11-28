@@ -139,36 +139,94 @@ consultApplicationsButton.addEventListener('click', async () => {
     }
 });
 
-// Function for the information of the applications
 function populateApplicationsTable(applications) {
     applicationsTableBody.innerHTML = ''; // clean table
 
-    if (applications.length === 0) {
+    // Filtrar solo los servicios donde hiddenForSitter es false
+    const visibleApplications = applications.filter(application => !application.hiddenForSitter);
+
+    if (visibleApplications.length === 0) {
         const row = document.createElement('tr');
         row.innerHTML = `<td colspan="9" class="text-center">No applications found.</td>`;
         applicationsTableBody.appendChild(row);
         return;
     }
 
-    applications.forEach(application => {
+    visibleApplications.forEach(application => {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>${application.id}</td>
             <td>${application.serviceType}</td>
             <td>${application.petName || 'N/A'}</td>
             <td>${application.ownerName || 'N/A'}</td>
-            <td>${application.startDate.split('T')[0]}</td>
-            <td>${application.endDate.split('T')[0]}</td>
+            <td>${application.startDate ? application.startDate.split('T')[0] : 'N/A'}</td>
+            <td>${application.endDate ? application.endDate.split('T')[0] : 'N/A'}</td>
             <td>${application.payment} €</td>
             <td>${application.status}</td> 
             <td>${application.description || 'N/A'}</td>
+            <td>
+                <button class="delete-application" data-id="${application.id}" title="Delete Service">
+                <img src="/images/bin.png" alt="Delete" class="delete-icon">
+                </button>
+            </td>
         `;
         applicationsTableBody.appendChild(row);
     });
 }
 
+// Hide a service from a sitter view
+    
+document.addEventListener('click', async (event) => {
+    if (event.target.closest('.delete-application')) {
+        const serviceId = event.target.closest('.delete-application').getAttribute('data-id');
 
+        const confirmation = confirm('Are you sure you want to hide this service from your view?');
+        if (!confirmation) return;
 
+        try {
+            const response = await fetch(`services/services/${serviceId}/hide`, {
+                method: 'PATCH', 
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
+            if (response.ok) {
+                alert('Service hidden successfully!');
+               // await loadApplications(); 
+                 // Close the modal
+                $('#myApplicationsModal').modal('hide');
+            } else {
+                const errorMessage = await response.text();
+                alert(`Failed to hide service: ${errorMessage}`);
+            }
+        } catch (error) {
+            console.error('Error hiding service:', error);
+            alert('An unexpected error occurred while hiding the service.');
+        }
+    }
+});
+
+// Function to load applications and update the table
+async function loadApplications() {
+    try {
+        const response = await fetch(`services/services/petsitter/${sitterId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const applications = await response.json();
+            populateApplicationsTable(applications); // Update the table
+        } else {
+            const errorMessage = await response.text();
+            console.error('Failed to fetch applications:', errorMessage);
+        }
+    } catch (error) {
+        console.error('Error loading applications:', error);
+    }
+}
 
 });

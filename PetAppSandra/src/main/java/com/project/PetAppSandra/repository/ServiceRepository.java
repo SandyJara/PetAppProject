@@ -69,12 +69,15 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
     					       "p.name AS petName, u.fullname AS ownerName, " +
     					       "s.startDate AS startDate, s.endDate AS endDate, " +
     					       "s.payment AS payment, s.description AS description, " +
-    					       "s.status AS status " +
+    					       "s.status AS status, s.hiddenForSitter AS hiddenForSitter, s.hiddenForOwner AS hiddenForOwner " +
     					       "FROM Service s " +
     					       "LEFT JOIN User u ON s.ownerId = u.id " +
     					       "LEFT JOIN Pet p ON s.petId = p.id " +
     					       "WHERE s.sitterId = :sitterId " +
     					       "AND s.status IN ('APPLIED', 'ACCEPTED', 'COMPLETED', 'CANCELLED')")
     					List<Object[]> findDetailedServicesBySitterId(@Param("sitterId") Long sitterId);
- 			
+ 
+ //to hide from the list, the services the petsitter selects   					
+    				@Query("SELECT s FROM Service s WHERE s.hiddenForSitter = false AND s.sitterId = :sitterId")
+    				List<Service> findVisibleServicesForSitter(@Param("sitterId") Long sitterId);
 }

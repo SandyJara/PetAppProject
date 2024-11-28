@@ -276,6 +276,30 @@ public class ServiceController {
 		    }
 		}
 		
+//to be able to hide a service from the petSitter view when consults her/his applications
+		@PatchMapping("/services/{serviceId}/hide")
+		public ResponseEntity<?> hideServiceForSitter(@PathVariable Long serviceId, HttpSession session) {
+		    User user = (User) session.getAttribute("user");
+		    
+		    if (user == null || !"PETSITTER".equalsIgnoreCase(user.getAccount().name())) {
+		        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized: Only Pet Sitters can hide services.");
+		    }
+
+		    Optional<Service> serviceOptional = serviceRepository.findById(serviceId);
+		    if (serviceOptional.isEmpty()) {
+		        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Service not found.");
+		    }
+
+		    Service service = serviceOptional.get();
+		    service.setHiddenForSitter(true);
+		    serviceRepository.save(service);
+
+		    return ResponseEntity.ok("Service has been hidden successfully.");
+		}
+		
+		
+		
+		
 //to change status when a owner ACCEPTS A petsitter
 		@PostMapping("/{id}/accept")
 	    public ResponseEntity<?> acceptService(@PathVariable Long id) {
@@ -319,22 +343,25 @@ public class ServiceController {
 			    List<Object[]> services = serviceRepository.findDetailedServicesBySitterId(sitterId);
 			    
 			    // Map the data 
-			    List<Map<String, Object>> formattedServices = services.stream().map(service -> {
-			        Map<String, Object> serviceMap = new HashMap<>();
-			        serviceMap.put("id", service[0]);
-			        serviceMap.put("serviceType", service[1]);
-			        serviceMap.put("petName", service[2]);
-			        serviceMap.put("ownerName", service[3]);
-			        serviceMap.put("startDate", service[4]);
-			        serviceMap.put("endDate", service[5]);
-			        serviceMap.put("payment", service[6]);
-			        serviceMap.put("description", service[7]);
-			        serviceMap.put("status", service[8]);
-			        return serviceMap;
-			    }).collect(Collectors.toList());
-			    
-			    return ResponseEntity.ok(formattedServices);
-			}
+			    List<Map<String, Object>> formattedServices = services.stream()
+			            .filter(service -> service.length > 9 && Boolean.FALSE.equals(service[9])) // Assuming 'hiddenForSitter' is at index 9
+			            .map(service -> {
+			                Map<String, Object> serviceMap = new HashMap<>();
+			                serviceMap.put("id", service[0]);
+			                serviceMap.put("serviceType", service[1]);
+			                serviceMap.put("petName", service[2]);
+			                serviceMap.put("ownerName", service[3]);
+			                serviceMap.put("startDate", service[4]);
+			                serviceMap.put("endDate", service[5]);
+			                serviceMap.put("payment", service[6]);
+			                serviceMap.put("description", service[7]);
+			                serviceMap.put("status", service[8]);
+			                return serviceMap;
+			            })
+			            .collect(Collectors.toList());
+
+			        return ResponseEntity.ok(formattedServices);
+			    }
 			
 			//to change status when a owner changes status to COMPLETE 
 			@PostMapping("/{id}/complete")
