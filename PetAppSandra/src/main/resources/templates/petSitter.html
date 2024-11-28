@@ -91,43 +91,39 @@
        
            
 
-         <!-- Services Section -->
+         <!-- Preferences Section -->
             <div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
-                <h3 class="profile-header">Services</h3>
-                <div class="existing-service">
-                    <button class="btn profile-btn-purple text-white">Consult Existing Service</button>
-                </div>
-                
+                <h3 class="profile-header">Set Preferences</h3>
+                             
                 <br>
-                <h5 class="profile-subheader">Set preferences</h5>
                 <form>
                     <div class="form-group">
                         <label for="type" class="profile-label">Type:</label>
                         <div id="type-options" class="checkbox-group">
-                            <div><input type="checkbox" id="walk" value="WALK" name="type"><label for="walk">Walk</label></div>
-                            <div><input type="checkbox" id="visit" value="VISIT" name="type"><label for="visit">Visit</label></div>
-                            <div><input type="checkbox" id="housesitting" value="HOUSESITTING" name="type"><label for="housesitting">House Sitting</label></div>
+                            <div><input type="checkbox" id="walk" value="WALK" name="type"><label for="WALK">Walk</label></div>
+                            <div><input type="checkbox" id="visit" value="VISIT" name="type"><label for="VISIT">Visit</label></div>
+                            <div><input type="checkbox" id="housesitting" value="HOUSESITTING" name="type"><label for="HOUSESITTING">House Sitting</label></div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="pet-type" class="profile-label">Pet type:</label>
-                        <div id="pet-type-options">
-                            <div class="form-check"><input type="checkbox" id="dog" class="form-check-input" value="Dog"><label for="dog" class="form-check-label">Dog</label></div>
-                            <div class="form-check"><input type="checkbox" id="cat" class="form-check-input" value="Cat"><label for="cat" class="form-check-label">Cat</label></div>
-                            <div class="form-check"><input type="checkbox" id="rabbit" class="form-check-input" value="Rabbit"><label for="rabbit" class="form-check-label">Rabbit</label></div>
-                        	<div class="form-check"><input type="checkbox" id="bird" class="form-check-input" value="Bird"><label for="bird" class="form-check-label">Bird</label></div>
-                            <div class="form-check"><input type="checkbox" id="hamster" class="form-check-input" value="Hamster"><label for="hamster" class="form-check-label">Hamster</label></div>
-                            <div class="form-check"><input type="checkbox" id="other" class="form-check-input" value="Other"><label for="other" class="form-check-label">Other</label></div>
+                        <label for="type" class="profile-label">Pet type:</label>
+                        <div id="petType">
+                        	<div><input type="checkbox" id="Dog" value="Dog" name= "petType"><label for="Dog">Dog</label></div>
+                        	<div><input type="checkbox" id="Cat" value="Cat" name= "petType"><label for="Cat">Cat</label></div>
+                        	<div><input type="checkbox" id="Rabbit" value="Rabbit" name= "petType"><label for="Rabbit">Rabbit</label></div>
+                        	<div><input type="checkbox" id="Bird" value="Bird" name= "petType"><label for="Bird">Bird</label></div>
+                        	<div><input type="checkbox" id="Hamster" value="Hamster" name= "petType"><label for="Hamster">Hamster</label></div>
+                        	<div><input type="checkbox" id="Other" value="Other" name= "petType"><label for="Other">Other</label></div>							      
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="type" class="profile-label">Estatus de perfil:</label>
-                        <select id="type" class="form-control profile-form-control">
-                            <option value="Activo">ACTIVO</option>
-                            <option value="Inactivo">INACTIVO</option>
+                        <select id="statusProfile" class="form-control profile-form-control">
+                            <option value="ACTIVE">ACTIVE</option>
+                            <option value="INACTIVE">INACTIVE</option>
                         </select>
                     </div>
-                    <button id="upload-buttonPreferences" type="button" class="btn profile-btn-purple text-white ml-2">Update</button>
+                    <button id="updatePreferences" type="button" class="btn profile-btn-purple text-white ml-2">Update</button>
                 </form>
             </div>
         </div>
@@ -297,7 +293,7 @@
     
     <script src="/js/petSitter.js"></script>
     <script src="/js/SearchServices.js"></script>
-   
+    <script src="/js/preferences.js"></script>
     
 </body>
 </html>
