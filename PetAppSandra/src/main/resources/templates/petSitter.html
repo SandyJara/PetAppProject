@@ -94,7 +94,8 @@
          <!-- Preferences Section -->
             <div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
                 <h3 class="profile-header">Set Preferences</h3>
-                             
+                     <!-- hidden ID -->   
+		  				<input type="hidden" id="user-id" name="userId" th:value="${user.id}">
                 <br>
                 <form>
                     <div class="form-group">
@@ -287,6 +288,8 @@
         </div>
     </footer>
 
+	
+	
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="/css/modal.css" rel="stylesheet">

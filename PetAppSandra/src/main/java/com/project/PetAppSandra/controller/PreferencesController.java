@@ -1,5 +1,6 @@
 package com.project.PetAppSandra.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -7,6 +8,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -53,4 +57,27 @@ public class PreferencesController {
 
         return ResponseEntity.ok("Preferences updated successfully.");
     }
+    
+    //get and read the information of the current user
+    @GetMapping("/preferences")
+    public String getPreferencesPage(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("sitterId", user.getId());
+        }
+        return "preferences";
+    }
+    
+    
+    @GetMapping("/{sitterId}")
+    public ResponseEntity<SitterPreferences> getPreferences(@PathVariable Long sitterId) {
+        Optional<SitterPreferences> preferences = preferencesRepository.findBySitterId(sitterId);
+
+        if (preferences.isPresent()) {
+            return ResponseEntity.ok(preferences.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+    
 }
