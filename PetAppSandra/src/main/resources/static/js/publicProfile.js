@@ -1,3 +1,5 @@
+// ONLY FOR OWNER
+
 document.addEventListener("DOMContentLoaded", () => {
     const ownerId = getOwnerIdFromURL(); // get ownerId  URL
 

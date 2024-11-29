@@ -11,4 +11,6 @@ import com.project.PetAppSandra.SitterPreferences;
 @Repository
 public interface PreferencesRepository extends JpaRepository<SitterPreferences, Long> {
     Optional<SitterPreferences> findBySitterId(Long sitterId);
+    
+    List<SitterPreferences> findAllBySitterId(Long sitterId);
 }

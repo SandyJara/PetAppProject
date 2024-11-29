@@ -1,5 +1,7 @@
 package com.project.PetAppSandra.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +18,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.PetAppSandra.Experience;
 import com.project.PetAppSandra.Pet;
+import com.project.PetAppSandra.SitterPreferences;
 import com.project.PetAppSandra.User;
 import com.project.PetAppSandra.repository.UserRepository;
+import com.project.PetAppSandra.repository.ExperienceRepository;
 import com.project.PetAppSandra.repository.PetRepository;
+import com.project.PetAppSandra.repository.PreferencesRepository;
 import com.project.PetAppSandra.repository.ServiceRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,6 +41,10 @@ public class LogInController {
     private ServiceRepository serviceRepository;
     @Autowired
     private PetRepository petRepository;
+    @Autowired
+    private PreferencesRepository PreferencesRepository;
+    @Autowired
+    private ExperienceRepository experienceRepository;
 
     @GetMapping("/login")
     public String loginPage() {
@@ -260,11 +270,64 @@ public class LogInController {
     public String renderPublicProfilePage() {
         return "ownerPublicProfile";
     }
+ 
     
-    
-    
-    
-    
+ // Added to be able to see the Pet Sitter profiles
+    @GetMapping("/sitter/petSitterPublicProfile/{sitterId}")
+    public ResponseEntity<Map<String, Object>> getPetSitterPublicProfile(@PathVariable Long sitterId) {
+        try {
+            // Search pet sitter information
+            Optional<User> sitterOptional = userRepository.findById(sitterId);
+            if (sitterOptional.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Map.of("error", "Pet Sitter not found with ID: " + sitterId));
+            }
+            User sitter = sitterOptional.get();
+
+            // getting Pet Sitter preferences
+            Optional<SitterPreferences> optionalPreference = PreferencesRepository.findBySitterId(sitterId);
+            List<Map<String, Object>> preferences = optionalPreference.isPresent()
+                    ? List.of(Map.of(
+                            "serviceType", optionalPreference.get().getServiceType(),
+                            "petType", optionalPreference.get().getPetType(),
+                            "statusProfile", optionalPreference.get().getStatusProfile()
+                    ))
+                    : List.of();
+
+            // getting Pet Sitter experiences
+            Optional<Experience> experienceOptional = experienceRepository.findBySitterId(sitterId);
+            String experienceText = experienceOptional.map(Experience::getExperienceText).orElse("N/A");
+
+            // to prepare the answer with the information 
+            Map<String, Object> response = new HashMap<>();
+            response.put("sitter", Map.of(
+                    "id", sitter.getId(),
+                    "fullname", sitter.getFullname(),
+                    "email", sitter.getEmail(),
+                    "username", sitter.getUsername(),
+                    "phone", sitter.getPhone(),
+                    "address", sitter.getAddress(),
+                    "birthdate", sitter.getBirthdate(),
+                    "profilePictureUrl", sitter.getProfilePictureUrl() != null && !sitter.getProfilePictureUrl().isEmpty()
+                            ? sitter.getProfilePictureUrl()
+                            : "https://via.placeholder.com/150"
+            ));
+            response.put("preferences", preferences);
+            response.put("experience", experienceText);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "An error occurred while retrieving the profile."));
+        }
+    }
+
+  
+    @GetMapping("/sitter/petSitterPublicProfile")
+    public String renderPetSitterPublicProfilePage() {
+        return "petSitterPublicProfile";
+    }
     
     
 	 
