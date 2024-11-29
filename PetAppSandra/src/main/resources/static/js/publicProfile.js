@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 async function fetchPublicProfile(ownerId) {
     try {
-        const response = await fetch(`/owner/publicProfile/${ownerId}`);
+        const response = await fetch(`/owner/ownerPublicProfile/${ownerId}`);
         if (!response.ok) {
             throw new Error(`Failed to fetch public profile. Status: ${response.status}`);
         }
@@ -22,28 +22,48 @@ async function fetchPublicProfile(ownerId) {
         const ownerData = data.owner;
         document.getElementById("owner-name").textContent = ownerData.fullname || "N/A";
         document.getElementById("owner-email").textContent = ownerData.email || "N/A";
-        document.getElementById("owner-phone").textContent = ownerData.phone || "N/A";
-        const profilePicture = document.getElementById("profile-picture");
+        document.getElementById("owner-username").textContent = ownerData.username || "N/A";
+        const profilePicture = document.getElementById("profile-picture-preview");
         if (profilePicture) {
-            profilePicture.src = ownerData.profilePictureUrl || "https://via.placeholder.com/150";
-        }
+		    console.log("Profile Picture URL:", ownerData.profilePictureUrl); // Debugging
+		    profilePicture.src = ownerData.profilePictureUrl && ownerData.profilePictureUrl.trim() !== ""
+		        ? ownerData.profilePictureUrl
+		        : "https://via.placeholder.com/150";
+		}
 
         // Show pets information
-        const petsContainer = document.getElementById("pets-container");
+        const petsContainer = document.getElementById("pet-selection");
         const pets = data.pets || [];
-        petsContainer.innerHTML = ""; 
+        petsContainer.innerHTML = '<option value="">Select Pet</option>';
 
         pets.forEach((pet) => {
-            const petElement = document.createElement("div");
-            petElement.className = "pet-card";
-            petElement.innerHTML = `
-                <h4>${pet.name}</h4>
-                <p>Age: ${pet.age || "N/A"} years</p>
-                <p>Breed: ${pet.breed || "N/A"}</p>
-                <p>Size: ${pet.size || "N/A"}</p>
-                <p>Complementary Info: ${pet.complementaryInfo || "N/A"}</p>
-            `;
-            petsContainer.appendChild(petElement);
+            // pets for dropdown
+            const petOption = document.createElement("option");
+            petOption.value = pet.id;
+            petOption.textContent = pet.name || "Unnamed Pet";
+            petsContainer.appendChild(petOption);
+        });
+
+        // show information from the pet selected
+        petsContainer.addEventListener("change", (event) => {
+            const selectedPetId = event.target.value;
+            const selectedPet = pets.find((pet) => pet.id == selectedPetId);
+
+            if (selectedPet) {
+                document.getElementById("pet-name").textContent = selectedPet.name || "N/A";
+                document.getElementById("pet-age").textContent = selectedPet.age || "N/A";
+                document.getElementById("pet-breed").textContent = selectedPet.breed || "N/A";
+                document.getElementById("pet-specie").textContent = selectedPet.species || "N/A";
+                document.getElementById("pet-size").textContent = selectedPet.size || "N/A";
+                document.getElementById("complementary-info").textContent = selectedPet.description || "N/A";
+            } else {
+                document.getElementById("pet-name").textContent = "";
+                document.getElementById("pet-age").textContent = "";
+                document.getElementById("pet-breed").textContent = "";
+                document.getElementById("pet-specie").textContent = "";
+                document.getElementById("pet-size").textContent = "";
+                document.getElementById("complementary-info").textContent = "";
+            }
         });
     } catch (error) {
         console.error("Error loading public profile:", error);

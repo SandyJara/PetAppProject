@@ -217,7 +217,7 @@ public class LogInController {
 		}
 		
    //Added to be able to see the owners profiles 
-    @GetMapping("/owner/publicProfile/{ownerId}")
+    @GetMapping("/owner/ownerPublicProfile/{ownerId}")
     public ResponseEntity<Map<String, Object>> getPublicProfile(@PathVariable Long ownerId) {
         try {
             // Search owner info
@@ -237,10 +237,13 @@ public class LogInController {
                     "id", owner.getId(),
                     "fullname", owner.getFullname(),
                     "email", owner.getEmail(),
+                    "username", owner.getUsername(),
                     "phone", owner.getPhone(),
                     "address", owner.getAddress(),
                     "birthdate", owner.getBirthdate(),
-                    "profilePictureUrl", owner.getProfilePictureUrl()
+                    "profilePictureUrl", owner.getProfilePictureUrl() != null && !owner.getProfilePictureUrl().isEmpty() 
+                    ? owner.getProfilePictureUrl() 
+                    : "https://via.placeholder.com/150" 
             ));
             response.put("pets", pets);
 
@@ -253,7 +256,10 @@ public class LogInController {
     }
     
     
-    
+    @GetMapping("/ownerPublicProfile.html")
+    public String renderPublicProfilePage() {
+        return "ownerPublicProfile";
+    }
     
     
     

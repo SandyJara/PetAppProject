@@ -72,7 +72,7 @@ let serviceId;
                 <td>${service.serviceType}</td>
                 <td>${service.petName}</td>
                 <td>
-                 <a href="/publicProfile.html?ownerId=${service.ownerId}" 
+                 <a href="/ownerPublicProfile.html?ownerId=${service.ownerId}" 
                    style="color: #d87db5; text-decoration: none;">
                     ${service.ownerName || "No Owner"}
                 </a>
@@ -161,7 +161,7 @@ consultApplicationsButton.addEventListener('click', async () => {
 function populateApplicationsTable(applications) {
     applicationsTableBody.innerHTML = ''; // clean table
 
-    // Filtrar solo los servicios donde hiddenForSitter es false
+    // filter services when hiddenForSitter = false
     const visibleApplications = applications.filter(application => !application.hiddenForSitter);
 
     if (visibleApplications.length === 0) {
