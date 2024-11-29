@@ -11,12 +11,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.PetAppSandra.Pet;
 import com.project.PetAppSandra.User;
 import com.project.PetAppSandra.repository.UserRepository;
+import com.project.PetAppSandra.repository.PetRepository;
 import com.project.PetAppSandra.repository.ServiceRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,6 +33,8 @@ public class LogInController {
     private UserRepository userRepository;
     @Autowired
     private ServiceRepository serviceRepository;
+    @Autowired
+    private PetRepository petRepository;
 
     @GetMapping("/login")
     public String loginPage() {
@@ -211,8 +216,41 @@ public class LogInController {
 		    }
 		}
 		
-    
-    
+   //Added to be able to see the owners profiles 
+    @GetMapping("/owner/publicProfile/{ownerId}")
+    public ResponseEntity<Map<String, Object>> getPublicProfile(@PathVariable Long ownerId) {
+        try {
+            // Search owner info
+            Optional<User> ownerOptional = userRepository.findById(ownerId);
+            if (ownerOptional.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Map.of("error", "Owner not found with ID: " + ownerId));
+            }
+            User owner = ownerOptional.get();
+
+            // get the pets
+            List<Pet> pets = petRepository.findByOwnerId(ownerId);
+
+            // All the information to show (check only the one needed)
+            Map<String, Object> response = new HashMap<>();
+            response.put("owner", Map.of(
+                    "id", owner.getId(),
+                    "fullname", owner.getFullname(),
+                    "email", owner.getEmail(),
+                    "phone", owner.getPhone(),
+                    "address", owner.getAddress(),
+                    "birthdate", owner.getBirthdate(),
+                    "profilePictureUrl", owner.getProfilePictureUrl()
+            ));
+            response.put("pets", pets);
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(Map.of("error", "An error occurred while retrieving the profile."));
+        }
+    }
     
     
     

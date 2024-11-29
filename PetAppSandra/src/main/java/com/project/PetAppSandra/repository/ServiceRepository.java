@@ -47,8 +47,8 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
     		
     		
     		
-   /// still testing
-    		@Query("SELECT s.id, s.serviceType, p.name AS petName, u.fullname AS ownerName, " +
+   /// still testing-table when a pet sitter search services
+    		@Query("SELECT s.id, s.serviceType, p.name AS petName, u.id AS ownerId, u.fullname AS ownerName, " +
     			       "s.startDate, s.endDate, s.payment, s.description " +
     			       "FROM Service s " +
     			       "LEFT JOIN User u ON s.ownerId = u.id " +
@@ -56,6 +56,7 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
     			       "WHERE s.status = 'PENDING' " +
     			       "AND (:serviceType IS NULL OR s.serviceType = :serviceType)")
     			List<Object[]> findPendingServicesWithOwnerAndPet(@Param("serviceType") String serviceType);
+
 
     		//Check if this is no needed
     			@Query("SELECT s.id, s.serviceType, s.status, u.username AS sitterUsername, s.description, s.startDate, s.endDate " +

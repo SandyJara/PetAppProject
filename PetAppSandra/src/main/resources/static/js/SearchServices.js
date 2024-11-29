@@ -34,8 +34,12 @@ let serviceId;
             const services = await response.json();
             console.log('Services received:', services);
 
-            // Populate the table and show modal
-            populateServicesTable(services);
+
+		        console.log("Calling populateServicesTable now...");
+		    // Populate the table and show modal
+		        populateServicesTable(services);
+		        console.log("populateServicesTable finished.");
+
             $('#servicesModal').modal('show'); // Open modal after populating
         } catch (error) {
             console.error('Error fetching services:', error);
@@ -44,23 +48,35 @@ let serviceId;
     });
 
     // Function to populate the services table with data
-    function populateServicesTable(services) {
+   function populateServicesTable(services) {
+    console.log("populateServicesTable is called");
         servicesTableBody.innerHTML = ''; // Clear the table
 
         if (services.length === 0) {
             const row = document.createElement('tr');
             row.innerHTML = `<td colspan="8" class="text-center">No services available.</td>`;
+           
+           console.log(row.innerHTML);
+           
             servicesTableBody.appendChild(row);
             return;
         }
 
+	console.log("Services received for table population:", services); // Debugging all services
         services.forEach(service => {
+        console.log("Service being processed:", service); // Debug
+        
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${service.id}</td>
                 <td>${service.serviceType}</td>
                 <td>${service.petName}</td>
-                <td>${service.ownerName}</td>
+                <td>
+                 <a href="/publicProfile.html?ownerId=${service.ownerId}" 
+                   style="color: #d87db5; text-decoration: none;">
+                    ${service.ownerName || "No Owner"}
+                </a>
+               </td>
                <td>${service.startDate.split('T')[0]}</td> <!--dont show time -->
    				<td>${service.endDate.split('T')[0]}</td> <!-- dont show time -->
                 <td>${service.payment} €</td>
@@ -75,10 +91,13 @@ let serviceId;
        				 
     			</td>
             `;
+            
+            console.log("Generated row HTML:", row.innerHTML); // Debug the generated row HTML
             servicesTableBody.appendChild(row);
         });
-    }
-
+    }//I added a lot of console.log to see what was wrong, at the end was only the explorer not reading ir properly, the function was ok since longer
+   
+   
     // Function to handle the APPLY button click
  	window.applyToService = async function(serviceId) { //allows the function globally
         try {

@@ -186,23 +186,24 @@ public class ServiceController {
 	        @RequestParam(required = false) String serviceType) {
 	        
 	        // Available services
-	        List<Object[]> services = serviceRepository.findPendingServicesWithOwnerAndPet(serviceType);
+			List<Object[]> services = serviceRepository.findPendingServicesWithOwnerAndPet(serviceType);
 
-	        List<Map<String, Object>> response = services.stream().map(service -> {
-	            Map<String, Object> map = new HashMap<>();
-	            map.put("id", service[0]);
-	            map.put("serviceType", service[1]);
-	            map.put("petName", service[2]);
-	            map.put("ownerName", service[3]);
-	            map.put("startDate", service[4]);
-	            map.put("endDate", service[5]);
-	            map.put("payment", service[6]); 
-	            map.put("description", service[7]);
-	            return map;
-	        }).collect(Collectors.toList());
+		    List<Map<String, Object>> response = services.stream().map(service -> {
+		        Map<String, Object> map = new HashMap<>();
+		        map.put("id", service[0]); 
+		        map.put("serviceType", service[1]); 
+		        map.put("petName", service[2]); 
+		        map.put("ownerId", service[3]); // Owner ID, added to have the ID for the link
+		        map.put("ownerName", service[4]); 
+		        map.put("startDate", service[5]); 
+		        map.put("endDate", service[6]); 
+		        map.put("payment", service[7]); 
+		        map.put("description", service[8]);
+		        return map;
+		    }).collect(Collectors.toList());
 
-	        return ResponseEntity.ok(response);
-	    }
+		    return ResponseEntity.ok(response);
+		}
 	
 		
 		
