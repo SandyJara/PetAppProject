@@ -12,12 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.PetAppSandra.Experience;
 import com.project.PetAppSandra.SitterPreferences;
 import com.project.PetAppSandra.User;
+import com.project.PetAppSandra.repository.ExperienceRepository;
 import com.project.PetAppSandra.repository.PreferencesRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +31,8 @@ public class PreferencesController {
 
     @Autowired
     private PreferencesRepository preferencesRepository;
+    @Autowired
+    private ExperienceRepository experienceRepository;
 
     @PostMapping("/update")
     public ResponseEntity<?> updatePreferences(@RequestBody Map<String, Object> preferencesData, HttpSession session) {
@@ -79,5 +84,11 @@ public class PreferencesController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+    
+    
+   
+    
+    
+    
     
 }

@@ -72,4 +72,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
         console.error('Error loading preferences:', error);
     }
-});
+    
+   
+});    
+    
+    
+ 
