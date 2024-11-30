@@ -161,7 +161,7 @@ public class LogInController {
 
             return ResponseEntity.ok(userData);
        } else if (user == null) {
-        // messaje to know the problem when i fails
+        // message to know the problem when it fails
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(Map.of("error", "No user found in session. Please log in."));
     } else {
@@ -183,7 +183,7 @@ public class LogInController {
             String address = updateData.get("address");
             String newPassword = updateData.get("newPassword");
 
-            // update this information, not all registered from the begining can be changed
+            // update this information, not all registered from the beginning can be changed
             user.setPhone(phone);
             user.setAddress(address);
 
@@ -329,7 +329,10 @@ public class LogInController {
         return "petSitterPublicProfile";
     }
     
-    
+    @GetMapping("/petSitterPublicProfile.html")
+    public String getPublicProfileWithHtml(@RequestParam("sitterId") Long sitterId, Model model) {
+        return "petSitterPublicProfile";
+    }
 	 
 }
     

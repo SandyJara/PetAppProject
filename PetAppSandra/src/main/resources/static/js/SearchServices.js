@@ -18,7 +18,7 @@ let serviceId;
         return;
     }
 
-    // Filter Services by Type
+    // Filter services by type
     searchServicesButton.addEventListener('click', async () => {
         const selectedType = serviceTypeFilter.value;
 
@@ -62,9 +62,9 @@ let serviceId;
             return;
         }
 
-	console.log("Services received for table population:", services); // Debugging all services
+	console.log("Services received for table population:", services); 
         services.forEach(service => {
-        console.log("Service being processed:", service); // Debug
+        console.log("Service being processed:", service); 
         
             const row = document.createElement('tr');
             row.innerHTML = `
@@ -92,7 +92,7 @@ let serviceId;
     			</td>
             `;
             
-            console.log("Generated row HTML:", row.innerHTML); // Debug the generated row HTML
+            console.log("Generated row HTML:", row.innerHTML); 
             servicesTableBody.appendChild(row);
         });
     }//I added a lot of console.log to see what was wrong, at the end was only the explorer not reading ir properly, the function was ok since longer

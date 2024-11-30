@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.PetAppSandra.Experience;
@@ -85,9 +87,21 @@ public class PreferencesController {
         }
     }
     
-    
-   
-    
+    //for the search of pet Sitters by their preferences
+    @GetMapping("/search")
+    public List<Map<String, Object>> searchSittersByServiceTypeAndStatus(@RequestParam String serviceType,
+                                                                          @RequestParam String statusProfile) {
+        
+        List<Object[]> results = preferencesRepository.findSittersWithNameByServiceTypeAndStatusProfile(serviceType, statusProfile);
+
+        // format for the information 
+        return results.stream().map(result -> {
+            Map<String, Object> sitterData = new HashMap<>();
+            sitterData.put("sitterId", result[0]); // Pet sitter ID
+            sitterData.put("username", result[1]); // Pet sitter name
+            return sitterData;
+        }).collect(Collectors.toList());
+    }
     
     
     
