@@ -61,4 +61,16 @@ public class MessageController {
     public List<Message> getConversation(@RequestParam String user1, @RequestParam String user2) {
         return messageRepository.findConversation(user1, user2);
     }
+    
+    @GetMapping("/conversations/users")
+    public ResponseEntity<List<String>> getConversationUsers(@RequestParam String username) {
+        
+    	// Consult database to get the users (not repeating them)
+        List<String> conversationUsers = messageRepository.findDistinctUsersByUsername(username);
+
+        if (conversationUsers.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 204 if the is no data
+        }
+        return ResponseEntity.ok(conversationUsers); // Users list
+    }
 }

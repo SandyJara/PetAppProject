@@ -21,4 +21,13 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
            "OR (m.senderUsername = :user2 AND m.receiverUsername = :user1) " +
            "ORDER BY m.submissionDate ASC")
     List<Message> findConversation(@Param("user1") String user1, @Param("user2") String user2);
-}
+
+    @Query("SELECT DISTINCT CASE WHEN m.senderUsername = :username THEN m.receiverUsername ELSE m.senderUsername END " +
+    	       "FROM Message m WHERE m.senderUsername = :username OR m.receiverUsername = :username")
+    	List<String> findDistinctUsersInConversations(@Param("username") String username);
+
+    @Query("SELECT DISTINCT m.receiverUsername FROM Message m WHERE m.senderUsername = :username " +
+            "UNION " +
+            "SELECT DISTINCT m.senderUsername FROM Message m WHERE m.receiverUsername = :username")
+     List<String> findDistinctUsersByUsername(@Param("username") String username);
+ }

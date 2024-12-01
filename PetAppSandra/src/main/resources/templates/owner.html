@@ -127,7 +127,7 @@
 
         
         
-        <!-- Rate a Pet Sitter Section, makind the informatrion dynamic  -->
+        <!-- Rate a Pet Sitter Section, making the information dynamic  -->
 	<div class="col-lg-3 col-md-4 col-sm-12 profile-rate-section mb-4">
     <h3 class="profile-header">Rate a Pet Sitter</h3>
     <form action="/owner/rate-sitter" method="POST">
@@ -207,15 +207,20 @@
         <!-- Chats Section -->
         <div class="col-lg-4 col-md-6 col-sm-12 profile-chats-section mb-4">
 		    <h3 class="profile-header">Chats</h3>
-		    <!-- Contenedor para los mensajes -->
+		    <!-- for the messages -->
 		    <div id="messagesContainer" style="border: 1px solid #ccc; padding: 10px; height: 200px; overflow-y: scroll;">
 		        <p><strong>Select a user to start chatting...</strong></p>
 		    </div>
 		
-		    <!-- Formulario para enviar mensajes -->
+		    <!-- Form to send messages -->
 		    <form id="sendMessageForm">
-		        <label for="receiverUsername">To:</label>
-		        <input type="text" id="receiverUsername" name="receiverUsername" placeholder="Username" required>
+		        <!-- datalist to choose the ones you texted before or a new user contacting -->
+					<label for="receiverUsername">To:</label>
+					<input list="conversationList" id="receiverUsername" name="receiverUsername" placeholder="Username" required>
+					<datalist id="conversationList">
+					    <!-- previous users to load -->
+					</datalist>
+		        
 		        <br>
 		        <textarea id="messageContent" name="message" placeholder="Write your message here..." required></textarea>
 		        <br>

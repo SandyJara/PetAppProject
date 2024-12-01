@@ -1,35 +1,68 @@
-console.log("File loaded!");//i was testing because petsitter wasnt reading it, just owner
+console.log("File loaded for Pet Sitters!"); // //i was testing because petsitter wasnt reading it, just owner
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM fully loaded!");
+    console.log("DOM fully loaded for Pet Sitters!");
 
-    //  use MutationObserver : monitor changes in DOMM
-    const observer = new MutationObserver(() => {
+     //  use MutationObserver : monitor changes in DOMM to wait the user name
+    const checkUsernameInterval = setInterval(() => {
         const currentUserElement = document.getElementById("user-username");
         const currentUser = currentUserElement?.textContent.trim();
 
         if (currentUser) {
-            console.log("Current user detected:", currentUser);
+            console.log("Pet Sitter detected:", currentUser);
 
-            // Initialize functions in the chat
-            initChatFunctions(currentUser);
+           // Initialize functions in the chat
+            try {
+                initChatFunctions(currentUser);
+                console.log("Chat functions initialized for Pet Sitter:", currentUser);
+            } catch (error) {
+                console.error("Error initializing chat functions:", error);
+            }
 
-            // Initialize functions in the chat
-            observer.disconnect();
+            // Stop the interval once functions initialized
+            clearInterval(checkUsernameInterval);
         } else {
-            console.warn("Waiting for 'user-username' to be dynamically filled.");
+            console.warn("Waiting for 'user-username' to be dynamically filled (Pet Sitter).");
         }
-    });
-
-    // Configurating observer to detect changes in "document body"
-    observer.observe(document.body, { childList: true, subtree: true });
+    }, 500); // Check every 500ms, this was the only way to make it work for the petsitters because the username wansnt arriving to start the functions
 });
 
 // Start chat functions
 function initChatFunctions(currentUser) {
     console.log("Initializing chat functions for:", currentUser);
 
-    // load conversation
+    // load previous conversations
+    function loadPreviousConversations() {
+        console.log("Loading previous conversations for Pet Sitter...");
+        fetch(`/messages/conversations/users?username=${currentUser}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to load previous conversations.");
+                }
+                return response.json();
+            })
+            .then((users) => {
+                console.log("Previous conversations retrieved (Pet Sitter):", users);
+                const datalist = document.getElementById("conversationList");
+                datalist.innerHTML = ""; // clean
+
+                if (users.length === 0) {
+                    console.log("No previous conversations found for Pet Sitter.");
+                    return;
+                }
+
+                users.forEach((user) => {
+                    const option = document.createElement("option");
+                    option.value = user; // add user name
+                    datalist.appendChild(option);
+                });
+            })
+            .catch((error) => {
+                console.error("Error loading previous conversations (Pet Sitter):", error);
+            });
+    }
+
+    // load conversations
     function loadConversation(otherUser) {
         console.log("Loading conversation with:", otherUser);
         if (!otherUser) {
@@ -46,7 +79,7 @@ function initChatFunctions(currentUser) {
             })
             .then((messages) => {
                 const container = document.getElementById("messagesContainer");
-                container.innerHTML = "";
+                container.innerHTML = ""; // clean messages
 
                 if (messages.length === 0) {
                     container.innerHTML = "<p>No messages found.</p>";
@@ -93,24 +126,24 @@ function initChatFunctions(currentUser) {
                 return response.json();
             })
             .then(() => {
-                loadConversation(receiverUsername); // load
-                document.getElementById("sendMessageForm").reset(); // clean
+                loadConversation(receiverUsername); //load
+                loadPreviousConversations(); //load
+                document.getElementById("sendMessageForm").reset(); // clean, resert form
             })
             .catch((error) => {
                 console.error("Error sending message:", error);
             });
     }
 
-    //Functions globally accessible
+   //Functions globally accessible
     window.sendMessage = sendMessage;
     window.loadConversation = loadConversation;
 
-   // Click del botón "Send"
+    // Click  "Send"
     const messageButton = document.getElementById("messageButton");
     if (messageButton) {
         messageButton.addEventListener("click", (e) => {
             e.preventDefault();
-            console.log("Send button clicked!");
             sendMessage();
         });
     } else {
@@ -125,6 +158,9 @@ function initChatFunctions(currentUser) {
             loadConversation(otherUser);
         });
     } else {
-        console.error("Receiver input field not found.");
+        console.error("Receiver input field not found for Pet Sitter.");
     }
+
+    // Load conversations from before
+    loadPreviousConversations();
 }
