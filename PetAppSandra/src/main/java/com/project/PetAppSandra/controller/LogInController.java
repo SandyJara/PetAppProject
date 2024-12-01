@@ -73,7 +73,7 @@ public class LogInController {
                     // if the password is correct
                     System.out.println("valid password");
 
-                    // Save the user in the sesion
+                    // Save the user in the session
                     session.setAttribute("user", user);
 
                     // this is to show the next page if the logIn was correct and depends if its owner or petsitter, it compares it from sql database
@@ -132,7 +132,7 @@ public class LogInController {
             String success = (String) session.getAttribute("successMessage");
             if (success != null) {
                 model.addAttribute("successMessage", success);
-                session.removeAttribute("successMessage"); // Limpiar después de mostrar
+                session.removeAttribute("successMessage"); // clean
                 System.out.println("Success message added to model and cleared from session");
             }
             

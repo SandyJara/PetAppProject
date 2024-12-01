@@ -11,8 +11,7 @@
     <link href="/css/modal.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-  
-    
+   
 </head>
 <body>
 
@@ -206,10 +205,23 @@
         </div>
 
         <!-- Chats Section -->
-        <div class="col-lg-4 col-md-6 col-sm-12 profile-chats-section mb-4 offset-lg-1">
-            <h3 class="profile-header">Chats</h3>
-            <p>Chat feature coming soon...</p>
-        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12 profile-chats-section mb-4">
+		    <h3 class="profile-header">Chats</h3>
+		    <!-- Contenedor para los mensajes -->
+		    <div id="messagesContainer" style="border: 1px solid #ccc; padding: 10px; height: 200px; overflow-y: scroll;">
+		        <p><strong>Select a user to start chatting...</strong></p>
+		    </div>
+		
+		    <!-- Formulario para enviar mensajes -->
+		    <form id="sendMessageForm">
+		        <label for="receiverUsername">To:</label>
+		        <input type="text" id="receiverUsername" name="receiverUsername" placeholder="Username" required>
+		        <br>
+		        <textarea id="messageContent" name="message" placeholder="Write your message here..." required></textarea>
+		        <br>
+		        <button id="messageButton" type="button">Send</button>
+		    </form>
+		</div>
     </div>
 
 </div>
@@ -311,9 +323,11 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
   
+  
 		 <script src="/js/ownerUnif.js"></script>
 		 <script src="/js/service.js"></script>
-		 <script src="/js/Review.js"></script>
+		 <script src="/js/review.js"></script>
 		 <script src="/js/SearchPetSitters.js"></script>
+		 <script src="/js/message.js"></script>
 </body>
 </html>

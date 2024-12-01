@@ -11,8 +11,7 @@
     <link href="/css/style.css" rel="stylesheet">
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
-	
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">    
 
 </head>
 <body>
@@ -63,7 +62,7 @@
    
 <header class="text-center">
    <h1 class="profile-title text-shadow welcome-text-bg">WELCOME <span th:text="${user.fullname}"></span>
-</h1>
+   </h1>
    
 </header>
 
@@ -82,7 +81,7 @@
                 <p>Phone: <span th:text="${user.phone}"></span></p>
                 <p>Birthdate: <span th:text="${user.birthdate}"></span></p>
                 <p>Address: <span th:text="${user.address}"></span></p>
-                <p>Username: <span th:text="${user.username}"></span></p>
+                <p>Username: <span id="user-username" th:text="${user.username}"></span></p>
                 
                 
 		    <button id="updateInfo" class="btn profile-btn-purple text-white">Update Information</button>
@@ -132,7 +131,7 @@
        
        <div class="row justify-content-around">
 		       <!-- Filter Section -->
-		<div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
+		<div class="col-lg-3 col-md-4 col-sm-12 profile-services mb-4">
 		<div class="form-group">
 			 <h3 class="profile-header">Consult Open Services</h3>
 		    <label for="service-type-filter" class="profile-label">Filter by Service Type:</label>
@@ -161,7 +160,7 @@
 		
 		
 		 <!-- My applications Section -->
-		<div class="col-lg-4 col-md-6 col-sm-12 profile-services mb-4">
+		<div class="col-lg-3 col-md-4 col-sm-12 profile-services mb-4">
 		<div class="form-group">
 		    <h3 class="profile-header">My applications and Services</h3>
 		    
@@ -175,18 +174,32 @@
 		<!-- Search Button -->
 		<div class="form-group">
 		    <button id="consultApplications" class="btn profile-btn-purple text-white ml-2">Consult</button>
-		    </button>
+		   
 		</div>
 		</div>
        
 
-            <!-- Chats Section -->
-            <div class="col-lg-3 col-md-4 col-sm-12 profile-section mb-4">
-                <h3 class="profile-header">Chats</h3>
-                <p>Chat feature coming soon...</p>
-            </div>
-        </div>
+             <!-- Chats Section -->
+        <div class="col-lg-4 col-md-6 col-sm-12 profile-chats-section mb-4">
+		    <h3 class="profile-header">Chats</h3>
+		    <!-- Contenedor para los mensajes -->
+		    <div id="messagesContainer" style="border: 1px solid #ccc; padding: 10px; height: 200px; overflow-y: scroll;">
+		        <p><strong>Select a user to start chatting...</strong></p>
+		    </div>
+		
+		    <!-- Formulario para enviar mensajes -->
+		    <form id="sendMessageForm">
+		        <label for="receiverUsername">To:</label>
+		        <input type="text" id="receiverUsername" name="receiverUsername" placeholder="Username" required>
+		        <br>
+		        <textarea id="messageContent" name="message" placeholder="Write your message here..." required></textarea>
+		        <br>
+		        <button id="messageButton" type="button">Send</button>
+		    </form>
+		</div>
     </div>
+
+</div>
 
 
 
@@ -294,10 +307,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link href="/css/modal.css" rel="stylesheet">
     
+    
+    
     <script src="/js/petSitter.js"></script>
     <script src="/js/SearchServices.js"></script>
     <script src="/js/preferences.js"></script>
     <script src="/js/SearchPetSitter.js"></script>
+    <script src="/js/message.js"></script>
     
 </body>
 </html>

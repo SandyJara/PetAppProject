@@ -1,10 +1,12 @@
 package com.project.PetAppSandra.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.PetAppSandra.Message;
 import com.project.PetAppSandra.repository.MessageRepository;
+import com.project.PetAppSandra.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,26 +17,48 @@ public class MessageController {
 
     @Autowired
     private MessageRepository messageRepository;
+    @Autowired
+    private UserRepository userRepository;
 
+    // Seng a message
     @PostMapping("/send")
-    public Message sendMessage(@RequestParam String senderUsername,
-                               @RequestParam String receiverUsername,
-                               @RequestParam String message) {
+    public ResponseEntity<?> sendMessage(@RequestParam String senderUsername,
+                                         @RequestParam String receiverUsername,
+                                         @RequestParam String message) {
+        System.out.println("Sender: " + senderUsername + ", Receiver: " + receiverUsername + ", Message: " + message);
+
+        boolean receiverExists = userRepository.existsByUsername(receiverUsername);
+        if (!receiverExists) {
+            return ResponseEntity.badRequest().body("The recipient does not exist.");
+        }
+
         Message newMessage = new Message();
         newMessage.setSenderUsername(senderUsername);
         newMessage.setReceiverUsername(receiverUsername);
         newMessage.setMessage(message);
         newMessage.setSubmissionDate(LocalDateTime.now().toString());
-        return messageRepository.save(newMessage);
+
+        Message savedMessage = messageRepository.save(newMessage);
+        System.out.println("Saved message: " + savedMessage);
+
+        return ResponseEntity.ok(savedMessage);
     }
 
+    // Get messages received
     @GetMapping("/received")
     public List<Message> getReceivedMessages(@RequestParam String receiverUsername) {
         return messageRepository.findByReceiverUsername(receiverUsername);
     }
 
+    // Get messages sent
     @GetMapping("/sent")
     public List<Message> getSentMessages(@RequestParam String senderUsername) {
         return messageRepository.findBySenderUsername(senderUsername);
+    }
+
+    // Get a conversation between 2 users
+    @GetMapping("/conversation")
+    public List<Message> getConversation(@RequestParam String user1, @RequestParam String user2) {
+        return messageRepository.findConversation(user1, user2);
     }
 }

@@ -1,23 +1,26 @@
 package com.project.PetAppSandra;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name = "contact_messages") 
+@Table(name = "contact_messages")
 public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
-    
-    private String senderUsername; 
-    private String receiverUsername; 
-    private String message; 
-    private String submissionDate; 
+    private Long id;
+
+    @Column(name = "sender_username", nullable = false) 
+    private String senderUsername;
+
+    @Column(name = "receiver_username", nullable = false)
+    private String receiverUsername;
+
+    @Column(name = "message", nullable = false)
+    private String message;
+
+    @Column(name = "submission_date", nullable = false)
+    private String submissionDate;
 
     // Getters y Setters
     public Long getId() {
