@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
-    // Buscar mensajes recibidos por un usuario específico
+    // Search messages
     List<Message> findByReceiverUsername(String receiverUsername);
 
-    // Buscar mensajes enviados por un usuario específico
+    // find messages
     List<Message> findBySenderUsername(String senderUsername);
 
-    // Buscar mensajes entre dos usuarios específicos, ordenados por fecha
+    // messages between users (by day of submission)
     @Query("SELECT m FROM Message m WHERE " +
            "(m.senderUsername = :user1 AND m.receiverUsername = :user2) " +
            "OR (m.senderUsername = :user2 AND m.receiverUsername = :user1) " +
