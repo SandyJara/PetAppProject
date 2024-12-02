@@ -33,6 +33,8 @@ public class User {
     private LocalDate birthdate;
     private String phone;
     private String address;
+    
+    
 	
     @Column(name = "profile_picture_url")
     private String profilePictureUrl;
