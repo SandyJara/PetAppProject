@@ -3,7 +3,7 @@ let map;
 // start the map
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 37.7749, lng: -122.4194 }, // Coordenadas iniciales
+        center: { lat: 53.349851529305866, lng:  -6.26009243725504 }, // INITIAL COORDINATES TO UPDATE
         zoom: 12,
     });
 
@@ -14,11 +14,32 @@ function initMap() {
 // Add markers in the map related with my services
 function addMultipleMarkers(services) {
     services.forEach((service) => {
-        new google.maps.Marker({
-            position: { lat: service.latitude, lng: service.longitude },
-            map: map,
-            title: `${service.name} - ${service.type}`, // Title 
-        });
+        if (service.latitude && service.longitude) { // Ensure coordinates exist
+            const marker = new google.maps.Marker({
+                position: { lat: service.latitude, lng: service.longitude },
+                map: map,
+                title: `Service Available: ${service.type}`, // Marker title
+            });
+
+            // InfoWindow to show service details
+            const infoWindow = new google.maps.InfoWindow({
+                content: `
+                    <div>
+                        <h4>Service Details</h4>
+                        <p><strong>Type:</strong> ${service.type}</p>
+                        <p><strong>Owner:</strong> ${service.name}</p>
+                        <p><strong>Description:</strong> ${service.description || "No description provided"}</p>
+                    </div>
+                `,
+            });
+
+            // Add click listener to marker to show InfoWindow
+            marker.addListener("click", () => {
+                infoWindow.open(map, marker);
+            });
+        } else {
+            console.error("Invalid coordinates for service:", service);
+        }
     });
 }
 

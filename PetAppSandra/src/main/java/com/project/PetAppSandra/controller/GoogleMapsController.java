@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -43,7 +44,7 @@ public class GoogleMapsController {
                 return ResponseEntity.ok(Collections.emptyList());
             }
 
-            // Create a listo to storage services with locations
+            // Create a list to storage services with locations
             List<Map<String, Object>> servicesWithLocations = new ArrayList<>();
 
             RestTemplate restTemplate = new RestTemplate();
@@ -90,6 +91,39 @@ public class GoogleMapsController {
         } catch (Exception e) {
             System.err.println("Error processing services: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+ // Method to get the coordinates
+    @GetMapping("/getCoordinates")
+    public ResponseEntity<?> getCoordinates(@RequestParam String address) {
+        try {
+            String url = "https://maps.googleapis.com/maps/api/geocode/json?address="
+                    + URLEncoder.encode(address, StandardCharsets.UTF_8)
+                    + "&key=" + GOOGLE_MAPS_API_KEY;
+
+            RestTemplate restTemplate = new RestTemplate();
+            ResponseEntity<Map> response = restTemplate.getForEntity(url, Map.class);
+
+            @SuppressWarnings("unchecked")
+            Map<String, Object> body = (Map<String, Object>) response.getBody();
+
+            if ("OK".equals(body.get("status"))) {
+                @SuppressWarnings("unchecked")
+                List<Map<String, Object>> results = (List<Map<String, Object>>) body.get("results");
+                Map<String, Object> geometry = (Map<String, Object>) results.get(0).get("geometry");
+                Map<String, Object> location = (Map<String, Object>) geometry.get("location");
+
+                return ResponseEntity.ok(Map.of(
+                        "latitude", location.get("lat"),
+                        "longitude", location.get("lng")
+                ));
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid address or no results found.");
+            }
+        } catch (Exception e) {
+            System.err.println("Error fetching coordinates for address " + address + ": " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error fetching coordinates.");
         }
     }
 }
