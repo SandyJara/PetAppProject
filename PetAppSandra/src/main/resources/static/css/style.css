@@ -43,16 +43,27 @@ body {
 
 .text-shadow {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    color: #5a32a3; /* Cambia a un color púrpura oscuro */
-    font-weight: 700; /* Aumentar el grosor del texto */
+    color: #5a32a3; 
+    font-weight: 700; 
 }
 
 /* Navbar */
 .navbar,
 .custom-nav {
+	
+	position: fixed; /* stuck nav bar */
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    z-index: 1000;
+	
     background-color: #d65eb8;
     padding: 10px 20px;
     color: white;
+}
+
+body {
+    margin-top: 70px; /* adjust needed when i stucked my navbar */
 }
 
 .nav-link,
@@ -69,13 +80,13 @@ body {
 
 /* Logo */
 .logo {
-    max-width: 120px;
-    max-height: 50px;
+    max-width: 140px;
+    max-height: auto;
 }
 
 .navbar img {
-    max-width: 100px;
-    max-height: 30px;
+    max-width: 150px;
+    max-height: 50px;
     object-fit: contain;
 }
 
@@ -89,6 +100,7 @@ body {
 
 /* PETXIE Title */
 .petxie-title {
+	all: unset;
     font-family: 'Playfair Display', serif;
     font-size: 2.5em;
     color: #be2b9a;
@@ -100,22 +112,30 @@ body {
 }
 
 /* Paw Images */
+.petxie-background {
+    position: relative;
+    text-align: center; 
+    margin-top: 20px; 
+}
+
 .paw-left,
 .paw-right {
     position: absolute;
-    top: 10px;
-    width: 200px;
+    top: 20px;
+    width: 150px;
+    max-width: 15%;
 }
 
 .paw-left {
-    left: 10%;
+    left: 5%;
 }
 
 .paw-right {
-    right: 10%;
+    right: 5%;
 }
 
 /* Centered Content */
+
 .home-container {
     display: flex;
     justify-content: center;
@@ -159,13 +179,16 @@ body {
 }
 
 /* Log In Section */
-		.main-container {
-		    display: flex;
-		    justify-content: center;
-		    align-items: flex-start;
-		    padding: 20px;
-		    gap: 20px;
-		}
+	.main-container {
+	    display: flex;
+	    justify-content: center;
+	    align-items: flex-start;
+	    gap: 20px;
+	    padding: 20px;
+	    flex-wrap: wrap; 
+	    max-width: 1200px;
+	    margin: 0 auto;
+}
 		
 		.side-by-side-container {
 		    display: flex;
@@ -177,24 +200,27 @@ body {
 		}
 
 .register-box {
-    background-color: rgba(255, 239, 186, 0.85);
+    background-color: rgba(255, 239, 186, 0.85); 
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 35%;
+    width: 40%;
     margin: 20px;
 }
 
+.login-box {
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
 		
-		.login-box, .login-section {
-		    flex: 1;
-		    background-color: rgba(255, 255, 255, 0.85);
-		    border-radius: 10px;
-		    padding: 15px;
-		    width:35%;
-		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-		    min-width: 500px; 
-		}
+.login-box, .register-box, .vision-card {
+    flex: 1 1 30%; 
+    max-width: 350px; 
+    min-width: 280px; 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
         .login-section {
             text-align: center;
@@ -208,12 +234,49 @@ body {
             
             object-fit: cover;
         }
+    
+/* SEE PROFILE Buttons - Pink Style */
+.vision-card .btn {
+    background-color: #ee4598; /* pink like in Sign In */
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.vision-card .btn:hover {
+    background-color: #d64586; /* darker pink*/
+}
+
 
 /* Form Styling */
 form {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+form#registerForm {
+    display: grid; 
+    grid-template-columns: auto 1fr;
+    gap: 10px 20px; 
+    align-items: center;
+}
+
+form#registerForm label {
+    text-align: right;
+    padding-right: 10px;
+}
+
+form#registerForm input,
+form#registerForm select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em;
 }
 
 label {
@@ -233,6 +296,8 @@ input:focus {
     outline: none;
     border-color: #5a7d9a;
 }
+
+
 
 /* Buttons */
 .join-btn {
@@ -287,13 +352,21 @@ body {
 
 /* About Us Section */
 .about-section {
-    padding: 40px;
     display: flex;
+    flex-wrap: wrap; 
     justify-content: space-between;
     align-items: flex-start;
-    width: 70%;
+    gap: 20px; 
+    width: 90%; 
     margin: 0 auto;
+    padding: 20px;
 }
+
+.about-section .mission-card,
+.about-section .vision-card,
+.about-section .about-why {
+    width: 30%;
+ }
 
 .mission-card, .vision-card {
     background-color: white;
@@ -429,19 +502,7 @@ body {
 .contact-icon {
     margin-right: 10px;
 }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
 .footer-custom {
     background-color: #7b4a9e;
     color: white;
@@ -451,11 +512,6 @@ body {
     margin: 0 10px;
     color: #fff !important;
 }
-    
-    
-    
-    
-    
     
 /* Blog Page Styles */
 /* Blog Title Container */
@@ -573,12 +629,6 @@ body {
     background-color: #b5497d;
 }
     
-    
-    
-
-
-
-
 /* PROFILE Page Styles */
 /* General Styles */
 body {
@@ -676,16 +726,52 @@ label.profile-label {
 
     
     
-    
-    
 /* Responsive Styles */
 @media screen and (max-width: 768px) {
 
 ---------------------
-	.about-section {
-        flex-direction: column;
-        width: 90%;
+.about-section {
+ 	 display: flex;
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center; 
+        gap: 20px; 
     }
+    
+    .about-section .mission-card,
+    .about-section .vision-card,
+    .about-section .about-why {
+        width: 100%; 
+        margin: 10px auto; 
+        max-width: none; 
+    }
+
+/* Inputs & Selects  */
+input, select {
+    width: 100%; 
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.login-box, .register-box, .vision-card {
+        width: 90%; /
+    }
+
+    form#registerForm {
+        grid-template-columns: 1fr; 
+        gap: 5px; 
+    }
+
+/*responsive buttons */
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+}
 
     .about-section-title {
         font-size: 1.5em;
@@ -702,6 +788,7 @@ label.profile-label {
     .mission-card, .vision-card, .about-why {
         width: 90%;
         margin: 10px auto;
+        
     }
 -------------------------
 
@@ -765,10 +852,16 @@ label.profile-label {
     }
 
 ---------------------
-    .paw-left,
-    .paw-right {
-        width: 100px;
+ .paw-left {
+        top: 30px; 
+        left: 5%; 
     }
+    .paw-right {
+        top: 30px;
+        right: 5%;
+    }
+    
+    
 
     .logo {
         max-width: 100px;
@@ -791,13 +884,19 @@ label.profile-label {
     }
 
     .main-container {
-        flex-direction: column;
+        flex-direction: column; 
         align-items: center;
+        gap: 15px;
     }
 
-    .login-box,
-    .register-box {
-        width: 90%;
+    .login-box, .register-box, .vision-card {
+        flex: 1 1 100%; 
+        max-width: 100%;
+    }
+    
+    form#registerForm {
+        grid-template-columns: 1fr; /* Cambia a una sola columna */
+        gap: 5px;
     }
 
     .image-box {
@@ -806,3 +905,4 @@ label.profile-label {
     }
 }
     
+
