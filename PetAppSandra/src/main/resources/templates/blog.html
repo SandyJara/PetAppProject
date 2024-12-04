@@ -60,7 +60,7 @@
         <h1 class="blog-title">Petxie Blog</h1>
     </div>
     <div class="articles-per-week mb-4">
-        <label for="articles-select" class="articles-label">ARTICLES PER WEEK</label>
+        <label for="articles-select" class="articles-label" ></label>
         <select id="articles-select" class="form-control ml-2" onchange="window.location.href='/blog-section?week=' + this.value;">
             <!-- updates with /blog-section because before was /blog and I had problems to run spring -->
             <option value="">All Weeks</option>
@@ -73,18 +73,14 @@
     <div class="alert alert-info" th:if="${message}" th:text="${message}"></div>
 
     <div class="blog-article-container">
-        <div th:each="article : ${articles}" class="blog-article-card mb-4">
-            <h3 class="subtitle" th:text="${article.title}">Subtitle Week</h3>
-            <p th:text="${article.content}">Content goes here...</p>
-        </div>
+    <div th:each="article : ${articles}" class="blog-article-card mb-4">
+        <h3 class="subtitle" th:text="${article.title}">Subtitle Week</h3>
+        <!-- text -->
+         <div class="article-content" th:utext="${article.content}"style="text-align: justify; font-size: 14px; line-height: 1.6;">></div>
     </div>
 </div>
-
-</body>
-</html>
-   
-   
-   
+</div>
+ 
   <!-- MY CODE -->
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->

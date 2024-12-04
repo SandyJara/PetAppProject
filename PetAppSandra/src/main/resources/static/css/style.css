@@ -142,6 +142,11 @@ body {
     align-items: center;
     gap: 20px;
     padding-top: 20px;
+    margin-bottom: 50px;
+}
+
+.margin {
+    margin-bottom: 50px;
 }
 
 .welcome-image {
@@ -868,16 +873,50 @@ button {
         width: 100%;
     }
     .blog-article-container {
-        flex-direction: column;
+        max-width: 1000px;
+    	margin: 0 auto;
+   	    padding: 30px;
+   	    text-align: justify;
     }
-    .blog-article-card {
-        width: 100%;
-    }
+    
     .article-navigation {
         flex-direction: column;
         gap: 10px;
     }
+    
+	/*more added for the articles style, but its not applying them properly*/
+		.blog-article-card .article-content {
+		    text-align: justify !important;
+		    font-size: 1rem; 
+		    line-height: 1.6; 
+		    margin-bottom: 20px; 
+		}
+		
+		.blog-article-card .article-content strong {
+		    font-size: 1.1rem; 
+		    font-weight: bold; 
+		}
+		
+		.blog-article-card h3.subtitle {
+		    font-size: 1.5rem; 
+		    margin-bottom: 15px; 
+		}
+		
+		.blog-article-card {
+		    border: 1px solid #ccc;
+		    padding: 20px;
+		    border-radius: 8px;
+		    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+		    margin-bottom: 30px;
+		}
+		
+		.blog-article-container .article-content {
+		    width: 100%; 
+		    display: block; 
+		}
 
+
+	
 ---------------------
 
  .profile-container {

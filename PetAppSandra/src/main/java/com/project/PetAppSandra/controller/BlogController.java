@@ -8,6 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.data.MutableDataSet;
+import com.vladsch.flexmark.html.HtmlRenderer;
+
 
 import java.util.List;
 
@@ -35,6 +39,21 @@ public class BlogController {
                     model.addAttribute("message", "No articles available at the moment.");
                 }
             }
+            
+            
+         // Convert Markdown content to HTML for each article
+            MutableDataSet options = new MutableDataSet();
+            Parser parser = Parser.builder(options).build();
+            HtmlRenderer renderer = HtmlRenderer.builder(options).build();
+
+            for (BlogArticle article : articles) {
+                String markdown = article.getContent(); 
+                String htmlContent = renderer.render(parser.parse(markdown));  //  Markdown to HTML
+                article.setContent(htmlContent); 
+            } 
+            
+            
+            
         } catch (Exception e) {
             // catch errors
             model.addAttribute("message", "An unexpected error occurred while retrieving articles.");
