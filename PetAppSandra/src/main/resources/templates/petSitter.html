@@ -9,46 +9,48 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="/css/style.css" rel="stylesheet">
-    
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">    
 
 </head>
 <body>
 
-   <!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-light custom-nav">
-    <a class="navbar-brand" href="/">
-        <img src="/images/logo.png" alt="Pet Community Logo" class="logo">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/">HOME</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/aboutUs">ABOUT US</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/blog">BLOG</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/contact">CONTACT</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/login">LOG IN</a>
-            </li>
+   <!-- Navbar -->
+    
+	<!-- To show message when a user wants to see her/his profile but its not logged -->
+	<div th:if="${errorMessage != null}" class="alert alert-danger">
+	    <p th:text="${errorMessage}"></p>
+	</div>
+    
+    
+    <nav class="navbar navbar-expand-lg navbar-light custom-nav">
+        <a class="navbar-brand" href="/">
+            <img src="/images/logo.png" alt="Pet Community Logo" class="logo" id="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="/aboutUs">ABOUT US</a></li>
+                <li class="nav-item"><a class="nav-link" href="/blog">BLOG</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contact">CONTACT</a></li>
+                <li class="nav-item"><a class="nav-link" href="/login">LOG IN</a></li>
+            
+            	 <!-- Added to see the profile -->
+            	<li class="nav-item"><a class="nav-link" href="/profile">MY PROFILE</a></li>
+            
         </ul>
-    </div>
-</nav>
+        
+        </div>
+    </nav>
 
-<button id="logOutButton" class="btn profile-btn-purple text-white logout-btn" style="position: relative; float: right; margin-right: 20px; margin-top: 20px; z-index: 1000; pointer-events: auto;">
+<button id="logOutButton" class="btn profile-btn-purple text-white logout-btn">
     LOG OUT
 </button>
-
+ 
 <!-- PETXIE Title with Images behind Navbar -->
     <div class="petxie-background">
         <img src="/images/paw.png" alt="Paw Image" class="paw-left">
