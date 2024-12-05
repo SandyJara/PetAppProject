@@ -22,6 +22,7 @@ import com.project.PetAppSandra.Experience;
 import com.project.PetAppSandra.Pet;
 import com.project.PetAppSandra.SitterPreferences;
 import com.project.PetAppSandra.User;
+import com.project.PetAppSandra.User.AccountType;
 import com.project.PetAppSandra.repository.UserRepository;
 import com.project.PetAppSandra.repository.ExperienceRepository;
 import com.project.PetAppSandra.repository.PetRepository;
@@ -334,5 +335,26 @@ public class LogInController {
         return "petSitterPublicProfile";
     }
 	 
+    
+  //for the one I added at the end in the nav bar
+    @GetMapping("/profile")
+    public String redirectToProfile(HttpSession session, Model model) {
+        // Get the user from the session
+        User user = (User) session.getAttribute("user");
+        
+        // Verify is there is a usser or not logged (and the type of) and sends to see the profile
+        if (user != null && user.getAccount() != null) {
+            if (user.getAccount() == AccountType.OWNER) {
+                return "redirect:/owner";
+            } else if (user.getAccount() == AccountType.PETSITTER) {
+                return "redirect:/petSitter";
+            }
+        }
+
+        // If the user hasnt log in, message to log In first
+        model.addAttribute("errorMessage", "Log In first, please.");
+        return "login"; // send to login
+    }
+
 }
     
