@@ -92,6 +92,16 @@ public ResponseEntity<String> updateOwnerProfile(@RequestBody Map<String, String
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authorized");
 }
 
+@GetMapping("/updatePetSitter")
+public String showUpdatePetSitterPage(Model model, HttpSession session) {
+    User user = (User) session.getAttribute("user");
+
+    if (user != null && "PETSITTER".equalsIgnoreCase(user.getAccount().name())) {
+        model.addAttribute("user", user);
+        return "updatePetSitter"; 
+    }
+    return "redirect:/login";
+}
 
 
 

@@ -49,7 +49,7 @@ public class HomeController {
 	    return "updateOwner"; 
 	}
 	
-	@GetMapping("/updatePetSitter")
+	@GetMapping("/home/updatePetSitter")
 	public String updatePetSitterPage() {
 	    return "updatePetSitter"; 
 	}
