@@ -17,6 +17,19 @@ public class UserController { //CLASS for the POST I'm using in my login.js and 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	// Verify if email or username exists
+    private boolean doesEmailExist(String email) {
+        String sql = "SELECT COUNT(*) FROM users WHERE email = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, new Object[] { email }, Integer.class);
+        return count != null && count > 0;
+    }
+
+    private boolean doesUsernameExist(String username) {
+        String sql = "SELECT COUNT(*) FROM users WHERE username = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, new Object[] { username }, Integer.class);
+        return count != null && count > 0;
+    }
+	
 	@PostMapping(value = "/register", consumes = "application/json", produces = "application/json")  //to accept JSON, endpoint that im using, the server can get http requests
 	public ResponseEntity<String> registerUser(@RequestBody Map<String, String> userData) {
 	    String account = userData.get("account");
@@ -28,14 +41,25 @@ public class UserController { //CLASS for the POST I'm using in my login.js and 
 	    String username = userData.get("username");
 	    String password = userData.get("password");
 
-	    try {
-	        String sql = "INSERT INTO users (account, fullname, birthdate, email, phone, address, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-	        jdbcTemplate.update(sql, account, fullname, birthdate, email, phone, address, username, password);
+	    // Verify if email is registered
+        if (doesEmailExist(email)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Sorry, this email is already registered. Please use another one.");
+        }
 
-	        return ResponseEntity.ok("User registered successfully");
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error registering user" + e.getMessage());
-	    }
-	}
+        // Verify if username is already registered
+        if (doesUsernameExist(username)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Sorry, this username is already registered. Please choose another.");
+        }
+
+        try {
+            // inserts new user in my database
+            String sql = "INSERT INTO users (account, fullname, birthdate, email, phone, address, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            jdbcTemplate.update(sql, account, fullname, birthdate, email, phone, address, username, password);
+
+            return ResponseEntity.ok("User registered successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error registering user: " + e.getMessage());
+        }
+    }
 }
