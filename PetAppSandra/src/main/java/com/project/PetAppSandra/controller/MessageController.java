@@ -10,6 +10,7 @@ import com.project.PetAppSandra.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/messages")
@@ -29,19 +30,23 @@ public class MessageController {
 
         boolean receiverExists = userRepository.existsByUsername(receiverUsername);
         if (!receiverExists) {
-            return ResponseEntity.badRequest().body("The recipient does not exist.");
+            return ResponseEntity.badRequest().body(Map.of("error", "The recipient does not exist."));
         }
 
-        Message newMessage = new Message();
-        newMessage.setSenderUsername(senderUsername);
-        newMessage.setReceiverUsername(receiverUsername);
-        newMessage.setMessage(message);
-        newMessage.setSubmissionDate(LocalDateTime.now().toString());
+        try {
+            Message newMessage = new Message();
+            newMessage.setSenderUsername(senderUsername);
+            newMessage.setReceiverUsername(receiverUsername);
+            newMessage.setMessage(message);
+            newMessage.setSubmissionDate(LocalDateTime.now().toString());
 
-        Message savedMessage = messageRepository.save(newMessage);
-        System.out.println("Saved message: " + savedMessage);
+            messageRepository.save(newMessage);
 
-        return ResponseEntity.ok(savedMessage);
+            return ResponseEntity.ok(Map.of("status", "Message sent successfully"));
+        } catch (Exception e) {
+            System.out.println("Error while saving the message: " + e.getMessage());
+            return ResponseEntity.status(500).body(Map.of("error", "Internal Server Error"));
+        }
     }
 
     // Get messages received
